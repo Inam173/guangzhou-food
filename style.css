@@ -1,0 +1,158 @@
+/* ===== 动画 ===== */
+
+/* 卡片入场动画 */
+@keyframes cardFadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.shop-card {
+  animation: cardFadeIn 0.4s ease-out both;
+}
+
+.shop-card:nth-child(1) { animation-delay: 0.05s; }
+.shop-card:nth-child(2) { animation-delay: 0.10s; }
+.shop-card:nth-child(3) { animation-delay: 0.15s; }
+.shop-card:nth-child(4) { animation-delay: 0.20s; }
+.shop-card:nth-child(5) { animation-delay: 0.25s; }
+.shop-card:nth-child(6) { animation-delay: 0.30s; }
+.shop-card:nth-child(7) { animation-delay: 0.35s; }
+.shop-card:nth-child(8) { animation-delay: 0.40s; }
+.shop-card:nth-child(9) { animation-delay: 0.45s; }
+.shop-card:nth-child(n+10) { animation-delay: 0.50s; }
+
+/* 卡片悬停效果 */
+.shop-card {
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.shop-card:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 12px 40px rgba(0, 0, 0, 0.12);
+}
+
+/* 图片加载渐变 */
+.card-image {
+  background: linear-gradient(135deg, #fef3c7 0%, #fde68a 50%, #fbbf24 100%);
+}
+
+/* 分类标签按钮 */
+.category-btn {
+  transition: all 0.2s ease;
+  cursor: pointer;
+  user-select: none;
+  white-space: nowrap;
+}
+
+.category-btn.active {
+  background: #ef4444 !important;
+  color: white !important;
+  border-color: #ef4444 !important;
+  box-shadow: 0 2px 8px rgba(239, 68, 68, 0.3);
+}
+
+/* 评分星星 */
+.star-rating {
+  color: #f59e0b;
+  letter-spacing: 2px;
+}
+
+/* 详情弹窗滚动条 */
+#detailModal > div::-webkit-scrollbar {
+  width: 4px;
+}
+#detailModal > div::-webkit-scrollbar-thumb {
+  background: #ddd;
+  border-radius: 4px;
+}
+
+/* 弹窗打开时禁止页面滚动 */
+body.modal-open {
+  overflow: hidden;
+}
+
+/* 管理后台表单样式 */
+.form-input {
+  transition: border-color 0.2s, box-shadow 0.2s;
+}
+
+.form-input:focus {
+  border-color: #f97316;
+  box-shadow: 0 0 0 3px rgba(249, 115, 22, 0.1);
+}
+
+/* Toast 提示 */
+.toast {
+  position: fixed;
+  top: 20px;
+  left: 50%;
+  transform: translateX(-50%);
+  padding: 12px 24px;
+  border-radius: 12px;
+  font-weight: 500;
+  z-index: 100;
+  animation: toastSlide 0.3s ease-out;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.15);
+  max-width: 90vw;
+  text-align: center;
+}
+
+@keyframes toastSlide {
+  from {
+    opacity: 0;
+    transform: translateX(-50%) translateY(-20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(-50%) translateY(0);
+  }
+}
+
+.toast.success {
+  background: #10b981;
+  color: white;
+}
+
+.toast.error {
+  background: #ef4444;
+  color: white;
+}
+
+.toast.info {
+  background: #3b82f6;
+  color: white;
+}
+
+/* ===== 响应式 ===== */
+
+/* 平板竖屏 */
+@media (max-width: 768px) {
+  .category-btn {
+    font-size: 12px;
+    padding: 6px 12px;
+  }
+}
+
+/* 手机 */
+@media (max-width: 640px) {
+  #cardGrid {
+    grid-template-columns: 1fr;
+    gap: 12px;
+  }
+
+  #detailModal > div {
+    max-height: 95vh;
+    margin: 8px;
+    border-radius: 16px;
+  }
+
+  header h1 {
+    font-size: 1.25rem;
+  }
+}

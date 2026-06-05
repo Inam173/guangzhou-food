@@ -1,0 +1,172 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>🍜 广州美食地图</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            primary: '#e74c3c',
+            warm: '#f39c12',
+          }
+        }
+      }
+    }
+  </script>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body class="bg-orange-50 min-h-screen">
+
+  <!-- Header -->
+  <header class="bg-gradient-to-r from-red-600 to-orange-500 text-white shadow-lg sticky top-0 z-40">
+    <div class="max-w-6xl mx-auto px-4 py-4 flex items-center justify-between">
+      <div>
+        <h1 class="text-2xl md:text-3xl font-bold tracking-wide">🍜 广州美食地图</h1>
+        <p class="text-orange-100 text-sm mt-1 hidden sm:block">记录我在广州探过的每一家小店</p>
+      </div>
+      <a href="admin.html" class="bg-white/20 hover:bg-white/30 text-white px-4 py-2 rounded-lg text-sm font-medium transition backdrop-blur-sm">
+        ✏️ 管理
+      </a>
+    </div>
+  </header>
+
+  <!-- Search & Filters -->
+  <div class="max-w-6xl mx-auto px-4 py-6">
+    <!-- Search Bar -->
+    <div class="relative mb-4">
+      <span class="absolute left-4 top-1/2 -translate-y-1/2 text-gray-400 text-lg">🔍</span>
+      <input
+        type="text"
+        id="searchInput"
+        placeholder="搜店名、地址、标签、备注..."
+        class="w-full pl-12 pr-4 py-3 bg-white rounded-2xl shadow-md border border-gray-200 focus:border-orange-400 focus:ring-2 focus:ring-orange-200 outline-none transition text-lg"
+        autocomplete="off"
+      >
+    </div>
+
+    <!-- Category Tabs -->
+    <div class="flex flex-wrap gap-2 mb-4" id="categoryTabs">
+      <button data-category="all" class="category-btn active px-4 py-2 rounded-full text-sm font-medium bg-red-500 text-white shadow-sm transition hover:scale-105">
+        全部
+      </button>
+      <button data-category="饭馆" class="category-btn px-4 py-2 rounded-full text-sm font-medium bg-white text-gray-700 shadow-sm transition hover:scale-105 border border-gray-200">
+        🍚 饭馆
+      </button>
+      <button data-category="茶楼" class="category-btn px-4 py-2 rounded-full text-sm font-medium bg-white text-gray-700 shadow-sm transition hover:scale-105 border border-gray-200">
+        🫖 茶楼
+      </button>
+      <button data-category="甜品糖水" class="category-btn px-4 py-2 rounded-full text-sm font-medium bg-white text-gray-700 shadow-sm transition hover:scale-105 border border-gray-200">
+        🍧 甜品糖水
+      </button>
+      <button data-category="小吃" class="category-btn px-4 py-2 rounded-full text-sm font-medium bg-white text-gray-700 shadow-sm transition hover:scale-105 border border-gray-200">
+        🍢 小吃
+      </button>
+      <button data-category="面馆" class="category-btn px-4 py-2 rounded-full text-sm font-medium bg-white text-gray-700 shadow-sm transition hover:scale-105 border border-gray-200">
+        🍜 面馆
+      </button>
+      <button data-category="火锅" class="category-btn px-4 py-2 rounded-full text-sm font-medium bg-white text-gray-700 shadow-sm transition hover:scale-105 border border-gray-200">
+        🍲 火锅
+      </button>
+      <button data-category="大排档" class="category-btn px-4 py-2 rounded-full text-sm font-medium bg-white text-gray-700 shadow-sm transition hover:scale-105 border border-gray-200">
+        🍻 大排档
+      </button>
+      <button data-category="其他" class="category-btn px-4 py-2 rounded-full text-sm font-medium bg-white text-gray-700 shadow-sm transition hover:scale-105 border border-gray-200">
+        📌 其他
+      </button>
+    </div>
+
+    <!-- Sort & Count -->
+    <div class="flex items-center justify-between flex-wrap gap-3">
+      <div class="flex items-center gap-2">
+        <span class="text-sm text-gray-500">排序：</span>
+        <select id="sortSelect" class="bg-white border border-gray-200 rounded-lg px-3 py-2 text-sm focus:border-orange-400 outline-none shadow-sm">
+          <option value="rating-desc">⭐ 评分最高</option>
+          <option value="price-asc">💰 人均最低</option>
+          <option value="price-desc">💰 人均最高</option>
+          <option value="date-desc">📅 最近添加</option>
+          <option value="visited-desc">📅 最近探店</option>
+        </select>
+      </div>
+      <span id="shopCount" class="text-sm text-gray-400">共 0 家</span>
+    </div>
+  </div>
+
+  <!-- Card Grid -->
+  <main class="max-w-6xl mx-auto px-4 pb-12">
+    <div id="cardGrid" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-5">
+      <!-- Cards rendered by JS -->
+    </div>
+    <div id="emptyState" class="hidden text-center py-20">
+      <div class="text-6xl mb-4">🍽️</div>
+      <p class="text-gray-400 text-lg">还没找到匹配的店铺</p>
+      <p class="text-gray-300 text-sm mt-1">去管理后台添加吧！</p>
+    </div>
+  </main>
+
+  <!-- Detail Modal -->
+  <div id="detailModal" class="fixed inset-0 bg-black/50 z-50 hidden flex items-center justify-center p-4 backdrop-blur-sm">
+    <div class="bg-white rounded-2xl max-w-lg w-full max-h-[90vh] overflow-y-auto shadow-2xl relative">
+      <!-- Close button -->
+      <button id="closeModal" class="absolute top-3 right-3 w-8 h-8 bg-gray-100 hover:bg-gray-200 rounded-full flex items-center justify-center text-gray-500 transition z-10">
+        ✕
+      </button>
+
+      <!-- Image -->
+      <div class="relative">
+        <img id="modalImage" src="" alt="" class="w-full h-56 object-cover rounded-t-2xl">
+        <div class="absolute inset-0 bg-gradient-to-t from-black/40 to-transparent rounded-t-2xl"></div>
+        <span id="modalCategory" class="absolute bottom-3 left-4 px-3 py-1 bg-white/90 backdrop-blur-sm rounded-full text-xs font-bold text-gray-700"></span>
+      </div>
+
+      <!-- Content -->
+      <div class="p-5">
+        <div class="flex items-start justify-between mb-1">
+          <h2 id="modalName" class="text-2xl font-bold text-gray-900"></h2>
+        </div>
+
+        <div class="flex items-center gap-3 mb-4 text-sm">
+          <span id="modalRating" class="text-orange-500 font-bold text-lg"></span>
+          <span class="text-gray-300">|</span>
+          <span id="modalPrice" class="text-gray-600"></span>
+        </div>
+
+        <div class="flex flex-wrap gap-2 mb-4" id="modalTags"></div>
+
+        <div class="bg-orange-50 rounded-xl p-4 mb-4">
+          <p id="modalNotes" class="text-gray-700 leading-relaxed text-sm"></p>
+        </div>
+
+        <div class="flex items-center gap-2 text-sm text-gray-500 mb-1">
+          <span>📍</span>
+          <span id="modalAddress"></span>
+        </div>
+
+        <div class="flex items-center gap-2 text-sm text-gray-400">
+          <span>📅</span>
+          <span id="modalVisitedDate"></span>
+        </div>
+
+        <!-- Map Button -->
+        <a id="modalMapLink" href="#" target="_blank" rel="noopener"
+           class="mt-4 flex items-center justify-center gap-2 w-full bg-green-500 hover:bg-green-600 text-white font-medium py-3 rounded-xl transition shadow-md">
+          🗺️ 打开地图查看位置
+        </a>
+      </div>
+    </div>
+  </div>
+
+  <!-- Footer -->
+  <footer class="text-center py-6 text-gray-300 text-sm border-t border-orange-100">
+    广州美食地图 · 个人收藏 · <span id="footerYear"></span>
+  </footer>
+
+  <script>
+    document.getElementById('footerYear').textContent = new Date().getFullYear();
+  </script>
+  <script src="app.js"></script>
+</body>
+</html>

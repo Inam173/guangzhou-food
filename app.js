@@ -266,5 +266,12 @@ function showToast(msg, type) {
   }, 2500);
 }
 
+// ---------- 管理入口可见性 ----------
+// 只有配置过 GitHub Token 的浏览器（你）才显示管理按钮
+if (localStorage.getItem('gzfood_token')) {
+  const adminLink = document.getElementById('adminLink');
+  if (adminLink) adminLink.classList.remove('hidden');
+}
+
 // ---------- 启动 ----------
 loadData();

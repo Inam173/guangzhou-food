@@ -185,46 +185,52 @@ async function githubGetFile() {
 async function githubPutFile(shops, commitMsg) {
   const c = getConfig();
   const url = `https://api.github.com/repos/${c.owner}/${c.repo}/contents/data.json`;
+  const content = JSON.stringify({ shops }, null, 2);
 
-  // 获取当前 SHA
-  let sha = null;
-  try {
-    const getResp = await fetchWithTimeout(url + `?ref=${c.branch}`, {
+  // 最多重试 2 次（应对并发修改导致的 SHA 不匹配）
+  for (let attempt = 0; attempt < 2; attempt++) {
+    // 获取最新 SHA
+    let sha = null;
+    try {
+      const getResp = await fetchWithTimeout(url + `?ref=${c.branch}`, {
+        headers: {
+          'Authorization': `token ${c.token}`,
+          'Accept': 'application/vnd.github.v3+json',
+        },
+      });
+      if (getResp.ok) {
+        const fd = await getResp.json();
+        sha = fd.sha;
+      }
+    } catch (e) { /* file may not exist yet */ }
+
+    const body = {
+      message: commitMsg,
+      content: btoa(unescape(encodeURIComponent(content))), // UTF-8 safe base64
+      branch: c.branch,
+    };
+    if (sha) body.sha = sha;
+
+    const resp = await fetchWithTimeout(url, {
+      method: 'PUT',
       headers: {
         'Authorization': `token ${c.token}`,
         'Accept': 'application/vnd.github.v3+json',
+        'Content-Type': 'application/json',
       },
+      body: JSON.stringify(body),
     });
-    if (getResp.ok) {
-      const fd = await getResp.json();
-      sha = fd.sha;
-    }
-  } catch (e) { /* file may not exist yet */ }
 
-  const content = JSON.stringify({ shops }, null, 2);
-  const body = {
-    message: commitMsg,
-    content: btoa(unescape(encodeURIComponent(content))), // UTF-8 safe base64
-    branch: c.branch,
-  };
-  if (sha) body.sha = sha;
+    if (resp.ok) return resp.json();
 
-  const resp = await fetchWithTimeout(url, {
-    method: 'PUT',
-    headers: {
-      'Authorization': `token ${c.token}`,
-      'Accept': 'application/vnd.github.v3+json',
-      'Content-Type': 'application/json',
-    },
-    body: JSON.stringify(body),
-  });
-
-  if (!resp.ok) {
     const err = await resp.json().catch(() => ({}));
+    // 如果是 SHA 不匹配，重试一次（重新获取最新 SHA）
+    if (err.message && err.message.includes('does not match') && attempt === 0) {
+      console.warn('SHA 冲突，自动重试...');
+      continue;
+    }
     throw new Error(err.message || `HTTP ${resp.status}`);
   }
-
-  return resp.json();
 }
 
 // ---------- 数据读取 ----------

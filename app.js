@@ -112,7 +112,7 @@ function render() {
 }
 
 function createCardHTML(shop) {
-  const stars = '⭐'.repeat(Math.floor(shop.rating || 0));
+  const stars = '⭐'.repeat(Math.round(shop.rating || 0));
   const tags = (shop.tags || []).slice(0, 3).map(t =>
     `<span class="px-2 py-0.5 bg-orange-100 text-orange-700 rounded-md text-xs font-medium">${escapeHTML(t)}</span>`
   ).join('');
@@ -172,7 +172,7 @@ function openDetail(id) {
   }
   document.getElementById('modalCategory').textContent = shop.category;
   document.getElementById('modalName').textContent = shop.name;
-  document.getElementById('modalRating').innerHTML = '⭐'.repeat(Math.floor(shop.rating || 0)) + ` ${shop.rating}`;
+  document.getElementById('modalRating').innerHTML = '⭐'.repeat(Math.round(shop.rating || 0)) + ` ${shop.rating}`;
   document.getElementById('modalPrice').textContent = `💰 人均 ¥${shop.pricePerPerson || '-'}`;
   document.getElementById('modalNotes').textContent = shop.notes || '暂无备注';
   document.getElementById('modalAddress').textContent = shop.address;

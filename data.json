@@ -20,6 +20,27 @@
       "visitedDate": null,
       "createdAt": "2026-05-20T14:30:00Z",
       "updatedAt": "2026-07-14T12:35:13.366Z"
+    },
+    {
+      "id": "0b20420a-b27a-4781-a4b3-41e8668c658f",
+      "name": "银灯食府(丽丰国际中心店)",
+      "category": "茶楼",
+      "rating": 4.5,
+      "pricePerPerson": 100,
+      "address": "越秀区解放南路33号丽丰国际中心3楼（近海珠广场地铁站D口）",
+      "coordinates": {
+        "lat": null,
+        "lng": null
+      },
+      "imageUrl": "https://img.meituan.net/content/dc99fe9754a621541cdc942324c3913088169.jpg%40750w_1e_1l%7Cwatermark%3D0.webp",
+      "dianpingUrl": "https://m.dianping.com/shopinfo/k2dUGd9VF4kLmDQ2?msource=Appshare2021&utm_source=shop_share&shoptype=10&shopcategoryid=34283&cityid=4&isoversea=0",
+      "tags": [
+        "茶楼，老字号，可线上排队"
+      ],
+      "notes": "菜品地道，环境较好\n（另一家门店的出品可能不如这家）",
+      "visitedDate": null,
+      "createdAt": "2026-07-14T12:44:30.648Z",
+      "updatedAt": "2026-07-14T12:44:30.648Z"
     }
   ]
 }

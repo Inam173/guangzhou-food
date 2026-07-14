@@ -40,6 +40,8 @@ const formAddress   = $('#formAddress');
 const formLat       = $('#formLat');
 const formLng       = $('#formLng');
 const formImageUrl  = $('#formImageUrl');
+const formImageFile = $('#formImageFile');
+const btnUploadImage = $('#btnUploadImage');
 const formImagePreview = $('#formImagePreview');
 const formDianpingUrl = $('#formDianpingUrl');
 const formTags      = $('#formTags');
@@ -381,6 +383,80 @@ function updateImagePreview() {
 }
 
 formImageUrl.addEventListener('input', updateImagePreview);
+
+// ---------- 本地上传图片 ----------
+btnUploadImage.addEventListener('click', () => formImageFile.click());
+
+formImageFile.addEventListener('change', async () => {
+  const file = formImageFile.files[0];
+  if (!file) return;
+
+  const c = getConfig();
+  if (!c.owner || !c.repo || !c.token) {
+    showToast('请先配置 GitHub 连接信息', 'error');
+    return;
+  }
+
+  // 校验文件大小（限 5MB）
+  if (file.size > 5 * 1024 * 1024) {
+    showToast('图片不能超过 5MB', 'error');
+    return;
+  }
+
+  btnUploadImage.disabled = true;
+  btnUploadImage.textContent = '⏳ 上传中...';
+
+  try {
+    // 读取文件为 base64
+    const reader = new FileReader();
+    const base64Content = await new Promise((resolve, reject) => {
+      reader.onload = () => {
+        // 去掉 data:image/...;base64, 前缀
+        const base64 = reader.result.split(',')[1];
+        resolve(base64);
+      };
+      reader.onerror = reject;
+      reader.readAsDataURL(file);
+    });
+
+    // 上传到 GitHub
+    const ext = file.name.split('.').pop() || 'jpg';
+    const imagePath = `images/${Date.now()}-${Math.random().toString(36).slice(2, 8)}.${ext}`;
+    const apiUrl = `https://api.github.com/repos/${c.owner}/${c.repo}/contents/${imagePath}`;
+
+    const resp = await fetchWithTimeout(apiUrl, {
+      method: 'PUT',
+      headers: {
+        'Authorization': `token ${c.token}`,
+        'Accept': 'application/vnd.github.v3+json',
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify({
+        message: `📷 上传图片：${file.name}`,
+        content: base64Content,
+        branch: c.branch,
+      }),
+    }, 15000);
+
+    if (!resp.ok) {
+      const err = await resp.json().catch(() => ({}));
+      throw new Error(err.message || `HTTP ${resp.status}`);
+    }
+
+    const result = await resp.json();
+    // 使用 raw URL 作为图片链接
+    const rawUrl = `https://raw.githubusercontent.com/${c.owner}/${c.repo}/${c.branch}/${imagePath}`;
+    formImageUrl.value = rawUrl;
+    updateImagePreview();
+    showToast('图片上传成功！', 'success');
+  } catch (err) {
+    showToast('上传失败：' + err.message, 'error');
+  } finally {
+    btnUploadImage.disabled = false;
+    btnUploadImage.textContent = '📁 本地上传';
+    formImageFile.value = '';
+  }
+});
 
 btnNewShop.addEventListener('click', () => openForm(null));
 btnCloseForm.addEventListener('click', closeForm);

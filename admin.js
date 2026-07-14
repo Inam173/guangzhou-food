@@ -229,42 +229,29 @@ async function githubPutFile(shops, commitMsg) {
 
 // ---------- 数据读取 ----------
 async function loadAdminShops() {
-  const c = getConfig();
-
-  // 如果没配置 GitHub，尝试从本地 data.json 加载
-  if (!c.owner || !c.repo) {
-    try {
-      const resp = await fetch('data.json');
-      const data = await resp.json();
-      adminShops = data.shops || [];
-    } catch (e) {
-      adminShops = [];
-    }
-    renderAdminList();
-    return;
+  // 1. 始终先加载本地 data.json（秒开，不依赖网络）
+  try {
+    const resp = await fetch('data.json?v=' + Date.now());
+    const data = await resp.json();
+    adminShops = data.shops || [];
+  } catch (e) {
+    adminShops = [];
   }
+  renderAdminList();
+
+  // 2. 如果配置了 GitHub，后台同步最新数据
+  const c = getConfig();
+  if (!c.owner || !c.repo) return;
 
   try {
     const result = await githubGetFile();
     if (result.content && result.content.shops) {
       adminShops = result.content.shops;
-    } else if (result.isNew) {
-      // 首次使用，初始化空数据
-      adminShops = [];
+      renderAdminList();
     }
-    renderAdminList();
   } catch (err) {
-    showToast('加载失败：' + err.message, 'error');
-    // fallback to local
-    try {
-      const resp = await fetch('data.json');
-      const data = await resp.json();
-      adminShops = data.shops || [];
-      renderAdminList();
-    } catch (e) {
-      adminShops = [];
-      renderAdminList();
-    }
+    // 静默失败，本地数据已经显示了
+    console.warn('GitHub 同步失败，使用本地数据:', err.message);
   }
 }
 

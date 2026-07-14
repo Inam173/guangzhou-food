@@ -41,6 +41,27 @@
       "visitedDate": null,
       "createdAt": "2026-07-14T12:44:30.648Z",
       "updatedAt": "2026-07-14T12:45:31.763Z"
+    },
+    {
+      "id": "7fe637da-1c8b-4616-9853-a2a1deea2633",
+      "name": "宋·SONG Cafe(太古汇店)",
+      "category": "甜品糖水",
+      "rating": 4.5,
+      "pricePerPerson": 50,
+      "address": "天河区天河路太古汇mu层一食圈16K号",
+      "coordinates": {
+        "lat": null,
+        "lng": null
+      },
+      "imageUrl": "https://p0.meituan.net/biztone/279c649cdb8a412ec2a52c6e64b32c2d250636.jpg%40750w_1e_1l%7Cwatermark%3D0.webp",
+      "dianpingUrl": "https://m.dianping.com/shopinfo/G3raFpDcP2glSHD0?msource=Appshare2021&utm_source=shop_share&shoptype=10&shopcategoryid=132&cityid=4&isoversea=0",
+      "tags": [
+        "瑞士卷，甜点"
+      ],
+      "notes": "招牌是抹茶瑞士卷，用料扎实，回口甘甜\n价格不低，但性价比同样不低，预算足够的话完全值得品尝及回购\n个人习惯外带坐地铁回家吃",
+      "visitedDate": null,
+      "createdAt": "2026-07-14T13:14:39.512Z",
+      "updatedAt": "2026-07-14T13:14:39.512Z"
     }
   ]
 }

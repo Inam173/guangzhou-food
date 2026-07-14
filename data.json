@@ -2,27 +2,24 @@
   "shops": [
     {
       "id": "a1b2c3d4-e5f6-7890-abcd-ef1234567890",
-      "name": "惠食佳（东风店）",
+      "name": "惠食佳（滨江大公馆店）",
       "category": "饭馆",
-      "rating": 4.7,
+      "rating": 4.5,
       "pricePerPerson": 120,
-      "address": "广州市越秀区东风东路760号",
+      "address": "海珠区滨江西路172号（远洋汇富商务中心旁）",
       "coordinates": {
         "lat": 23.1352,
         "lng": 113.2887
       },
       "imageUrl": "https://images.unsplash.com/photo-1554118811-1e0d58224f24?w=600",
-      "dianpingUrl": "",
+      "dianpingUrl": "https://m.dianping.com/shopinfo/Gams6NXcwGShysQe?msource=Appshare2021&utm_source=shop_share&shoptype=10&shopcategoryid=34283&cityid=4&isoversea=0",
       "tags": [
-        "粤菜",
-        "老字号",
-        "啫啫煲",
-        "聚餐首选"
+        "啫啫煲，粤菜，老字号"
       ],
-      "notes": "啫啫黄鳝煲是招牌，镬气十足。环境偏老派但干净，饭点要排队，建议提前半小时到。人均120左右，性价比不错。",
+      "notes": "各类啫啫煲是招牌\n价格不低，但预算足够的话值得一试\n饭点要排队，建议提前到",
       "visitedDate": null,
       "createdAt": "2026-05-20T14:30:00Z",
-      "updatedAt": "2026-07-14T11:57:04.579Z"
+      "updatedAt": "2026-07-14T12:28:44.333Z"
     }
   ]
 }

@@ -5,21 +5,21 @@
       "name": "惠食佳（滨江大公馆店）",
       "category": "饭馆",
       "rating": 4.5,
-      "pricePerPerson": 120,
+      "pricePerPerson": 180,
       "address": "海珠区滨江西路172号（远洋汇富商务中心旁）",
       "coordinates": {
-        "lat": 23.1352,
-        "lng": 113.2887
+        "lat": null,
+        "lng": null
       },
-      "imageUrl": "https://images.unsplash.com/photo-1554118811-1e0d58224f24?w=600",
+      "imageUrl": "https://qcloud.dpfile.com/pc/YnEObzs3PMRkZfxizOgm7vf7PzBQcUf1dNkJBefc7bET4G0l735e9h0rDGCpIVmOtinsm4wZBU2JBzCyrLLxBw.webp",
       "dianpingUrl": "https://m.dianping.com/shopinfo/Gams6NXcwGShysQe?msource=Appshare2021&utm_source=shop_share&shoptype=10&shopcategoryid=34283&cityid=4&isoversea=0",
       "tags": [
-        "啫啫煲，粤菜，老字号"
+        "啫啫煲，粤菜，老字号，有外卖"
       ],
-      "notes": "各类啫啫煲是招牌\n价格不低，但预算足够的话值得一试\n饭点要排队，建议提前到",
+      "notes": "各类啫啫煲是招牌\n价格高，但比较物有所值\n饭点一般都要排长队",
       "visitedDate": null,
       "createdAt": "2026-05-20T14:30:00Z",
-      "updatedAt": "2026-07-14T12:28:44.333Z"
+      "updatedAt": "2026-07-14T12:35:13.366Z"
     }
   ]
 }

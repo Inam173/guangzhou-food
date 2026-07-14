@@ -174,9 +174,13 @@ function openDetail(id) {
   document.getElementById('modalRating').innerHTML = createStarsHTML(shop.rating) + ` ${shop.rating}`;
   document.getElementById('modalNotes').textContent = shop.notes || '暂无备注';
   document.getElementById('modalAddress').textContent = shop.address;
-  document.getElementById('modalVisitedDate').textContent = shop.visitedDate
-    ? `探店日期：${shop.visitedDate}`
-    : '探店日期：未记录';
+  const visitedRow = document.getElementById('modalVisitedRow');
+  if (shop.visitedDate) {
+    document.getElementById('modalVisitedDate').textContent = `探店日期：${shop.visitedDate}`;
+    visitedRow.classList.remove('hidden');
+  } else {
+    visitedRow.classList.add('hidden');
+  }
 
   // Tags
   const tagsContainer = document.getElementById('modalTags');

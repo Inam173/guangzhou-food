@@ -41,6 +41,7 @@ const formLat       = $('#formLat');
 const formLng       = $('#formLng');
 const formImageUrl  = $('#formImageUrl');
 const formImagePreview = $('#formImagePreview');
+const formDianpingUrl = $('#formDianpingUrl');
 const formTags      = $('#formTags');
 const formNotes     = $('#formNotes');
 const formVisitedDate = $('#formVisitedDate');
@@ -346,6 +347,7 @@ function openForm(shop) {
     formLat.value = shop.coordinates?.lat || '';
     formLng.value = shop.coordinates?.lng || '';
     formImageUrl.value = shop.imageUrl || '';
+    formDianpingUrl.value = shop.dianpingUrl || '';
     formTags.value = (shop.tags || []).join(', ');
     formNotes.value = shop.notes || '';
     formVisitedDate.value = shop.visitedDate || '';
@@ -411,6 +413,7 @@ shopForm.addEventListener('submit', async (e) => {
       lng: parseFloat(formLng.value) || null,
     },
     imageUrl: formImageUrl.value.trim(),
+    dianpingUrl: formDianpingUrl.value.trim(),
     tags: formTags.value.split(',').map(t => t.trim()).filter(Boolean),
     notes: formNotes.value.trim(),
     visitedDate: formVisitedDate.value || null,

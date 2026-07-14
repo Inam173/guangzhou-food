@@ -200,6 +200,15 @@ function openDetail(id) {
     document.getElementById('modalMapLink').href = `https://uri.amap.com/search?keyword=${addr}&callnative=1`;
   }
 
+  // 大众点评链接
+  const dianpingBtn = document.getElementById('modalDianpingLink');
+  if (shop.dianpingUrl) {
+    dianpingBtn.href = shop.dianpingUrl;
+    dianpingBtn.classList.remove('hidden');
+  } else {
+    dianpingBtn.classList.add('hidden');
+  }
+
   detailModal.classList.remove('hidden');
   document.body.classList.add('modal-open');
 }

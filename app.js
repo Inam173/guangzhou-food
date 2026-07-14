@@ -112,7 +112,6 @@ function render() {
 }
 
 function createCardHTML(shop) {
-  const stars = createStarsHTML(shop.rating);
   const tags = (shop.tags || []).slice(0, 3).map(t =>
     `<span class="px-2 py-0.5 bg-orange-100 text-orange-700 rounded-md text-xs font-medium">${escapeHTML(t)}</span>`
   ).join('');
@@ -134,11 +133,6 @@ function createCardHTML(shop) {
           <h3 class="font-bold text-gray-900 text-base truncate pr-2">${escapeHTML(shop.name)}</h3>
         </div>
         <div class="flex items-center gap-2 mb-2 text-sm">
-          <span class="star-rating text-sm">${stars}</span>
-          <span class="text-gray-400 text-xs">${shop.rating || '-'}</span>
-          <span class="text-gray-300">·</span>
-          <span class="text-gray-600 text-xs">💰${shop.pricePerPerson || '-'}/人</span>
-          <span class="text-gray-300">·</span>
           <span class="px-2 py-0.5 bg-gray-100 text-gray-500 rounded-md text-xs">${escapeHTML(shop.category)}</span>
         </div>
         <div class="flex flex-wrap gap-1 mb-2">${tags || '<span class="text-gray-300 text-xs">暂无标签</span>'}</div>
@@ -147,27 +141,6 @@ function createCardHTML(shop) {
         </p>
       </div>
     </div>`;
-}
-
-// 生成星级 HTML（支持半星）
-function createStarsHTML(rating) {
-  const r = rating || 0;
-  const fullStars = Math.floor(r);
-  const fraction = r - fullStars;
-  const hasHalf = fraction >= 0.25 && fraction < 0.75;
-  const roundUp = fraction >= 0.75;
-
-  let html = '';
-  for (let i = 0; i < fullStars; i++) {
-    html += '<span class="star-full">★</span>';
-  }
-  if (hasHalf) {
-    html += '<span class="star-half">★</span>';
-  }
-  if (roundUp) {
-    html += '<span class="star-full">★</span>';
-  }
-  return html;
 }
 
 function escapeHTML(str) {
@@ -193,8 +166,6 @@ function openDetail(id) {
   }
   document.getElementById('modalCategory').textContent = shop.category;
   document.getElementById('modalName').textContent = shop.name;
-  document.getElementById('modalRating').innerHTML = createStarsHTML(shop.rating) + ` ${shop.rating}`;
-  document.getElementById('modalPrice').textContent = `💰 人均 ¥${shop.pricePerPerson || '-'}`;
   document.getElementById('modalNotes').textContent = shop.notes || '暂无备注';
   document.getElementById('modalAddress').textContent = shop.address;
   document.getElementById('modalVisitedDate').textContent = shop.visitedDate

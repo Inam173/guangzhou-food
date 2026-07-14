@@ -57,30 +57,6 @@
   box-shadow: 0 2px 8px rgba(239, 68, 68, 0.3);
 }
 
-/* 评分星星 */
-.star-rating {
-  color: #f59e0b;
-  letter-spacing: 2px;
-}
-
-.star-full { color: #f59e0b; }
-
-.star-half {
-  position: relative;
-  display: inline-block;
-  color: #d1d5db;
-}
-
-.star-half::after {
-  content: '★';
-  position: absolute;
-  left: 0;
-  top: 0;
-  width: 50%;
-  overflow: hidden;
-  color: #f59e0b;
-}
-
 /* 详情弹窗滚动条 */
 #detailModal > div::-webkit-scrollbar {
   width: 4px;

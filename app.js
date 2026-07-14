@@ -24,7 +24,8 @@ async function loadData() {
   try {
     // 部分云服务商可能会对 raw.githubusercontent.com 有访问问题
     // 如果你使用 GitHub Pages 部署，data.json 在同目录下直接 fetch 即可
-    const response = await fetch('data.json');
+    // 添加时间戳防止浏览器缓存旧数据
+    const response = await fetch('data.json?v=' + Date.now());
     if (!response.ok) throw new Error(`HTTP ${response.status}`);
     const data = await response.json();
     allShops = data.shops || [];

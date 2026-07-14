@@ -111,6 +111,28 @@
       "visitedDate": null,
       "createdAt": "2026-07-14T14:25:16.683Z",
       "updatedAt": "2026-07-14T22:41:11.836Z"
+    },
+    {
+      "id": "eb44fcc5-fc79-4b0f-bc65-de8cc84f9807",
+      "name": "禄运茶居·手工点心(正佳广场店)",
+      "category": "茶楼",
+      "rating": 4,
+      "pricePerPerson": 70,
+      "address": "天河区天河路228号正佳广场5楼5A031",
+      "coordinates": {
+        "lat": null,
+        "lng": null
+      },
+      "imageUrl": "https://raw.githubusercontent.com/Inam173/guangzhou-food/main/images/1784069434134-uof8gj.jpg",
+      "dianpingUrl": "https://m.dianping.com/shopinfo/EwHdLZfxzcTDVUdY?msource=Appshare2021&utm_source=shop_share&shoptype=10&shopcategoryid=34282&cityid=4&isoversea=0",
+      "tags": [
+        "早茶",
+        "连锁"
+      ],
+      "notes": "",
+      "visitedDate": null,
+      "createdAt": "2026-07-14T22:51:24.456Z",
+      "updatedAt": "2026-07-14T22:51:24.456Z"
     }
   ]
 }

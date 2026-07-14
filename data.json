@@ -62,6 +62,27 @@
       "visitedDate": null,
       "createdAt": "2026-07-14T13:14:39.512Z",
       "updatedAt": "2026-07-14T13:14:39.512Z"
+    },
+    {
+      "id": "976d37c8-f33e-404a-9d62-44dee2378bbf",
+      "name": "英姐鲜奶",
+      "category": "甜品糖水",
+      "rating": 4,
+      "pricePerPerson": 15,
+      "address": "越秀区西华路华业大厦1层（雍和酒家对面）",
+      "coordinates": {
+        "lat": null,
+        "lng": null
+      },
+      "imageUrl": "https://qcloud.dpfile.com/pc/AoT5VqDBtorPWjnM63edb5Z9Hc42GBw0Zm1TlcuuV7eNsqTZjllUeOvSOzh2Ou8Btinsm4wZBU2JBzCyrLLxBw.webp",
+      "dianpingUrl": "https://m.dianping.com/shopinfo/l8wmBHRWnkEEPB6s?msource=Appshare2021&utm_source=shop_share&shoptype=10&shopcategoryid=34236&cityid=4&isoversea=0",
+      "tags": [
+        "广式甜品"
+      ],
+      "notes": "街坊小店，店家现点现做，主打双皮奶姜撞奶鲜奶等等\n逛吃西华路时可作为必吃之一",
+      "visitedDate": null,
+      "createdAt": "2026-07-14T13:25:27.981Z",
+      "updatedAt": "2026-07-14T13:25:27.981Z"
     }
   ]
 }

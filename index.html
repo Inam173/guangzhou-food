@@ -17,7 +17,7 @@
       }
     }
   </script>
-  <link rel="stylesheet" href="style.css?v=2">
+  <link rel="stylesheet" href="style.css?v=3">
 </head>
 <body class="bg-orange-50 min-h-screen">
 
@@ -79,18 +79,8 @@
       </button>
     </div>
 
-    <!-- Sort & Count -->
+    <!-- Count -->
     <div class="flex items-center justify-between flex-wrap gap-3">
-      <div class="flex items-center gap-2">
-        <span class="text-sm text-gray-500">排序：</span>
-        <select id="sortSelect" class="bg-white border border-gray-200 rounded-lg px-3 py-2 text-sm focus:border-orange-400 outline-none shadow-sm">
-          <option value="rating-desc">⭐ 评分最高</option>
-          <option value="price-asc">💰 人均最低</option>
-          <option value="price-desc">💰 人均最高</option>
-          <option value="date-desc">📅 最近添加</option>
-          <option value="visited-desc">📅 最近探店</option>
-        </select>
-      </div>
       <span id="shopCount" class="text-sm text-gray-400">共 0 家</span>
     </div>
   </div>
@@ -126,6 +116,10 @@
       <div class="p-5">
         <div class="flex items-start justify-between mb-1">
           <h2 id="modalName" class="text-2xl font-bold text-gray-900"></h2>
+        </div>
+
+        <div class="flex items-center gap-3 mb-4 text-sm">
+          <span id="modalRating" class="text-orange-500 font-bold text-lg"></span>
         </div>
 
         <div class="flex flex-wrap gap-2 mb-4" id="modalTags"></div>
@@ -167,6 +161,6 @@
   <script>
     document.getElementById('footerYear').textContent = new Date().getFullYear();
   </script>
-  <script src="app.js?v=4"></script>
+  <script src="app.js?v=5"></script>
 </body>
 </html>

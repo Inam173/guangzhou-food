@@ -112,7 +112,7 @@ function render() {
 }
 
 function createCardHTML(shop) {
-  const stars = '⭐'.repeat(Math.round(shop.rating || 0));
+  const stars = createStarsHTML(shop.rating);
   const tags = (shop.tags || []).slice(0, 3).map(t =>
     `<span class="px-2 py-0.5 bg-orange-100 text-orange-700 rounded-md text-xs font-medium">${escapeHTML(t)}</span>`
   ).join('');
@@ -149,6 +149,27 @@ function createCardHTML(shop) {
     </div>`;
 }
 
+// 生成星级 HTML（支持半星）
+function createStarsHTML(rating) {
+  const r = rating || 0;
+  const fullStars = Math.floor(r);
+  const fraction = r - fullStars;
+  const hasHalf = fraction >= 0.25 && fraction < 0.75;
+  const roundUp = fraction >= 0.75;
+
+  let html = '';
+  for (let i = 0; i < fullStars; i++) {
+    html += '<span class="star-full">★</span>';
+  }
+  if (hasHalf) {
+    html += '<span class="star-half">★</span>';
+  }
+  if (roundUp) {
+    html += '<span class="star-full">★</span>';
+  }
+  return html;
+}
+
 function escapeHTML(str) {
   if (!str) return '';
   const div = document.createElement('div');
@@ -172,7 +193,7 @@ function openDetail(id) {
   }
   document.getElementById('modalCategory').textContent = shop.category;
   document.getElementById('modalName').textContent = shop.name;
-  document.getElementById('modalRating').innerHTML = '⭐'.repeat(Math.round(shop.rating || 0)) + ` ${shop.rating}`;
+  document.getElementById('modalRating').innerHTML = createStarsHTML(shop.rating) + ` ${shop.rating}`;
   document.getElementById('modalPrice').textContent = `💰 人均 ¥${shop.pricePerPerson || '-'}`;
   document.getElementById('modalNotes').textContent = shop.notes || '暂无备注';
   document.getElementById('modalAddress').textContent = shop.address;

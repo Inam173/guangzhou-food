@@ -2,7 +2,7 @@
   "shops": [
     {
       "id": "a1b2c3d4-e5f6-7890-abcd-ef1234567890",
-      "name": "惠食佳（滨江大公馆店）",
+      "name": "惠食佳(滨江大公馆店)",
       "category": "饭馆",
       "rating": 4.5,
       "pricePerPerson": 180,
@@ -19,7 +19,7 @@
       "notes": "各类啫啫煲是招牌\n价格高，但比较物有所值\n饭点一般都要排长队",
       "visitedDate": null,
       "createdAt": "2026-05-20T14:30:00Z",
-      "updatedAt": "2026-07-14T12:35:13.366Z"
+      "updatedAt": "2026-07-14T12:52:44.839Z"
     },
     {
       "id": "0b20420a-b27a-4781-a4b3-41e8668c658f",

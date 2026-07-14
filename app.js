@@ -134,7 +134,6 @@ function createCardHTML(shop) {
           <h3 class="font-bold text-gray-900 text-base truncate pr-2">${escapeHTML(shop.name)}</h3>
         </div>
         <div class="flex items-center gap-2 mb-2 text-sm">
-          <span class="text-gray-400 text-xs">大众点评</span>
           <span class="star-rating text-sm">${stars}</span>
           <span class="text-gray-400 text-xs">${shop.rating || '-'}</span>
           <span class="text-gray-300">·</span>
@@ -194,7 +193,7 @@ function openDetail(id) {
   }
   document.getElementById('modalCategory').textContent = shop.category;
   document.getElementById('modalName').textContent = shop.name;
-  document.getElementById('modalRating').innerHTML = `大众点评 ` + createStarsHTML(shop.rating) + ` ${shop.rating}`;
+  document.getElementById('modalRating').innerHTML = createStarsHTML(shop.rating) + ` ${shop.rating}`;
   document.getElementById('modalPrice').textContent = `💰 人均 ¥${shop.pricePerPerson || '-'}`;
   document.getElementById('modalNotes').textContent = shop.notes || '暂无备注';
   document.getElementById('modalAddress').textContent = shop.address;

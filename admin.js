@@ -140,12 +140,19 @@ btnTestConfig.addEventListener('click', async () => {
   }
 });
 
+// ---------- 工具：带超时的 fetch ----------
+function fetchWithTimeout(url, options = {}, timeoutMs = 8000) {
+  const controller = new AbortController();
+  const timer = setTimeout(() => controller.abort(), timeoutMs);
+  return fetch(url, { ...options, signal: controller.signal }).finally(() => clearTimeout(timer));
+}
+
 // ---------- GitHub API 操作 ----------
 async function githubGetFile() {
   const c = getConfig();
   // 先用 raw URL 读取（更快，无需 Token）
   try {
-    const rawResp = await fetch(`https://raw.githubusercontent.com/${c.owner}/${c.repo}/${c.branch}/data.json`);
+    const rawResp = await fetchWithTimeout(`https://raw.githubusercontent.com/${c.owner}/${c.repo}/${c.branch}/data.json`);
     if (rawResp.ok) {
       const data = await rawResp.json();
       return { content: data, sha: null, isNew: false };
@@ -154,7 +161,7 @@ async function githubGetFile() {
 
   // 回退到 API（需要 Token）
   const url = `https://api.github.com/repos/${c.owner}/${c.repo}/contents/data.json?ref=${c.branch}`;
-  const resp = await fetch(url, {
+  const resp = await fetchWithTimeout(url, {
     headers: {
       'Authorization': `token ${c.token}`,
       'Accept': 'application/vnd.github.v3+json',
@@ -182,7 +189,7 @@ async function githubPutFile(shops, commitMsg) {
   // 获取当前 SHA
   let sha = null;
   try {
-    const getResp = await fetch(url + `?ref=${c.branch}`, {
+    const getResp = await fetchWithTimeout(url + `?ref=${c.branch}`, {
       headers: {
         'Authorization': `token ${c.token}`,
         'Accept': 'application/vnd.github.v3+json',
@@ -202,7 +209,7 @@ async function githubPutFile(shops, commitMsg) {
   };
   if (sha) body.sha = sha;
 
-  const resp = await fetch(url, {
+  const resp = await fetchWithTimeout(url, {
     method: 'PUT',
     headers: {
       'Authorization': `token ${c.token}`,

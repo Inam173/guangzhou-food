@@ -2,27 +2,45 @@
   "shops": [
     {
       "id": "a1b2c3d4-e5f6-7890-abcd-ef1234567890",
-      "name": "惠食佳（东风店）",
+      "name": "惠食佳（滨江大公馆店）",
       "category": "饭馆",
-      "rating": 4.7,
-      "pricePerPerson": 120,
-      "address": "广州市越秀区东风东路760号",
+      "rating": 4.5,
+      "pricePerPerson": 180,
+      "address": "海珠区滨江西路172号（远洋汇富商务中心旁）",
       "coordinates": {
-        "lat": 23.1352,
-        "lng": 113.2887
+        "lat": null,
+        "lng": null
       },
-      "imageUrl": "https://images.unsplash.com/photo-1554118811-1e0d58224f24?w=600",
-      "dianpingUrl": "",
+      "imageUrl": "https://qcloud.dpfile.com/pc/YnEObzs3PMRkZfxizOgm7vf7PzBQcUf1dNkJBefc7bET4G0l735e9h0rDGCpIVmOtinsm4wZBU2JBzCyrLLxBw.webp",
+      "dianpingUrl": "https://m.dianping.com/shopinfo/Gams6NXcwGShysQe?msource=Appshare2021&utm_source=shop_share&shoptype=10&shopcategoryid=34283&cityid=4&isoversea=0",
       "tags": [
-        "粤菜",
-        "老字号",
-        "啫啫煲",
-        "聚餐首选"
+        "啫啫煲，粤菜，老字号，有外卖"
       ],
-      "notes": "啫啫黄鳝煲是招牌，镬气十足。环境偏老派但干净，饭点要排队，建议提前半小时到。人均120左右，性价比不错。",
+      "notes": "各类啫啫煲是招牌\n价格高，但比较物有所值\n饭点一般都要排长队",
       "visitedDate": null,
       "createdAt": "2026-05-20T14:30:00Z",
-      "updatedAt": "2026-07-14T11:57:04.579Z"
+      "updatedAt": "2026-07-14T12:35:13.366Z"
+    },
+    {
+      "id": "0b20420a-b27a-4781-a4b3-41e8668c658f",
+      "name": "银灯食府(丽丰国际中心店)",
+      "category": "茶楼",
+      "rating": 4.5,
+      "pricePerPerson": 100,
+      "address": "越秀区解放南路33号丽丰国际中心3楼（近海珠广场地铁站D口）",
+      "coordinates": {
+        "lat": null,
+        "lng": null
+      },
+      "imageUrl": "https://img.meituan.net/content/dc99fe9754a621541cdc942324c3913088169.jpg%40750w_1e_1l%7Cwatermark%3D0.webp",
+      "dianpingUrl": "https://m.dianping.com/shopinfo/k2dUGd9VF4kLmDQ2?msource=Appshare2021&utm_source=shop_share&shoptype=10&shopcategoryid=34283&cityid=4&isoversea=0",
+      "tags": [
+        "茶楼，老字号，可线上排队"
+      ],
+      "notes": "菜品地道，环境较好\n（另一家门店的出品可能不如这家）",
+      "visitedDate": null,
+      "createdAt": "2026-07-14T12:44:30.648Z",
+      "updatedAt": "2026-07-14T12:45:31.763Z"
     }
   ]
 }

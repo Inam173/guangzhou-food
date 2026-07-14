@@ -83,6 +83,25 @@
       "visitedDate": null,
       "createdAt": "2026-07-14T13:25:27.981Z",
       "updatedAt": "2026-07-14T14:15:35.457Z"
+    },
+    {
+      "id": "c678252f-4595-4f94-9c2d-d4760c508408",
+      "name": "华记石磨美食(西华路店)",
+      "category": "小吃",
+      "rating": 4,
+      "pricePerPerson": 10,
+      "address": "越秀区西华路377号",
+      "coordinates": {
+        "lat": null,
+        "lng": null
+      },
+      "imageUrl": "https://p0.meituan.net/content/612c8e51f53700a6710251cb3b1c6c4253937.jpg%40750w_1e_1l%7Cwatermark%3D0.webp",
+      "dianpingUrl": "https://m.dianping.com/shopinfo/l7jWuERM3XMIGk4Q?msource=Appshare2021&utm_source=shop_share&shoptype=10&shopcategoryid=210&cityid=4&isoversea=0",
+      "tags": [],
+      "notes": "",
+      "visitedDate": "2026-07-14",
+      "createdAt": "2026-07-14T14:25:16.683Z",
+      "updatedAt": "2026-07-14T14:25:16.683Z"
     }
   ]
 }

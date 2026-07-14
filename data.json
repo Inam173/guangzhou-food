@@ -95,13 +95,16 @@
         "lat": null,
         "lng": null
       },
-      "imageUrl": "https://p0.meituan.net/content/612c8e51f53700a6710251cb3b1c6c4253937.jpg%40750w_1e_1l%7Cwatermark%3D0.webp",
+      "imageUrl": "https://raw.githubusercontent.com/Inam173/guangzhou-food/main/images/1784039222492-dhpd4a.jpg",
       "dianpingUrl": "https://m.dianping.com/shopinfo/l7jWuERM3XMIGk4Q?msource=Appshare2021&utm_source=shop_share&shoptype=10&shopcategoryid=210&cityid=4&isoversea=0",
-      "tags": [],
-      "notes": "",
-      "visitedDate": "2026-07-14",
+      "tags": [
+        "肠粉",
+        "石磨"
+      ],
+      "notes": "绝对地道，绝非预制，皮薄价低，童叟无欺\n都逛吃广州了，那还不得一起床先急头白脸来一碟肠粉？\n不过街坊店的卫生不会太过讲究，反正东西在锅里都高温消毒过啦",
+      "visitedDate": null,
       "createdAt": "2026-07-14T14:25:16.683Z",
-      "updatedAt": "2026-07-14T14:25:16.683Z"
+      "updatedAt": "2026-07-14T14:39:20.093Z"
     }
   ]
 }

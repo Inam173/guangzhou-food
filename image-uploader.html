@@ -1,0 +1,277 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>🖼️ 图片转链接</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <style>
+    .drop-zone {
+      border: 2px dashed #d1d5db;
+      transition: all 0.2s;
+    }
+    .drop-zone:hover, .drop-zone.drag-over {
+      border-color: #d97706;
+      background: #fffbeb;
+    }
+    #result:empty { display: none; }
+  </style>
+</head>
+<body class="bg-stone-50 min-h-screen">
+
+  <header class="bg-gradient-to-r from-amber-900 via-amber-800 to-amber-700 text-white shadow-lg sticky top-0 z-40">
+    <div class="max-w-2xl mx-auto px-4 py-4 flex items-center justify-between">
+      <h1 class="text-xl font-bold">🖼️ 图片转链接</h1>
+      <span class="text-amber-200/60 text-xs">上传到 GitHub → 获取直链</span>
+    </div>
+  </header>
+
+  <main class="max-w-2xl mx-auto px-4 py-8 space-y-6">
+
+    <!-- 配置区 -->
+    <section class="bg-white rounded-2xl shadow-sm p-5 border border-gray-200">
+      <h2 class="text-sm font-bold text-gray-700 mb-3">⚙️ GitHub 配置</h2>
+      <div class="grid grid-cols-3 gap-3">
+        <div>
+          <label class="block text-xs text-gray-500 mb-1">用户名</label>
+          <input type="text" id="cfgOwner" placeholder="Inam173"
+                 class="w-full border border-gray-200 rounded-lg px-3 py-1.5 text-sm outline-none focus:border-amber-400">
+        </div>
+        <div>
+          <label class="block text-xs text-gray-500 mb-1">仓库名</label>
+          <input type="text" id="cfgRepo" placeholder="guangzhou-food"
+                 class="w-full border border-gray-200 rounded-lg px-3 py-1.5 text-sm outline-none focus:border-amber-400">
+        </div>
+        <div>
+          <label class="block text-xs text-gray-500 mb-1">Token</label>
+          <input type="password" id="cfgToken" placeholder="ghp_..."
+                 class="w-full border border-gray-200 rounded-lg px-3 py-1.5 text-sm outline-none font-mono focus:border-amber-400">
+        </div>
+      </div>
+      <p class="text-xs text-gray-400 mt-2">配置一次自动保存，下次打开不用再填</p>
+    </section>
+
+    <!-- 上传区 -->
+    <section class="bg-white rounded-2xl shadow-sm p-8 border border-gray-200 text-center">
+      <div id="dropZone" class="drop-zone rounded-2xl py-12 px-6 cursor-pointer transition">
+        <div class="text-5xl mb-3">📁</div>
+        <p class="text-gray-600 font-medium mb-1">点击选择图片 或 拖拽到此处</p>
+        <p class="text-gray-400 text-xs">支持 JPG / PNG / WebP / HEIC，自动压缩</p>
+        <input type="file" id="fileInput" accept="image/*" class="hidden">
+      </div>
+
+      <!-- 预览 -->
+      <div id="previewArea" class="hidden mt-5">
+        <img id="previewImage" src="" class="max-h-48 rounded-xl mx-auto shadow-md">
+        <p id="previewInfo" class="text-xs text-gray-400 mt-2"></p>
+      </div>
+
+      <!-- 进度 -->
+      <div id="progressArea" class="hidden mt-5">
+        <div class="w-full bg-gray-100 rounded-full h-2 overflow-hidden">
+          <div id="progressBar" class="bg-amber-500 h-full rounded-full transition-all duration-300" style="width:0%"></div>
+        </div>
+        <p id="progressText" class="text-sm text-gray-500 mt-2"></p>
+      </div>
+
+      <!-- 结果 -->
+      <div id="result" class="mt-5 p-4 bg-green-50 rounded-xl border border-green-200 text-left">
+        <p class="text-xs text-green-600 font-medium mb-2">✅ 链接已生成，已复制到剪贴板</p>
+        <div class="flex items-center gap-2">
+          <input type="text" id="resultUrl" readonly
+                 class="flex-1 bg-white border border-green-200 rounded-lg px-3 py-2 text-sm text-gray-700 outline-none font-mono">
+          <button id="btnCopy" class="px-3 py-2 bg-green-500 hover:bg-green-600 text-white rounded-lg text-sm font-medium transition whitespace-nowrap">
+            📋 复制
+          </button>
+        </div>
+      </div>
+    </section>
+
+    <!-- 使用说明 -->
+    <section class="text-center text-xs text-gray-400 pb-8">
+      图片上传到 GitHub 仓库的 images/ 目录 · 获取 raw.githubusercontent.com 直链 · 可粘贴到管理后台的图片链接栏
+    </section>
+
+  </main>
+
+  <script>
+    // ===== DOM =====
+    const $ = s => document.querySelector(s);
+    const dropZone = $('#dropZone');
+    const fileInput = $('#fileInput');
+    const previewArea = $('#previewArea');
+    const previewImage = $('#previewImage');
+    const previewInfo = $('#previewInfo');
+    const progressArea = $('#progressArea');
+    const progressBar = $('#progressBar');
+    const progressText = $('#progressText');
+    const result = $('#result');
+    const resultUrl = $('#resultUrl');
+    const btnCopy = $('#btnCopy');
+    const cfgOwner = $('#cfgOwner');
+    const cfgRepo = $('#cfgRepo');
+    const cfgToken = $('#cfgToken');
+
+    // ===== 配置持久化 =====
+    function loadConfig() {
+      cfgOwner.value = localStorage.getItem('imgup_owner') || '';
+      cfgRepo.value = localStorage.getItem('imgup_repo') || '';
+      cfgToken.value = localStorage.getItem('imgup_token') || '';
+    }
+    function saveConfig() {
+      localStorage.setItem('imgup_owner', cfgOwner.value.trim());
+      localStorage.setItem('imgup_repo', cfgRepo.value.trim());
+      localStorage.setItem('imgup_token', cfgToken.value.trim());
+    }
+    [cfgOwner, cfgRepo, cfgToken].forEach(el => el.addEventListener('change', saveConfig));
+    loadConfig();
+
+    // ===== 拖拽上传 =====
+    dropZone.addEventListener('click', () => fileInput.click());
+
+    dropZone.addEventListener('dragover', e => {
+      e.preventDefault();
+      dropZone.classList.add('drag-over');
+    });
+    dropZone.addEventListener('dragleave', () => {
+      dropZone.classList.remove('drag-over');
+    });
+    dropZone.addEventListener('drop', e => {
+      e.preventDefault();
+      dropZone.classList.remove('drag-over');
+      if (e.dataTransfer.files.length) handleFile(e.dataTransfer.files[0]);
+    });
+
+    fileInput.addEventListener('change', () => {
+      if (fileInput.files.length) handleFile(fileInput.files[0]);
+    });
+
+    // ===== 图片压缩 =====
+    function compressImage(file, maxWidth, quality) {
+      return new Promise((resolve, reject) => {
+        const img = new Image();
+        const url = URL.createObjectURL(file);
+        img.onload = () => {
+          URL.revokeObjectURL(url);
+          const width = Math.min(img.width, maxWidth);
+          const height = Math.round(img.height * (width / img.width));
+          const canvas = document.createElement('canvas');
+          canvas.width = width;
+          canvas.height = height;
+          canvas.getContext('2d').drawImage(img, 0, 0, width, height);
+          const dataUrl = canvas.toDataURL('image/webp', quality);
+          resolve(dataUrl.split(',')[1]);
+        };
+        img.onerror = () => { URL.revokeObjectURL(url); reject(new Error('图片加载失败')); };
+        img.src = url;
+      });
+    }
+
+    // ===== 主流程 =====
+    async function handleFile(file) {
+      const c = { owner: cfgOwner.value.trim(), repo: cfgRepo.value.trim(), token: cfgToken.value.trim() };
+      if (!c.owner || !c.repo || !c.token) {
+        alert('请先填写 GitHub 配置');
+        return;
+      }
+
+      // 预览
+      const reader = new FileReader();
+      reader.onload = () => {
+        previewImage.src = reader.result;
+        previewArea.classList.remove('hidden');
+        const sizeMB = (file.size / 1024 / 1024).toFixed(2);
+        previewInfo.textContent = `${file.name} · ${sizeMB} MB`;
+      };
+      reader.readAsDataURL(file);
+
+      // 隐藏旧结果
+      result.style.display = 'none';
+      progressArea.classList.remove('hidden');
+      progressBar.style.width = '10%';
+      progressText.textContent = '正在压缩...';
+
+      try {
+        // 压缩参数
+        let maxWidth, quality;
+        if (file.size > 2 * 1024 * 1024)       { maxWidth = 500; quality = 0.2; }
+        else if (file.size > 1024 * 1024)      { maxWidth = 550; quality = 0.25; }
+        else                                    { maxWidth = 600; quality = 0.3; }
+
+        const base64 = await compressImage(file, maxWidth, quality);
+        const compressedKB = Math.round(base64.length * 0.75 / 1024);
+        progressBar.style.width = '30%';
+        progressText.textContent = `压缩完成（约 ${compressedKB} KB），正在上传...`;
+
+        // 上传
+        const imagePath = `images/${Date.now()}-${Math.random().toString(36).slice(2, 8)}.webp`;
+        const apiUrl = `https://api.github.com/repos/${c.owner}/${c.repo}/contents/${imagePath}`;
+
+        const resp = await fetchWithTimeout(apiUrl, {
+          method: 'PUT',
+          headers: {
+            'Authorization': `token ${c.token}`,
+            'Accept': 'application/vnd.github.v3+json',
+            'Content-Type': 'application/json',
+          },
+          body: JSON.stringify({
+            message: `📷 上传图片：${file.name}`,
+            content: base64,
+            branch: 'main',
+          }),
+        }, 20000);
+
+        if (!resp.ok) {
+          const err = await resp.json().catch(() => ({}));
+          throw new Error(err.message || `HTTP ${resp.status}`);
+        }
+
+        progressBar.style.width = '100%';
+        progressText.textContent = '上传完成！';
+
+        const rawUrl = `https://raw.githubusercontent.com/${c.owner}/${c.repo}/main/${imagePath}`;
+        resultUrl.value = rawUrl;
+        result.style.display = 'block';
+
+        // 自动复制
+        await navigator.clipboard.writeText(rawUrl);
+        showToast('链接已复制！');
+
+        setTimeout(() => {
+          progressArea.classList.add('hidden');
+          progressBar.style.width = '0%';
+        }, 2000);
+
+      } catch (err) {
+        progressText.textContent = '上传失败：' + err.message;
+        progressBar.style.background = '#ef4444';
+        setTimeout(() => {
+          progressArea.classList.add('hidden');
+          progressBar.style.background = '';
+        }, 3000);
+      }
+    }
+
+    // ===== 手动复制 =====
+    btnCopy.addEventListener('click', async () => {
+      await navigator.clipboard.writeText(resultUrl.value);
+      showToast('已复制！');
+    });
+
+    // ===== 工具 =====
+    function fetchWithTimeout(url, options, timeoutMs) {
+      const controller = new AbortController();
+      const timer = setTimeout(() => controller.abort(), timeoutMs);
+      return fetch(url, { ...options, signal: controller.signal }).finally(() => clearTimeout(timer));
+    }
+
+    function showToast(msg) {
+      const t = document.createElement('div');
+      t.className = 'fixed top-5 left-1/2 -translate-x-1/2 bg-gray-800 text-white px-5 py-2.5 rounded-xl text-sm font-medium shadow-lg z-50';
+      t.textContent = msg;
+      document.body.appendChild(t);
+      setTimeout(() => { t.style.opacity = '0'; t.style.transition = 'opacity 0.3s'; setTimeout(() => t.remove(), 300); }, 2000);
+    }
+  </script>
+</body>
+</html>

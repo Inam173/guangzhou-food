@@ -437,8 +437,16 @@ formImageFile.addEventListener('change', async () => {
   btnUploadImage.textContent = '⏳ 压缩中...';
 
   try {
-    // 图片压缩（限制宽度 600px，WebP 质量 0.3）
-    const base64Content = await compressImage(file, 600, 0.3, 'image/webp');
+    // 动态压缩：大图压得更狠
+    let maxWidth, quality;
+    if (file.size > 2 * 1024 * 1024) {       // > 2MB
+      maxWidth = 500; quality = 0.2;
+    } else if (file.size > 1024 * 1024) {    // > 1MB
+      maxWidth = 550; quality = 0.25;
+    } else {                                  // <= 1MB
+      maxWidth = 600; quality = 0.3;
+    }
+    const base64Content = await compressImage(file, maxWidth, quality, 'image/webp');
     const finalExt = 'webp';
 
     btnUploadImage.textContent = '⏳ 上传中...';

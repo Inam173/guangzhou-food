@@ -244,6 +244,29 @@
       "visitedDate": null,
       "createdAt": "2026-07-15T22:47:13.192Z",
       "updatedAt": "2026-07-15T22:51:07.979Z"
+    },
+    {
+      "id": "2df70750-4109-4b9f-9042-79649360ccd4",
+      "name": "老狒·简聚食堂 H.party(越秀南路店)",
+      "category": "饭馆",
+      "rating": 4.5,
+      "pricePerPerson": 60,
+      "address": "越秀区东沙角路16号越秀时光113铺",
+      "coordinates": {
+        "lat": null,
+        "lng": null
+      },
+      "imageUrl": "https://raw.githubusercontent.com/Inam173/guangzhou-food/main/images/1784156413880-c74q24.webp",
+      "dianpingUrl": "https://m.dianping.com/shopinfo/l9PTip9oXEktlTOi?msource=Appshare2021&utm_source=shop_share&shoptype=10&shopcategoryid=116&cityid=4&isoversea=0",
+      "tags": [
+        "汉堡",
+        "西餐",
+        "有外卖"
+      ],
+      "notes": "※汉堡是招牌，有老式有新式，肉饼多汁，堡胚饱满\n※意面也推荐，我吃过肉最厚实的一家，而且价格也不坑\n※个人点过他家不下10次外卖",
+      "visitedDate": null,
+      "createdAt": "2026-07-15T23:05:07.912Z",
+      "updatedAt": "2026-07-15T23:05:07.912Z"
     }
   ]
 }

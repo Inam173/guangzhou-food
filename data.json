@@ -178,6 +178,27 @@
       "visitedDate": null,
       "createdAt": "2026-07-15T11:20:39.396Z",
       "updatedAt": "2026-07-15T11:20:39.396Z"
+    },
+    {
+      "id": "8a80ab85-ec85-4d47-80ee-a8d015dd083a",
+      "name": "皇鹏烧鹅仔(共和大街店)",
+      "category": "饭馆",
+      "rating": 4,
+      "pricePerPerson": 25,
+      "address": "越秀区共和大街24栋50号105室",
+      "coordinates": {
+        "lat": null,
+        "lng": null
+      },
+      "imageUrl": "",
+      "dianpingUrl": "https://m.dianping.com/shopinfo/G39MHG8c68TgfWKj?msource=Appshare2021&utm_source=shop_share&shoptype=10&shopcategoryid=2919&cityid=4&isoversea=0",
+      "tags": [
+        "烧腊（有烧鹅）"
+      ],
+      "notes": "※街坊店，出品标准，价格公道，可惜没有分店\n※高中时想改善伙食了就来这，当时都还是30m²的简陋装潢小门店，没想到后来扩张+精装升级这么多\n※烧腊店倒也不用专程去吃哪家，但住附近的话可以闭眼消费",
+      "visitedDate": null,
+      "createdAt": "2026-07-15T11:34:39.895Z",
+      "updatedAt": "2026-07-15T11:34:39.895Z"
     }
   ]
 }

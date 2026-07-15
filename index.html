@@ -4,31 +4,37 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>🍜 寻味广州</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Serif+SC:wght@400;700;900&display=swap" rel="stylesheet">
   <script src="https://cdn.tailwindcss.com"></script>
   <script>
     tailwind.config = {
       theme: {
         extend: {
           colors: {
-            primary: '#e74c3c',
-            warm: '#f39c12',
-          }
+            primary: '#d97706',
+            warm: '#b45309',
+          },
+          fontFamily: {
+            serif: ['"Noto Serif SC"', 'serif'],
+          },
         }
       }
     }
   </script>
-  <link rel="stylesheet" href="style.css?v=3">
+  <link rel="stylesheet" href="style.css?v=4">
 </head>
-<body class="bg-orange-50 min-h-screen">
+<body class="min-h-screen bg-fixed" style="background: linear-gradient(180deg, #fffbeb 0%, #fef3c7 30%, #fde68a 100%)">
 
   <!-- Header -->
-  <header class="bg-gradient-to-r from-red-600 to-orange-500 text-white shadow-lg sticky top-0 z-40">
+  <header class="bg-gradient-to-r from-amber-900 via-amber-800 to-amber-700 text-white shadow-lg sticky top-0 z-40">
     <div class="max-w-6xl mx-auto px-4 py-4 flex items-center justify-between">
       <div>
-        <h1 class="text-2xl md:text-3xl font-bold tracking-wide">🍜 寻味广州</h1>
-        <p class="text-orange-100 text-sm mt-1 hidden sm:block">声明：本网页收录所有店铺均为本人自行品尝收藏。所有评价均为主观，没有客观，如有帮助，不胜荣幸！</p>
+        <h1 class="text-2xl md:text-3xl font-bold tracking-wide font-serif">🍜 寻味广州</h1>
+        <p class="text-amber-200/70 text-xs mt-1 hidden sm:block italic">声明：本网页收录所有店铺均为本人自行品尝收藏。所有评价均为主观，没有客观，如有帮助，不胜荣幸！</p>
       </div>
-      <a href="admin.html" id="adminLink" class="hidden bg-white/20 hover:bg-white/30 text-white px-4 py-2 rounded-lg text-sm font-medium transition backdrop-blur-sm">
+      <a href="admin.html" id="adminLink" class="hidden bg-white/15 hover:bg-white/25 text-white px-4 py-2 rounded-lg text-sm font-medium transition backdrop-blur-sm border border-white/20">
         ✏️ 管理
       </a>
     </div>
@@ -43,14 +49,14 @@
         type="text"
         id="searchInput"
         placeholder="搜店名、地址、标签、备注..."
-        class="w-full pl-12 pr-4 py-3 bg-white rounded-2xl shadow-md border border-gray-200 focus:border-orange-400 focus:ring-2 focus:ring-orange-200 outline-none transition text-lg"
+        class="w-full pl-12 pr-4 py-3 bg-white/80 backdrop-blur rounded-2xl shadow-sm focus:shadow-md border border-amber-200 focus:border-amber-400 focus:ring-2 focus:ring-amber-200 outline-none transition text-lg"
         autocomplete="off"
       >
     </div>
 
     <!-- Category Tabs -->
     <div class="flex flex-wrap gap-2 mb-4" id="categoryTabs">
-      <button data-category="all" class="category-btn active px-4 py-2 rounded-full text-sm font-medium bg-red-500 text-white shadow-sm transition hover:scale-105">
+      <button data-category="all" class="category-btn active px-4 py-2 rounded-full text-sm font-medium bg-amber-600 text-white shadow-sm transition hover:scale-105">
         全部
       </button>
       <button data-category="饭馆" class="category-btn px-4 py-2 rounded-full text-sm font-medium bg-white text-gray-700 shadow-sm transition hover:scale-105 border border-gray-200">
@@ -115,7 +121,7 @@
       <!-- Content -->
       <div class="p-5">
         <div class="flex items-start justify-between mb-1">
-          <h2 id="modalName" class="text-2xl font-bold text-gray-900"></h2>
+          <h2 id="modalName" class="text-2xl font-bold text-gray-900 font-serif"></h2>
         </div>
 
         <div class="flex items-center gap-3 mb-4 text-sm">
@@ -161,6 +167,6 @@
   <script>
     document.getElementById('footerYear').textContent = new Date().getFullYear();
   </script>
-  <script src="app.js?v=6"></script>
+  <script src="app.js?v=7"></script>
 </body>
 </html>

@@ -51,10 +51,10 @@
 }
 
 .category-btn.active {
-  background: #ef4444 !important;
+  background: #d97706 !important;
   color: white !important;
-  border-color: #ef4444 !important;
-  box-shadow: 0 2px 8px rgba(239, 68, 68, 0.3);
+  border-color: #d97706 !important;
+  box-shadow: 0 2px 8px rgba(217, 119, 6, 0.3);
 }
 
 /* 评分星星 */

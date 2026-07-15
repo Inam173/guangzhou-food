@@ -101,7 +101,7 @@
         "lat": null,
         "lng": null
       },
-      "imageUrl": "https://raw.githubusercontent.com/Inam173/guangzhou-food/main/images/1784154058466-c1augp.webp",
+      "imageUrl": "https://raw.githubusercontent.com/Inam173/guangzhou-food/main/images/1784118142163-gqserg.jpg",
       "dianpingUrl": "https://m.dianping.com/shopinfo/l7jWuERM3XMIGk4Q?msource=Appshare2021&utm_source=shop_share&shoptype=10&shopcategoryid=210&cityid=4&isoversea=0",
       "tags": [
         "肠粉",
@@ -110,7 +110,7 @@
       "notes": "※绝对地道，绝非预制，皮薄价低，童叟无欺\n※人在广州，起床了不得先急头白脸来一碟肠粉？\n※肠粉店倒也没必要专门打卡，但来西华路的话这家不容错过\n※街坊店的卫生不会太讲究，反正出餐前在锅里都高温消毒过啦",
       "visitedDate": null,
       "createdAt": "2026-07-14T14:25:16.683Z",
-      "updatedAt": "2026-07-15T22:21:20.601Z"
+      "updatedAt": "2026-07-15T12:22:25.306Z"
     },
     {
       "id": "eb44fcc5-fc79-4b0f-bc65-de8cc84f9807",
@@ -199,6 +199,28 @@
       "visitedDate": null,
       "createdAt": "2026-07-15T11:34:39.895Z",
       "updatedAt": "2026-07-15T12:32:02.403Z"
+    },
+    {
+      "id": "c32d9a81-af1e-4631-9af7-a37d60867e7d",
+      "name": "银座餐厅(昌岗中路店)",
+      "category": "饭馆",
+      "rating": 4,
+      "pricePerPerson": 70,
+      "address": "海珠区沙园街道昌岗中路125号B1楼（近地铁宝岗大道站）",
+      "coordinates": {
+        "lat": null,
+        "lng": null
+      },
+      "imageUrl": "https://raw.githubusercontent.com/Inam173/guangzhou-food/main/images/1784154671917-dpc2fy.webp",
+      "dianpingUrl": "https://m.dianping.com/shopinfo/l1A5L7YwX7TqK4Y4?msource=Appshare2021&utm_source=shop_share&shoptype=10&shopcategoryid=205&cityid=4&isoversea=0",
+      "tags": [
+        "粤菜",
+        "老店"
+      ],
+      "notes": "※街坊店，经典粤菜馆，出品和价格都很经典，住得近都可以当饭堂\n※点菜直接让阿姨推荐就行，店内较特色的有脆皮大肠、鱼肠焗蛋、虾酱骨...\n※环境中规中矩，店内老人多，一般比较人声鼎沸\n※近年在北京路开了家分店，目前还没吃过不了解品控，就不评价了",
+      "visitedDate": null,
+      "createdAt": "2026-07-15T22:32:49.490Z",
+      "updatedAt": "2026-07-15T22:32:49.490Z"
     }
   ]
 }

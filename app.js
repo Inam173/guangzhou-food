@@ -99,11 +99,11 @@ function createCardHTML(shop) {
 
   const imageUrl = shop.imageUrl || '';
   const imageHTML = imageUrl
-    ? `<div class="relative w-full h-44 overflow-hidden">
-         <img src="${escapeHTML(imageUrl)}" alt="${escapeHTML(shop.name)}" class="w-full h-44 object-cover card-image absolute inset-0" loading="lazy" onerror="this.style.display='none';this.nextElementSibling.classList.remove('hidden')">
-         <div class="hidden w-full h-44 card-image flex items-center justify-center text-5xl absolute inset-0">🍜</div>
+    ? `<div class="relative w-full card-image overflow-hidden">
+         <img src="${escapeHTML(imageUrl)}" alt="${escapeHTML(shop.name)}" class="w-full h-full object-cover absolute inset-0" loading="lazy" onerror="this.style.display='none';this.nextElementSibling.classList.remove('hidden')">
+         <div class="hidden w-full h-full card-image flex items-center justify-center text-5xl absolute inset-0">🍜</div>
        </div>`
-    : `<div class="w-full h-44 card-image flex items-center justify-center text-5xl">🍜</div>`;
+    : `<div class="w-full card-image flex items-center justify-center text-5xl">🍜</div>`;
 
   return `
     <div class="shop-card bg-white rounded-2xl shadow-md overflow-hidden cursor-pointer hover:shadow-xl transition"

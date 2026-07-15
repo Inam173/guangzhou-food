@@ -142,6 +142,35 @@ btnTestConfig.addEventListener('click', async () => {
   }
 });
 
+// ---------- 图片压缩 ----------
+function compressImage(file, maxWidth, quality) {
+  return new Promise((resolve, reject) => {
+    const img = new Image();
+    const url = URL.createObjectURL(file);
+    img.onload = () => {
+      URL.revokeObjectURL(url);
+      // 如果原图宽度小于最大宽度，不放大
+      const width = Math.min(img.width, maxWidth);
+      const height = Math.round(img.height * (width / img.width));
+
+      const canvas = document.createElement('canvas');
+      canvas.width = width;
+      canvas.height = height;
+      const ctx = canvas.getContext('2d');
+      ctx.drawImage(img, 0, 0, width, height);
+
+      // 输出 JPEG base64（去掉 data: 前缀）
+      const dataUrl = canvas.toDataURL('image/jpeg', quality);
+      resolve(dataUrl.split(',')[1]);
+    };
+    img.onerror = () => {
+      URL.revokeObjectURL(url);
+      reject(new Error('图片加载失败'));
+    };
+    img.src = url;
+  });
+}
+
 // ---------- 工具：带超时的 fetch ----------
 function fetchWithTimeout(url, options = {}, timeoutMs = 8000) {
   const controller = new AbortController();
@@ -404,24 +433,17 @@ formImageFile.addEventListener('change', async () => {
   }
 
   btnUploadImage.disabled = true;
-  btnUploadImage.textContent = '⏳ 上传中...';
+  btnUploadImage.textContent = '⏳ 压缩中...';
 
   try {
-    // 读取文件为 base64
-    const reader = new FileReader();
-    const base64Content = await new Promise((resolve, reject) => {
-      reader.onload = () => {
-        // 去掉 data:image/...;base64, 前缀
-        const base64 = reader.result.split(',')[1];
-        resolve(base64);
-      };
-      reader.onerror = reject;
-      reader.readAsDataURL(file);
-    });
+    // 图片压缩（限制宽度 800px，JPEG 质量 0.75）
+    const base64Content = await compressImage(file, 800, 0.75);
+    const finalExt = 'jpg'; // 统一输出 JPEG
+
+    btnUploadImage.textContent = '⏳ 上传中...';
 
     // 上传到 GitHub
-    const ext = file.name.split('.').pop() || 'jpg';
-    const imagePath = `images/${Date.now()}-${Math.random().toString(36).slice(2, 8)}.${ext}`;
+    const imagePath = `images/${Date.now()}-${Math.random().toString(36).slice(2, 8)}.${finalExt}`;
     const apiUrl = `https://api.github.com/repos/${c.owner}/${c.repo}/contents/${imagePath}`;
 
     const resp = await fetchWithTimeout(apiUrl, {

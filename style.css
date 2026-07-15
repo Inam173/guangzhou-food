@@ -37,9 +37,11 @@
   box-shadow: 0 12px 40px rgba(0, 0, 0, 0.12);
 }
 
-/* 图片加载渐变 */
+/* 图片加载渐变 + 统一比例 */
 .card-image {
   background: linear-gradient(135deg, #fef3c7 0%, #fde68a 50%, #fbbf24 100%);
+  aspect-ratio: 4 / 3;
+  object-fit: cover;
 }
 
 /* 分类标签按钮 */

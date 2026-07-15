@@ -172,7 +172,8 @@ function openDetail(id) {
   document.getElementById('modalCategory').textContent = shop.category;
   document.getElementById('modalName').textContent = shop.name;
   document.getElementById('modalRating').innerHTML = createStarsHTML(shop.rating) + ` ${shop.rating}`;
-  document.getElementById('modalNotes').textContent = shop.notes || '暂无备注';
+  const notesText = shop.notes || '暂无备注';
+  document.getElementById('modalNotes').innerHTML = escapeHTML(notesText).replace(/\n/g, '<br>');
   document.getElementById('modalAddress').textContent = shop.address;
   const visitedRow = document.getElementById('modalVisitedRow');
   if (shop.visitedDate) {

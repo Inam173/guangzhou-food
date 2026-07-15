@@ -236,11 +236,20 @@ categoryTabs.addEventListener('click', function(e) {
   const btn = e.target.closest('.category-btn');
   if (!btn) return;
 
-  // 更新 active 状态
+  // 如果点击已选中的分类，切换回「全部」
+  const isActive = btn.classList.contains('active');
   document.querySelectorAll('.category-btn').forEach(b => b.classList.remove('active'));
-  btn.classList.add('active');
 
-  currentCategory = btn.dataset.category;
+  if (isActive && btn.dataset.category !== 'all') {
+    // 回到全部
+    const allBtn = document.querySelector('[data-category="all"]');
+    if (allBtn) allBtn.classList.add('active');
+    currentCategory = 'all';
+  } else {
+    btn.classList.add('active');
+    currentCategory = btn.dataset.category;
+  }
+
   applyAllFilters();
 });
 

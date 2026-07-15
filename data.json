@@ -199,6 +199,51 @@
       "visitedDate": null,
       "createdAt": "2026-07-15T11:34:39.895Z",
       "updatedAt": "2026-07-15T12:32:02.403Z"
+    },
+    {
+      "id": "c32d9a81-af1e-4631-9af7-a37d60867e7d",
+      "name": "银座餐厅(昌岗中路店)",
+      "category": "饭馆",
+      "rating": 4,
+      "pricePerPerson": 70,
+      "address": "海珠区沙园街道昌岗中路125号B1楼（近地铁宝岗大道站）",
+      "coordinates": {
+        "lat": null,
+        "lng": null
+      },
+      "imageUrl": "https://raw.githubusercontent.com/Inam173/guangzhou-food/main/images/1784154671917-dpc2fy.webp",
+      "dianpingUrl": "https://m.dianping.com/shopinfo/l1A5L7YwX7TqK4Y4?msource=Appshare2021&utm_source=shop_share&shoptype=10&shopcategoryid=205&cityid=4&isoversea=0",
+      "tags": [
+        "粤菜",
+        "老店"
+      ],
+      "notes": "※街坊店，经典粤菜馆，出品和价格都很经典，住得近都可以当饭堂\n※点菜直接请阿姨推荐就行，店内较特色的有脆皮大肠、鱼肠焗蛋、虾酱骨...\n※环境中规中矩，店内老人聊天的多，所以一般会比较有烟火气（\n※近年在北京路开了家分店，目前还没吃过不了解品控，就不评价了",
+      "visitedDate": null,
+      "createdAt": "2026-07-15T22:32:49.490Z",
+      "updatedAt": "2026-07-15T22:35:12.147Z"
+    },
+    {
+      "id": "a2ee0138-de1b-4a4c-9a46-51cb592be34e",
+      "name": "Mammamia意大利餐厅(IFC国金天地店)",
+      "category": "饭馆",
+      "rating": 4.5,
+      "pricePerPerson": 130,
+      "address": "天河区珠江西路5号广州IFC国金天地4层405单元",
+      "coordinates": {
+        "lat": null,
+        "lng": null
+      },
+      "imageUrl": "https://raw.githubusercontent.com/Inam173/guangzhou-food/main/images/1784155173636-58kuo6.webp",
+      "dianpingUrl": "https://m.dianping.com/shopinfo/G4rK4Z2G5ayRl44b?msource=Appshare2021&utm_source=shop_share&shoptype=10&shopcategoryid=232&cityid=4&isoversea=0",
+      "tags": [
+        "意大利菜",
+        "披萨",
+        "有外卖"
+      ],
+      "notes": "※披萨神中神，老那不勒斯正宗玛格丽特，当然价格也有点正宗（有一点吧）\n※绝非预制，现揉面饼+窑炉现烤还是太权威了\n※唯一雷点是吃多了烤制饼皮小心嗓子干上火\n※个人习惯点外卖，专程去吃下也没毛病吧，他家环境好也适合拍照，反正比去意大利方便",
+      "visitedDate": null,
+      "createdAt": "2026-07-15T22:47:13.192Z",
+      "updatedAt": "2026-07-15T22:51:07.979Z"
     }
   ]
 }

@@ -436,8 +436,8 @@ formImageFile.addEventListener('change', async () => {
   btnUploadImage.textContent = '⏳ 压缩中...';
 
   try {
-    // 图片压缩（限制宽度 800px，JPEG 质量 0.75）
-    const base64Content = await compressImage(file, 800, 0.75);
+    // 图片压缩（限制宽度 600px，JPEG 质量 0.65，目标 <50KB）
+    const base64Content = await compressImage(file, 600, 0.65);
     const finalExt = 'jpg'; // 统一输出 JPEG
 
     btnUploadImage.textContent = '⏳ 上传中...';

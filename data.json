@@ -221,6 +221,28 @@
       "visitedDate": null,
       "createdAt": "2026-07-15T22:32:49.490Z",
       "updatedAt": "2026-07-15T22:35:12.147Z"
+    },
+    {
+      "id": "a2ee0138-de1b-4a4c-9a46-51cb592be34e",
+      "name": "Mammamia意大利餐厅(IFC国金天地店)",
+      "category": "饭馆",
+      "rating": 4.5,
+      "pricePerPerson": 130,
+      "address": "天河区珠江西路5号广州IFC国金天地4层405单元",
+      "coordinates": {
+        "lat": null,
+        "lng": null
+      },
+      "imageUrl": "https://raw.githubusercontent.com/Inam173/guangzhou-food/main/images/1784155173636-58kuo6.webp",
+      "dianpingUrl": "https://m.dianping.com/shopinfo/G4rK4Z2G5ayRl44b?msource=Appshare2021&utm_source=shop_share&shoptype=10&shopcategoryid=232&cityid=4&isoversea=0",
+      "tags": [
+        "意大利菜",
+        "披萨"
+      ],
+      "notes": "※披萨神中神，老那不勒斯正宗玛格丽特，当然价格也有点正宗，不至于很贵吧\n※绝非预制，现揉面饼+窑炉现烤还是太权威了\n※唯一雷点是吃多了烤制饼皮小心嗓子干上火",
+      "visitedDate": null,
+      "createdAt": "2026-07-15T22:47:13.192Z",
+      "updatedAt": "2026-07-15T22:47:13.192Z"
     }
   ]
 }

@@ -143,7 +143,8 @@ btnTestConfig.addEventListener('click', async () => {
 });
 
 // ---------- 图片压缩 ----------
-function compressImage(file, maxWidth, quality) {
+function compressImage(file, maxWidth, quality, format) {
+  format = format || 'image/jpeg';
   return new Promise((resolve, reject) => {
     const img = new Image();
     const url = URL.createObjectURL(file);
@@ -159,8 +160,8 @@ function compressImage(file, maxWidth, quality) {
       const ctx = canvas.getContext('2d');
       ctx.drawImage(img, 0, 0, width, height);
 
-      // 输出 JPEG base64（去掉 data: 前缀）
-      const dataUrl = canvas.toDataURL('image/jpeg', quality);
+      // 输出 base64（去掉 data: 前缀）
+      const dataUrl = canvas.toDataURL(format, quality);
       resolve(dataUrl.split(',')[1]);
     };
     img.onerror = () => {
@@ -436,9 +437,9 @@ formImageFile.addEventListener('change', async () => {
   btnUploadImage.textContent = '⏳ 压缩中...';
 
   try {
-    // 图片压缩（限制宽度 600px，JPEG 质量 0.65，目标 <50KB）
-    const base64Content = await compressImage(file, 600, 0.65);
-    const finalExt = 'jpg'; // 统一输出 JPEG
+    // 图片压缩（限制宽度 600px，WebP 质量 0.5）
+    const base64Content = await compressImage(file, 600, 0.5, 'image/webp');
+    const finalExt = 'webp';
 
     btnUploadImage.textContent = '⏳ 上传中...';
 

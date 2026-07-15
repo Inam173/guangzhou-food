@@ -151,13 +151,12 @@
         "粤菜",
         "酒楼",
         "早茶",
-        "老店",
-        "有外卖"
+        "老店"
       ],
       "notes": "※没什么好说的，经典酒楼出品ok价格尚可环境不错交通便利，客流量还比网红店少，基本闭眼点菜不踩雷\n※虽然各方面没有一项特别顶级，但基本都高于平均水准\n※美中不足是出餐慢，真的有点慢，太饿的时候去他家可能真的会饿过劲儿",
       "visitedDate": null,
       "createdAt": "2026-07-14T23:28:27.000Z",
-      "updatedAt": "2026-07-15T23:11:43.730Z"
+      "updatedAt": "2026-07-15T11:04:56.612Z"
     },
     {
       "id": "e2011742-7417-42c6-b09e-936d0707009a",
@@ -194,12 +193,13 @@
       "imageUrl": "https://raw.githubusercontent.com/Inam173/guangzhou-food/main/images/1784118719289-xbw2jc.webp",
       "dianpingUrl": "https://m.dianping.com/shopinfo/G39MHG8c68TgfWKj?msource=Appshare2021&utm_source=shop_share&shoptype=10&shopcategoryid=2919&cityid=4&isoversea=0",
       "tags": [
-        "烧腊（有烧鹅）"
+        "烧腊（有烧鹅）",
+        "有外卖"
       ],
       "notes": "※街坊店，出品很好，价格公道，没有分店\n※高中时想改善伙食了就来这，当时都还是30m²的简陋装潢小门店，没想到后来扩张+精装升级这么多\n※烧腊倒也不用专程去吃哪家，但住附近的话这家完全可以闭眼消费",
       "visitedDate": null,
       "createdAt": "2026-07-15T11:34:39.895Z",
-      "updatedAt": "2026-07-15T12:32:02.403Z"
+      "updatedAt": "2026-07-15T23:12:46.260Z"
     },
     {
       "id": "c32d9a81-af1e-4631-9af7-a37d60867e7d",

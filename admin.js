@@ -444,14 +444,12 @@ formImageFile.addEventListener('change', async () => {
   btnUploadImage.textContent = '⏳ 压缩中...';
 
   try {
-    // 动态压缩：大图保持较高清晰度（卡片需覆盖 2x-3x Retina 屏）
+    // 几乎无损压缩：仅防止超大原图，视觉上与原图无差异
     let maxWidth, quality;
-    if (file.size > 5 * 1024 * 1024) {       // > 5MB
-      maxWidth = 1200; quality = 0.7;
-    } else if (file.size > 2 * 1024 * 1024) { // > 2MB
-      maxWidth = 1200; quality = 0.75;
-    } else {                                  // <= 2MB
-      maxWidth = 1200; quality = 0.8;
+    if (file.size > 5 * 1024 * 1024) {       // > 5MB，适度缩小
+      maxWidth = 2000; quality = 0.85;
+    } else {                                  // <= 5MB，保留原图品质
+      maxWidth = 2000; quality = 0.92;
     }
     const base64Content = await compressImage(file, maxWidth, quality, 'image/webp');
     const finalExt = 'webp';

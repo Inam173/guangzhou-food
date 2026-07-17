@@ -192,11 +192,11 @@
       progressText.textContent = '正在压缩...';
 
       try {
-        // 压缩参数
+        // 压缩参数：宽度覆盖 2x-3x Retina 屏，质量保证清晰度
         let maxWidth, quality;
-        if (file.size > 2 * 1024 * 1024)       { maxWidth = 500; quality = 0.2; }
-        else if (file.size > 1024 * 1024)      { maxWidth = 550; quality = 0.25; }
-        else                                    { maxWidth = 600; quality = 0.3; }
+        if (file.size > 5 * 1024 * 1024)       { maxWidth = 1200; quality = 0.7; }
+        else if (file.size > 2 * 1024 * 1024)  { maxWidth = 1200; quality = 0.75; }
+        else                                    { maxWidth = 1200; quality = 0.8; }
 
         const base64 = await compressImage(file, maxWidth, quality);
         const compressedKB = Math.round(base64.length * 0.75 / 1024);

@@ -198,9 +198,9 @@ function openDetail(id) {
     document.getElementById('modalMapLink').href = gaodeURL;
     document.getElementById('modalMapLink').classList.remove('hidden');
   } else {
-    // 没有坐标时用地址搜索
-    const addr = encodeURIComponent(shop.address);
-    document.getElementById('modalMapLink').href = `https://uri.amap.com/search?keyword=${addr}&callnative=1`;
+    // 没有坐标时优先用店名搜索（比地址更精准）
+    const keyword = encodeURIComponent(shop.name);
+    document.getElementById('modalMapLink').href = `https://uri.amap.com/search?keyword=${keyword}&callnative=1`;
   }
 
   // 大众点评链接

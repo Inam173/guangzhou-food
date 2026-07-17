@@ -99,13 +99,22 @@ function createCardHTML(shop) {
 
   const imageUrl = shop.imageUrl || '';
   const fit = shop.imageFit || 'cover';
-  const fitClass = fit === 'contain' ? 'object-contain' : fit === 'fill' ? 'object-fill' : 'object-cover';
   const posX = shop.imagePosX ?? 50;
   const posY = shop.imagePosY ?? 50;
   const zoom = shop.imageZoom ?? 1;
+
+  // 自定义了缩放/位置时，改用 contain + scale（100%=完整原图，>100%放大，<100%缩小）
+  const customized = fit === 'cover' && (zoom !== 1 || posX !== 50 || posY !== 50);
+  const fitClass = customized
+    ? 'object-contain'
+    : (fit === 'contain' ? 'object-contain' : fit === 'fill' ? 'object-fill' : 'object-cover');
+  const extraStyle = customized
+    ? `object-position:${posX}% ${posY}%;transform:scale(${zoom});transform-origin:${posX}% ${posY}%`
+    : (fit === 'cover' ? `object-position:${posX}% ${posY}%` : '');
+
   const imageHTML = imageUrl
     ? `<div class="relative w-full card-image overflow-hidden">
-         <img src="${escapeHTML(imageUrl)}" alt="${escapeHTML(shop.name)}" class="w-full h-full ${fitClass} absolute inset-0" loading="lazy" style="object-position:${posX}% ${posY}%;transform:scale(${zoom});transform-origin:${posX}% ${posY}%" onerror="this.style.display='none';this.nextElementSibling.classList.remove('hidden')">
+         <img src="${escapeHTML(imageUrl)}" alt="${escapeHTML(shop.name)}" class="w-full h-full ${fitClass} absolute inset-0" loading="lazy" style="${extraStyle}" onerror="this.style.display='none';this.nextElementSibling.classList.remove('hidden')">
          <div class="hidden w-full h-full card-image flex items-center justify-center text-5xl absolute inset-0">🍜</div>
        </div>`
     : `<div class="w-full card-image flex items-center justify-center text-5xl">🍜</div>`;

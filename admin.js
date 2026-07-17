@@ -447,13 +447,21 @@ function updateImagePreview() {
   const px = formImagePosX.value;
   const py = formImagePosY.value;
   const zoom = parseInt(formImageZoom.value) / 100;
+  const customized = fit === 'cover' && (zoom !== 1 || px !== '50' || py !== '50');
+  const previewFitClass = customized ? 'object-contain' : (fit === 'contain' ? 'object-contain' : fit === 'fill' ? 'object-fill' : 'object-cover');
+
   formImagePreview.style.objectPosition = `${px}% ${py}%`;
-  formImagePreview.style.transform = `scale(${zoom})`;
-  formImagePreview.style.transformOrigin = `${px}% ${py}%`;
+  if (customized) {
+    formImagePreview.style.transform = `scale(${zoom})`;
+    formImagePreview.style.transformOrigin = `${px}% ${py}%`;
+  } else {
+    formImagePreview.style.transform = '';
+    formImagePreview.style.transformOrigin = '';
+  }
 
   if (url) {
     formImagePreview.src = url;
-    formImagePreview.className = `w-full h-full ${fitClass}`;
+    formImagePreview.className = `w-full h-full ${previewFitClass}`;
     formImagePreview.classList.remove('hidden');
     formImagePreviewPlaceholder.classList.add('hidden');
     formImagePreview.onerror = () => {

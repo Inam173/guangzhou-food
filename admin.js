@@ -182,36 +182,43 @@ function fetchWithTimeout(url, options = {}, timeoutMs = 8000) {
 // ---------- GitHub API 操作 ----------
 async function githubGetFile() {
   const c = getConfig();
-  // 先用 raw URL 读取（更快，无需 Token）
+  const apiUrl = `https://api.github.com/repos/${c.owner}/${c.repo}/contents/data.json?ref=${c.branch}`;
+
+  // ⚠️ 优先用 API 读取（始终返回最新数据，避免 raw CDN 缓存导致旧数据覆盖）
   try {
-    const rawResp = await fetchWithTimeout(`https://raw.githubusercontent.com/${c.owner}/${c.repo}/${c.branch}/data.json`);
+    const apiResp = await fetchWithTimeout(apiUrl, {
+      headers: {
+        'Authorization': `token ${c.token}`,
+        'Accept': 'application/vnd.github.v3+json',
+      },
+    });
+
+    if (apiResp.ok) {
+      const fileData = await apiResp.json();
+      const content = JSON.parse(decodeURIComponent(escape(atob(fileData.content))));
+      return { content, sha: fileData.sha, isNew: false };
+    }
+    if (apiResp.status === 404) {
+      return { content: null, sha: null, isNew: true };
+    }
+    // API 失败不抛错，继续尝试 raw URL 降级
+    console.warn('GitHub API 读取失败，尝试 raw URL 降级...');
+  } catch (e) {
+    console.warn('GitHub API 网络错误，尝试 raw URL 降级...', e.message);
+  }
+
+  // 降级：raw URL（加时间戳打破 CDN 缓存）
+  try {
+    const rawResp = await fetchWithTimeout(
+      `https://raw.githubusercontent.com/${c.owner}/${c.repo}/${c.branch}/data.json?t=${Date.now()}`
+    );
     if (rawResp.ok) {
       const data = await rawResp.json();
       return { content: data, sha: null, isNew: false };
     }
-  } catch (e) { /* fallback to API */ }
+  } catch (e) { /* raw URL 也失败，最终报错 */ }
 
-  // 回退到 API（需要 Token）
-  const url = `https://api.github.com/repos/${c.owner}/${c.repo}/contents/data.json?ref=${c.branch}`;
-  const resp = await fetchWithTimeout(url, {
-    headers: {
-      'Authorization': `token ${c.token}`,
-      'Accept': 'application/vnd.github.v3+json',
-    },
-  });
-
-  if (resp.status === 404) {
-    return { content: null, sha: null, isNew: true };
-  }
-  if (!resp.ok) {
-    const err = await resp.json().catch(() => ({}));
-    throw new Error(err.message || `HTTP ${resp.status}`);
-  }
-
-  const fileData = await resp.json();
-  // UTF-8 safe base64 decode（支持中文）
-  const content = JSON.parse(decodeURIComponent(escape(atob(fileData.content))));
-  return { content, sha: fileData.sha, isNew: false };
+  throw new Error('无法读取 GitHub 数据，请检查网络连接');
 }
 
 async function githubPutFile(shops, commitMsg) {

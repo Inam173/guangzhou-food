@@ -47,6 +47,8 @@ const formImagePreviewPlaceholder = $('#formImagePreviewPlaceholder');
 const formImageFitRadios = () => document.querySelectorAll('input[name="imageFit"]');
 const formImageFitHint = $('#imageFitHint');
 const imagePosSliders = $('#imagePosSliders');
+const formImageZoom = $('#formImageZoom');
+const zoomLabel = $('#zoomLabel');
 const formImagePosX = $('#formImagePosX');
 const formImagePosY = $('#formImagePosY');
 const posXLabel = $('#posXLabel');
@@ -396,8 +398,10 @@ function openForm(shop) {
     formImageUrl.value = shop.imageUrl || '';
     const fit = shop.imageFit || 'cover';
     formImageFitRadios().forEach(r => { if (r.value === fit) r.checked = true; });
+    formImageZoom.value = (shop.imageZoom ?? 1) * 100;
     formImagePosX.value = shop.imagePosX ?? 50;
     formImagePosY.value = shop.imagePosY ?? 50;
+    zoomLabel.textContent = formImageZoom.value + '%';
     posXLabel.textContent = formImagePosX.value + '%';
     posYLabel.textContent = formImagePosY.value + '%';
     formDianpingUrl.value = shop.dianpingUrl || '';
@@ -410,8 +414,8 @@ function openForm(shop) {
     formId.value = '';
     formRating.value = '4.0';
     formImageFitRadios().forEach(r => { r.checked = r.value === 'cover'; });
-    formImagePosX.value = 50; formImagePosY.value = 50;
-    posXLabel.textContent = '50%'; posYLabel.textContent = '50%';
+    formImageZoom.value = 100; formImagePosX.value = 50; formImagePosY.value = 50;
+    zoomLabel.textContent = '100%'; posXLabel.textContent = '50%'; posYLabel.textContent = '50%';
     formVisitedDate.value = new Date().toISOString().split('T')[0];
   }
   updateImagePreview();
@@ -439,10 +443,13 @@ function updateImagePreview() {
   // 显示/隐藏裁剪位置滑块（仅 cover 模式需要）
   imagePosSliders.style.display = fit === 'cover' ? '' : 'none';
 
-  // 应用 object-position
+  // 应用裁剪位置 + 缩放
   const px = formImagePosX.value;
   const py = formImagePosY.value;
+  const zoom = parseInt(formImageZoom.value) / 100;
   formImagePreview.style.objectPosition = `${px}% ${py}%`;
+  formImagePreview.style.transform = `scale(${zoom})`;
+  formImagePreview.style.transformOrigin = `${px}% ${py}%`;
 
   if (url) {
     formImagePreview.src = url;
@@ -468,9 +475,10 @@ document.addEventListener('change', (e) => {
   }
 });
 
-// 拖动裁剪滑块 → 实时更新预览
-[formImagePosX, formImagePosY].forEach(slider => {
+// 拖动滑块 → 实时更新预览
+[formImageZoom, formImagePosX, formImagePosY].forEach(slider => {
   slider.addEventListener('input', () => {
+    zoomLabel.textContent = formImageZoom.value + '%';
     posXLabel.textContent = formImagePosX.value + '%';
     posYLabel.textContent = formImagePosY.value + '%';
     updateImagePreview();
@@ -584,6 +592,7 @@ shopForm.addEventListener('submit', async (e) => {
     },
     imageUrl: formImageUrl.value.trim(),
     imageFit: getSelectedImageFit(),
+    imageZoom: parseInt(formImageZoom.value) / 100 || 1,
     imagePosX: parseInt(formImagePosX.value) || 50,
     imagePosY: parseInt(formImagePosY.value) || 50,
     dianpingUrl: formDianpingUrl.value.trim(),

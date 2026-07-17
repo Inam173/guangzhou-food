@@ -216,16 +216,22 @@
                     <p class="text-gray-400 text-xs mt-1" id="imageFitHint">撑满裁剪 — 填满卡片，裁掉多余部分</p>
                     <div id="imagePosSliders" class="mt-2 space-y-1.5">
                       <div class="flex items-center gap-2">
+                        <span class="text-xs text-gray-500 w-5">🔍</span>
+                        <span class="text-xs text-gray-500 w-6 shrink-0">缩放</span>
+                        <input type="range" id="formImageZoom" min="50" max="200" value="100" class="flex-1 h-1 accent-amber-500">
+                        <span class="text-xs text-gray-500 w-10 text-right" id="zoomLabel">100%</span>
+                      </div>
+                      <div class="flex items-center gap-2">
                         <span class="text-xs text-gray-500 w-5">↔️</span>
                         <span class="text-xs text-gray-500 w-6 shrink-0">水平</span>
                         <input type="range" id="formImagePosX" min="0" max="100" value="50" class="flex-1 h-1 accent-amber-500">
-                        <span class="text-xs text-gray-500 w-8 text-right" id="posXLabel">50%</span>
+                        <span class="text-xs text-gray-500 w-10 text-right" id="posXLabel">50%</span>
                       </div>
                       <div class="flex items-center gap-2">
                         <span class="text-xs text-gray-500 w-5">↕️</span>
                         <span class="text-xs text-gray-500 w-6 shrink-0">垂直</span>
                         <input type="range" id="formImagePosY" min="0" max="100" value="50" class="flex-1 h-1 accent-amber-500">
-                        <span class="text-xs text-gray-500 w-8 text-right" id="posYLabel">50%</span>
+                        <span class="text-xs text-gray-500 w-10 text-right" id="posYLabel">50%</span>
                       </div>
                     </div>
                   </div>

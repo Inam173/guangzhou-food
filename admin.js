@@ -46,6 +46,11 @@ const formImagePreview = $('#formImagePreview');
 const formImagePreviewPlaceholder = $('#formImagePreviewPlaceholder');
 const formImageFitRadios = () => document.querySelectorAll('input[name="imageFit"]');
 const formImageFitHint = $('#imageFitHint');
+const imagePosSliders = $('#imagePosSliders');
+const formImagePosX = $('#formImagePosX');
+const formImagePosY = $('#formImagePosY');
+const posXLabel = $('#posXLabel');
+const posYLabel = $('#posYLabel');
 const formDianpingUrl = $('#formDianpingUrl');
 const formTags      = $('#formTags');
 const formNotes     = $('#formNotes');
@@ -391,6 +396,10 @@ function openForm(shop) {
     formImageUrl.value = shop.imageUrl || '';
     const fit = shop.imageFit || 'cover';
     formImageFitRadios().forEach(r => { if (r.value === fit) r.checked = true; });
+    formImagePosX.value = shop.imagePosX ?? 50;
+    formImagePosY.value = shop.imagePosY ?? 50;
+    posXLabel.textContent = formImagePosX.value + '%';
+    posYLabel.textContent = formImagePosY.value + '%';
     formDianpingUrl.value = shop.dianpingUrl || '';
     formTags.value = (shop.tags || []).join(', ');
     formNotes.value = shop.notes || '';
@@ -401,6 +410,8 @@ function openForm(shop) {
     formId.value = '';
     formRating.value = '4.0';
     formImageFitRadios().forEach(r => { r.checked = r.value === 'cover'; });
+    formImagePosX.value = 50; formImagePosY.value = 50;
+    posXLabel.textContent = '50%'; posYLabel.textContent = '50%';
     formVisitedDate.value = new Date().toISOString().split('T')[0];
   }
   updateImagePreview();
@@ -425,6 +436,14 @@ function updateImagePreview() {
   const fit = getSelectedImageFit();
   const fitClass = fit === 'contain' ? 'object-contain' : fit === 'fill' ? 'object-fill' : 'object-cover';
 
+  // 显示/隐藏裁剪位置滑块（仅 cover 模式需要）
+  imagePosSliders.style.display = fit === 'cover' ? '' : 'none';
+
+  // 应用 object-position
+  const px = formImagePosX.value;
+  const py = formImagePosY.value;
+  formImagePreview.style.objectPosition = `${px}% ${py}%`;
+
   if (url) {
     formImagePreview.src = url;
     formImagePreview.className = `w-full h-full ${fitClass}`;
@@ -440,13 +459,22 @@ function updateImagePreview() {
   }
 }
 
-// 切换展示模式时实时更新预览和提示
+// 切换展示模式 → 更新预览和提示
 document.addEventListener('change', (e) => {
   if (e.target.name === 'imageFit') {
     updateImagePreview();
-    const hints = { cover: '撑满裁剪 — 填满卡片，裁掉多余部分', contain: '完整显示 — 图片完整可见，可能留白', fill: '拉伸填充 — 强制填满，可能变形' };
+    const hints = { cover: '撑满裁剪 — 拖动滑块调整可见区域', contain: '完整显示 — 图片完整可见，可能留白', fill: '拉伸填充 — 强制填满，可能变形' };
     formImageFitHint.textContent = hints[e.target.value] || '';
   }
+});
+
+// 拖动裁剪滑块 → 实时更新预览
+[formImagePosX, formImagePosY].forEach(slider => {
+  slider.addEventListener('input', () => {
+    posXLabel.textContent = formImagePosX.value + '%';
+    posYLabel.textContent = formImagePosY.value + '%';
+    updateImagePreview();
+  });
 });
 
 formImageUrl.addEventListener('input', updateImagePreview);
@@ -556,6 +584,8 @@ shopForm.addEventListener('submit', async (e) => {
     },
     imageUrl: formImageUrl.value.trim(),
     imageFit: getSelectedImageFit(),
+    imagePosX: parseInt(formImagePosX.value) || 50,
+    imagePosY: parseInt(formImagePosY.value) || 50,
     dianpingUrl: formDianpingUrl.value.trim(),
     tags: formTags.value.split(',').map(t => t.trim()).filter(Boolean),
     notes: formNotes.value.trim(),

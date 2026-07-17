@@ -100,9 +100,11 @@ function createCardHTML(shop) {
   const imageUrl = shop.imageUrl || '';
   const fit = shop.imageFit || 'cover';
   const fitClass = fit === 'contain' ? 'object-contain' : fit === 'fill' ? 'object-fill' : 'object-cover';
+  const posX = shop.imagePosX ?? 50;
+  const posY = shop.imagePosY ?? 50;
   const imageHTML = imageUrl
     ? `<div class="relative w-full card-image overflow-hidden">
-         <img src="${escapeHTML(imageUrl)}" alt="${escapeHTML(shop.name)}" class="w-full h-full ${fitClass} absolute inset-0" loading="lazy" onerror="this.style.display='none';this.nextElementSibling.classList.remove('hidden')">
+         <img src="${escapeHTML(imageUrl)}" alt="${escapeHTML(shop.name)}" class="w-full h-full ${fitClass} absolute inset-0" loading="lazy" style="object-position:${posX}% ${posY}%" onerror="this.style.display='none';this.nextElementSibling.classList.remove('hidden')">
          <div class="hidden w-full h-full card-image flex items-center justify-center text-5xl absolute inset-0">🍜</div>
        </div>`
     : `<div class="w-full card-image flex items-center justify-center text-5xl">🍜</div>`;

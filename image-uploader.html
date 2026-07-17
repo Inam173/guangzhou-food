@@ -146,24 +146,17 @@
       if (fileInput.files.length) handleFile(fileInput.files[0]);
     });
 
-    // ===== 图片压缩 =====
-    function compressImage(file, maxWidth, quality) {
+    // ===== 读取文件为 base64（不压缩，保留原图） =====
+    function readFileAsBase64(file) {
       return new Promise((resolve, reject) => {
-        const img = new Image();
-        const url = URL.createObjectURL(file);
-        img.onload = () => {
-          URL.revokeObjectURL(url);
-          const width = Math.min(img.width, maxWidth);
-          const height = Math.round(img.height * (width / img.width));
-          const canvas = document.createElement('canvas');
-          canvas.width = width;
-          canvas.height = height;
-          canvas.getContext('2d').drawImage(img, 0, 0, width, height);
-          const dataUrl = canvas.toDataURL('image/webp', quality);
-          resolve(dataUrl.split(',')[1]);
+        const reader = new FileReader();
+        reader.onload = () => {
+          // 去掉 data:xxx;base64, 前缀
+          const base64 = reader.result.split(',')[1];
+          resolve(base64);
         };
-        img.onerror = () => { URL.revokeObjectURL(url); reject(new Error('图片加载失败')); };
-        img.src = url;
+        reader.onerror = () => reject(new Error('文件读取失败'));
+        reader.readAsDataURL(file);
       });
     }
 
@@ -175,35 +168,37 @@
         return;
       }
 
+      // 文件大小提醒（GitHub API 限制 100MB）
+      if (file.size > 50 * 1024 * 1024) {
+        alert('文件超过 50MB，建议先压缩再上传');
+        return;
+      }
+
       // 预览
-      const reader = new FileReader();
-      reader.onload = () => {
-        previewImage.src = reader.result;
+      const previewReader = new FileReader();
+      previewReader.onload = () => {
+        previewImage.src = previewReader.result;
         previewArea.classList.remove('hidden');
         const sizeMB = (file.size / 1024 / 1024).toFixed(2);
-        previewInfo.textContent = `${file.name} · ${sizeMB} MB`;
+        previewInfo.textContent = `${file.name} · ${sizeMB} MB（原图直传）`;
       };
-      reader.readAsDataURL(file);
+      previewReader.readAsDataURL(file);
 
       // 隐藏旧结果
       result.style.display = 'none';
       progressArea.classList.remove('hidden');
       progressBar.style.width = '10%';
-      progressText.textContent = '正在压缩...';
+      progressText.textContent = '正在读取原图...';
 
       try {
-        // 几乎无损压缩：仅防止超大原图，视觉上与原图无差异
-        let maxWidth, quality;
-        if (file.size > 5 * 1024 * 1024)       { maxWidth = 2000; quality = 0.85; }
-        else                                    { maxWidth = 2000; quality = 0.92; }
-
-        const base64 = await compressImage(file, maxWidth, quality);
-        const compressedKB = Math.round(base64.length * 0.75 / 1024);
+        // 原图直传，不压缩不转码
+        const base64 = await readFileAsBase64(file);
         progressBar.style.width = '30%';
-        progressText.textContent = `压缩完成（约 ${compressedKB} KB），正在上传...`;
+        progressText.textContent = `原图读取完成（${(file.size / 1024).toFixed(0)} KB），正在上传...`;
 
-        // 上传
-        const imagePath = `images/${Date.now()}-${Math.random().toString(36).slice(2, 8)}.webp`;
+        // 保留原始扩展名
+        const ext = file.name.split('.').pop().toLowerCase() || 'jpg';
+        const imagePath = `images/${Date.now()}-${Math.random().toString(36).slice(2, 8)}.${ext}`;
         const apiUrl = `https://api.github.com/repos/${c.owner}/${c.repo}/contents/${imagePath}`;
 
         const resp = await fetchWithTimeout(apiUrl, {
@@ -214,11 +209,11 @@
             'Content-Type': 'application/json',
           },
           body: JSON.stringify({
-            message: `📷 上传图片：${file.name}`,
+            message: `📷 上传原图：${file.name}`,
             content: base64,
             branch: 'main',
           }),
-        }, 20000);
+        }, 30000);
 
         if (!resp.ok) {
           const err = await resp.json().catch(() => ({}));
@@ -234,7 +229,7 @@
 
         // 自动复制
         await navigator.clipboard.writeText(rawUrl);
-        showToast('链接已复制！');
+        showToast('原图直传完成，链接已复制！');
 
         setTimeout(() => {
           progressArea.classList.add('hidden');

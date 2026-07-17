@@ -190,7 +190,33 @@
                   📁 本地上传
                 </button>
               </div>
-              <img id="formImagePreview" src="" class="mt-2 rounded-lg max-h-32 object-cover hidden">
+              <div class="mt-2 bg-gray-50 rounded-lg p-3">
+                <div class="flex items-start gap-3">
+                  <!-- 模式预览 -->
+                  <div class="w-24 h-18 bg-gray-200 rounded-lg overflow-hidden shrink-0" style="aspect-ratio:4/3">
+                    <img id="formImagePreview" src="" class="w-full h-full object-cover hidden">
+                    <div id="formImagePreviewPlaceholder" class="w-full h-full flex items-center justify-center text-2xl">🍜</div>
+                  </div>
+                  <div class="flex-1 min-w-0">
+                    <label class="block text-xs font-medium text-gray-600 mb-1">展示模式</label>
+                    <div class="flex gap-1">
+                      <label class="flex-1 cursor-pointer">
+                        <input type="radio" name="imageFit" value="cover" checked class="sr-only peer">
+                        <span class="block text-center px-2 py-1.5 text-xs rounded-lg border border-gray-300 bg-white peer-checked:bg-amber-500 peer-checked:text-white peer-checked:border-amber-500 transition">🔲 撑满</span>
+                      </label>
+                      <label class="flex-1 cursor-pointer">
+                        <input type="radio" name="imageFit" value="contain" class="sr-only peer">
+                        <span class="block text-center px-2 py-1.5 text-xs rounded-lg border border-gray-300 bg-white peer-checked:bg-amber-500 peer-checked:text-white peer-checked:border-amber-500 transition">🖼️ 完整</span>
+                      </label>
+                      <label class="flex-1 cursor-pointer">
+                        <input type="radio" name="imageFit" value="fill" class="sr-only peer">
+                        <span class="block text-center px-2 py-1.5 text-xs rounded-lg border border-gray-300 bg-white peer-checked:bg-amber-500 peer-checked:text-white peer-checked:border-amber-500 transition">↔️ 拉伸</span>
+                      </label>
+                    </div>
+                    <p class="text-gray-400 text-xs mt-1" id="imageFitHint">撑满裁剪 — 填满卡片，裁掉多余部分</p>
+                  </div>
+                </div>
+              </div>
             </div>
             <div class="col-span-2">
               <label class="block text-xs font-medium text-gray-600 mb-1">大众点评链接</label>

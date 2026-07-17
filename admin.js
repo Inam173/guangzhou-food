@@ -43,6 +43,9 @@ const formImageUrl  = $('#formImageUrl');
 const formImageFile = $('#formImageFile');
 const btnUploadImage = $('#btnUploadImage');
 const formImagePreview = $('#formImagePreview');
+const formImagePreviewPlaceholder = $('#formImagePreviewPlaceholder');
+const formImageFitRadios = () => document.querySelectorAll('input[name="imageFit"]');
+const formImageFitHint = $('#imageFitHint');
 const formDianpingUrl = $('#formDianpingUrl');
 const formTags      = $('#formTags');
 const formNotes     = $('#formNotes');
@@ -386,6 +389,8 @@ function openForm(shop) {
     formLat.value = shop.coordinates?.lat || '';
     formLng.value = shop.coordinates?.lng || '';
     formImageUrl.value = shop.imageUrl || '';
+    const fit = shop.imageFit || 'cover';
+    formImageFitRadios().forEach(r => { if (r.value === fit) r.checked = true; });
     formDianpingUrl.value = shop.dianpingUrl || '';
     formTags.value = (shop.tags || []).join(', ');
     formNotes.value = shop.notes || '';
@@ -395,6 +400,7 @@ function openForm(shop) {
     shopForm.reset();
     formId.value = '';
     formRating.value = '4.0';
+    formImageFitRadios().forEach(r => { r.checked = r.value === 'cover'; });
     formVisitedDate.value = new Date().toISOString().split('T')[0];
   }
   updateImagePreview();
@@ -408,16 +414,40 @@ function closeForm() {
   document.body.classList.remove('modal-open');
 }
 
+function getSelectedImageFit() {
+  let fit = 'cover';
+  formImageFitRadios().forEach(r => { if (r.checked) fit = r.value; });
+  return fit;
+}
+
 function updateImagePreview() {
   const url = formImageUrl.value.trim();
+  const fit = getSelectedImageFit();
+  const fitClass = fit === 'contain' ? 'object-contain' : fit === 'fill' ? 'object-fill' : 'object-cover';
+
   if (url) {
     formImagePreview.src = url;
+    formImagePreview.className = `w-full h-full ${fitClass}`;
     formImagePreview.classList.remove('hidden');
-    formImagePreview.onerror = () => { formImagePreview.classList.add('hidden'); };
+    formImagePreviewPlaceholder.classList.add('hidden');
+    formImagePreview.onerror = () => {
+      formImagePreview.classList.add('hidden');
+      formImagePreviewPlaceholder.classList.remove('hidden');
+    };
   } else {
     formImagePreview.classList.add('hidden');
+    formImagePreviewPlaceholder.classList.remove('hidden');
   }
 }
+
+// 切换展示模式时实时更新预览和提示
+document.addEventListener('change', (e) => {
+  if (e.target.name === 'imageFit') {
+    updateImagePreview();
+    const hints = { cover: '撑满裁剪 — 填满卡片，裁掉多余部分', contain: '完整显示 — 图片完整可见，可能留白', fill: '拉伸填充 — 强制填满，可能变形' };
+    formImageFitHint.textContent = hints[e.target.value] || '';
+  }
+});
 
 formImageUrl.addEventListener('input', updateImagePreview);
 
@@ -525,6 +555,7 @@ shopForm.addEventListener('submit', async (e) => {
       lng: parseFloat(formLng.value) || null,
     },
     imageUrl: formImageUrl.value.trim(),
+    imageFit: getSelectedImageFit(),
     dianpingUrl: formDianpingUrl.value.trim(),
     tags: formTags.value.split(',').map(t => t.trim()).filter(Boolean),
     notes: formNotes.value.trim(),

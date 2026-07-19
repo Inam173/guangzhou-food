@@ -193,8 +193,8 @@
           "url": "https://raw.githubusercontent.com/Inam173/guangzhou-food/main/images/1784458090451-ggpe0s.jpg",
           "fit": "cover",
           "posX": 50,
-          "posY": 50,
-          "zoom": 1
+          "posY": 46,
+          "zoom": 1.45
         },
         {
           "url": "https://raw.githubusercontent.com/Inam173/guangzhou-food/main/images/1784458127349-wgf1j8.jpg",
@@ -220,7 +220,7 @@
       "notes": "※街坊小店，店家现点现做，主打双皮奶姜撞奶鲜奶等等\n※西华路必吃，有可能排队\n※奶制品比较顶饱，但毕竟来都来了，不妨多预留一点胃容量啦",
       "visitedDate": null,
       "createdAt": "2026-07-14T13:25:27.981Z",
-      "updatedAt": "2026-07-19T10:51:45.668Z"
+      "updatedAt": "2026-07-19T12:41:51.905Z"
     },
     {
       "id": "c678252f-4595-4f94-9c2d-d4760c508408",

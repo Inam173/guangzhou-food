@@ -73,7 +73,35 @@
       },
       "images": [
         {
-          "url": "https://raw.githubusercontent.com/Inam173/guangzhou-food/main/images/1784198567355-gavsu2.webp",
+          "url": "https://raw.githubusercontent.com/Inam173/guangzhou-food/main/images/1784447621000-jpv6rs.jpg",
+          "fit": "cover",
+          "posX": 50,
+          "posY": 50,
+          "zoom": 1
+        },
+        {
+          "url": "https://raw.githubusercontent.com/Inam173/guangzhou-food/main/images/1784447648201-a8za47.jpg",
+          "fit": "cover",
+          "posX": 50,
+          "posY": 50,
+          "zoom": 1
+        },
+        {
+          "url": "https://raw.githubusercontent.com/Inam173/guangzhou-food/main/images/1784447664609-f2wyll.jpg",
+          "fit": "cover",
+          "posX": 50,
+          "posY": 50,
+          "zoom": 1
+        },
+        {
+          "url": "https://raw.githubusercontent.com/Inam173/guangzhou-food/main/images/1784447678401-82k1g4.jpg",
+          "fit": "cover",
+          "posX": 50,
+          "posY": 50,
+          "zoom": 1
+        },
+        {
+          "url": "https://raw.githubusercontent.com/Inam173/guangzhou-food/main/images/1784447691271-px2xw6.jpg",
           "fit": "cover",
           "posX": 50,
           "posY": 50,
@@ -89,7 +117,7 @@
       "notes": "※菜品地道非冻品，环境较好\n※门店尽量选这家，另一家的出品有可能不如这家\n※价格稍微略贵，原价的话他家我不认为有90分以上。但吃完下楼右转即可珠江散步，所以我直接10000分\n※但是人太多了，直冲的话只建议赶早上开门第一波去\n※所以还是线上拿号吧，尤其节假日要至少提前1.5h开始留意，多几个人轮流排号更好，他家的出品还是值得动动小手操作下的\n※包间有点菜限制，如果要吃早茶相关菜品，请务必坐大堂，包间主要提供的是正菜\n※早茶10:45前结账打7.8折",
       "visitedDate": null,
       "createdAt": "2026-07-14T12:44:30.648Z",
-      "updatedAt": "2026-07-19T07:15:37.060Z"
+      "updatedAt": "2026-07-19T07:55:04.369Z"
     },
     {
       "id": "7fe637da-1c8b-4616-9853-a2a1deea2633",

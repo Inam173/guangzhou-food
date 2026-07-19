@@ -179,64 +179,14 @@
                      class="form-input w-full border border-gray-200 rounded-lg px-3 py-2 text-sm outline-none">
             </div>
             <div class="col-span-2">
-              <label class="block text-xs font-medium text-gray-600 mb-1">图片链接</label>
-              <div class="flex gap-2">
-                <input type="url" id="formImageUrl" placeholder="https://example.com/photo.jpg"
-                       class="form-input flex-1 border border-gray-200 rounded-lg px-3 py-2 text-sm outline-none">
-                <input type="file" id="formImageFile" accept="image/*"
-                       class="hidden">
-                <button type="button" id="btnUploadImage"
-                        class="px-3 py-2 bg-blue-500 hover:bg-blue-600 text-white rounded-lg text-sm font-medium transition whitespace-nowrap">
-                  📁 本地上传
-                </button>
+              <label class="block text-xs font-medium text-gray-600 mb-1">图片管理</label>
+              <div id="imagesContainer" class="space-y-3">
+                <!-- 动态生成图片条目 -->
               </div>
-              <div class="mt-2 bg-gray-50 rounded-lg p-3">
-                <div class="flex items-start gap-3">
-                  <!-- 模式预览 -->
-                  <div class="w-24 h-18 bg-gray-200 rounded-lg overflow-hidden shrink-0" style="aspect-ratio:4/3">
-                    <img id="formImagePreview" src="" class="w-full h-full object-cover hidden">
-                    <div id="formImagePreviewPlaceholder" class="w-full h-full flex items-center justify-center text-2xl">🍜</div>
-                  </div>
-                  <div class="flex-1 min-w-0">
-                    <label class="block text-xs font-medium text-gray-600 mb-1">展示模式</label>
-                    <div class="flex gap-1">
-                      <label class="flex-1 cursor-pointer">
-                        <input type="radio" name="imageFit" value="cover" checked class="sr-only peer">
-                        <span class="block text-center px-2 py-1.5 text-xs rounded-lg border border-gray-300 bg-white peer-checked:bg-amber-500 peer-checked:text-white peer-checked:border-amber-500 transition">🔲 撑满</span>
-                      </label>
-                      <label class="flex-1 cursor-pointer">
-                        <input type="radio" name="imageFit" value="contain" class="sr-only peer">
-                        <span class="block text-center px-2 py-1.5 text-xs rounded-lg border border-gray-300 bg-white peer-checked:bg-amber-500 peer-checked:text-white peer-checked:border-amber-500 transition">🖼️ 完整</span>
-                      </label>
-                      <label class="flex-1 cursor-pointer">
-                        <input type="radio" name="imageFit" value="fill" class="sr-only peer">
-                        <span class="block text-center px-2 py-1.5 text-xs rounded-lg border border-gray-300 bg-white peer-checked:bg-amber-500 peer-checked:text-white peer-checked:border-amber-500 transition">↔️ 拉伸</span>
-                      </label>
-                    </div>
-                    <p class="text-gray-400 text-xs mt-1" id="imageFitHint">撑满裁剪 — 填满卡片，裁掉多余部分</p>
-                    <div id="imagePosSliders" class="mt-2 space-y-1.5">
-                      <div class="flex items-center gap-2">
-                        <span class="text-xs text-gray-500 w-5">🔍</span>
-                        <span class="text-xs text-gray-500 w-6 shrink-0">缩放</span>
-                        <input type="range" id="formImageZoom" min="50" max="200" value="100" class="flex-1 h-1 accent-amber-500">
-                        <span class="text-xs text-gray-500 w-10 text-right" id="zoomLabel">100%</span>
-                      </div>
-                      <div class="flex items-center gap-2">
-                        <span class="text-xs text-gray-500 w-5">↔️</span>
-                        <span class="text-xs text-gray-500 w-6 shrink-0">水平</span>
-                        <input type="range" id="formImagePosX" min="0" max="100" value="50" class="flex-1 h-1 accent-amber-500">
-                        <span class="text-xs text-gray-500 w-10 text-right" id="posXLabel">50%</span>
-                      </div>
-                      <div class="flex items-center gap-2">
-                        <span class="text-xs text-gray-500 w-5">↕️</span>
-                        <span class="text-xs text-gray-500 w-6 shrink-0">垂直</span>
-                        <input type="range" id="formImagePosY" min="0" max="100" value="50" class="flex-1 h-1 accent-amber-500">
-                        <span class="text-xs text-gray-500 w-10 text-right" id="posYLabel">50%</span>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-              </div>
+              <button type="button" id="btnAddImage"
+                      class="mt-2 px-4 py-1.5 bg-gray-100 hover:bg-gray-200 text-gray-600 rounded-lg text-sm transition w-full">
+                ➕ 添加图片（最多5张）
+              </button>
             </div>
             <div class="col-span-2">
               <label class="block text-xs font-medium text-gray-600 mb-1">大众点评链接</label>

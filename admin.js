@@ -39,20 +39,9 @@ const formPrice     = $('#formPrice');
 const formAddress   = $('#formAddress');
 const formLat       = $('#formLat');
 const formLng       = $('#formLng');
-const formImageUrl  = $('#formImageUrl');
 const formImageFile = $('#formImageFile');
-const btnUploadImage = $('#btnUploadImage');
-const formImagePreview = $('#formImagePreview');
-const formImagePreviewPlaceholder = $('#formImagePreviewPlaceholder');
-const formImageFitRadios = () => document.querySelectorAll('input[name="imageFit"]');
-const formImageFitHint = $('#imageFitHint');
-const imagePosSliders = $('#imagePosSliders');
-const formImageZoom = $('#formImageZoom');
-const zoomLabel = $('#zoomLabel');
-const formImagePosX = $('#formImagePosX');
-const formImagePosY = $('#formImagePosY');
-const posXLabel = $('#posXLabel');
-const posYLabel = $('#posYLabel');
+const imagesContainer = $('#imagesContainer');
+const btnAddImage = $('#btnAddImage');
 const formDianpingUrl = $('#formDianpingUrl');
 const formTags      = $('#formTags');
 const formNotes     = $('#formNotes');
@@ -67,7 +56,239 @@ const deleteShopName  = $('#deleteShopName');
 const btnCancelDelete = $('#btnCancelDelete');
 const btnConfirmDelete = $('#btnConfirmDelete');
 
-// ---------- 配置管理 ----------
+// ---------- 多图管理 ----------
+let formImages = [];
+
+function defaultImage() {
+  return { url: '', fit: 'cover', posX: 50, posY: 50, zoom: 1 };
+}
+
+function renderImageEntry(img, index) {
+  const idx = index;
+  const zoomPct = Math.round((img.zoom || 1) * 100);
+  const fit = img.fit || 'cover';
+  const posX = img.posX ?? 50;
+  const posY = img.posY ?? 50;
+  const hasUrl = img.url && img.url.trim();
+  const customized = fit === 'cover' && (img.zoom !== 1 || posX !== 50 || posY !== 50);
+  const previewFit = customized ? 'object-contain' : (fit === 'contain' ? 'object-contain' : fit === 'fill' ? 'object-fill' : 'object-cover');
+  const previewStyle = customized
+    ? `object-position:${posX}% ${posY}%;transform:scale(${img.zoom || 1});transform-origin:${posX}% ${posY}%`
+    : (fit === 'cover' ? `object-position:${posX}% ${posY}%` : '');
+
+  return `
+    <div class="image-entry bg-gray-50 rounded-lg p-3 border border-gray-200" data-img-index="${idx}">
+      <div class="flex items-center justify-between mb-2">
+        <span class="text-xs font-medium text-gray-600">📷 图片 ${idx + 1}</span>
+        ${formImages.length > 1 ? `<button type="button" class="btn-remove-img text-red-400 hover:text-red-600 text-xs transition" data-img-index="${idx}">✕ 移除</button>` : ''}
+      </div>
+      <div class="flex gap-2 mb-2">
+        <input type="url" id="imgUrl-${idx}" value="${escapeHTML(img.url || '')}" placeholder="https://example.com/photo.jpg"
+               class="img-url-input form-input flex-1 border border-gray-200 rounded-lg px-3 py-2 text-sm outline-none">
+        <button type="button" class="btn-img-upload px-3 py-2 bg-blue-500 hover:bg-blue-600 text-white rounded-lg text-sm font-medium transition whitespace-nowrap" data-img-index="${idx}">
+          📁 上传
+        </button>
+      </div>
+      <div class="flex items-start gap-3">
+        <div class="w-20 bg-gray-200 rounded-lg overflow-hidden shrink-0" style="aspect-ratio:4/3">
+          ${hasUrl
+            ? `<img id="imgPreview-${idx}" src="${escapeHTML(img.url)}" class="w-full h-full ${previewFit}" style="${previewStyle}" onerror="this.parentElement.innerHTML='<div class=\\'w-full h-full flex items-center justify-center text-xl\\'>🍜</div>'">`
+            : `<div class="w-full h-full flex items-center justify-center text-xl">🍜</div>`}
+        </div>
+        <div class="flex-1 min-w-0">
+          <div class="flex gap-1 mb-1">
+            ${['cover','contain','fill'].map(f => `
+              <label class="flex-1 cursor-pointer">
+                <input type="radio" name="imgFit-${idx}" value="${f}" ${fit === f ? 'checked' : ''} class="sr-only peer img-fit-radio" data-img-index="${idx}">
+                <span class="block text-center px-1 py-1 text-xs rounded border border-gray-300 bg-white peer-checked:bg-amber-500 peer-checked:text-white peer-checked:border-amber-500 transition">${f==='cover'?'🔲撑满':f==='contain'?'🖼️完整':'↔️拉伸'}</span>
+              </label>
+            `).join('')}
+          </div>
+          <div class="img-sliders space-y-1" style="display:${fit==='cover'?'':'none'}">
+            <div class="flex items-center gap-1">
+              <span class="text-xs w-5">🔍</span>
+              <input type="range" id="imgZoom-${idx}" min="50" max="200" value="${zoomPct}" class="img-slider flex-1 h-1 accent-amber-500" data-img-index="${idx}" data-key="zoom" data-scale="100">
+              <span class="text-xs w-10 text-right img-zoom-label">${zoomPct}%</span>
+            </div>
+            <div class="flex items-center gap-1">
+              <span class="text-xs w-5">↔️</span>
+              <input type="range" id="imgPosX-${idx}" min="0" max="100" value="${posX}" class="img-slider flex-1 h-1 accent-amber-500" data-img-index="${idx}" data-key="posX">
+              <span class="text-xs w-10 text-right img-posx-label">${posX}%</span>
+            </div>
+            <div class="flex items-center gap-1">
+              <span class="text-xs w-5">↕️</span>
+              <input type="range" id="imgPosY-${idx}" min="0" max="100" value="${posY}" class="img-slider flex-1 h-1 accent-amber-500" data-img-index="${idx}" data-key="posY">
+              <span class="text-xs w-10 text-right img-posy-label">${posY}%</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>`;
+}
+
+function renderImages() {
+  imagesContainer.innerHTML = formImages.map((img, i) => renderImageEntry(img, i)).join('');
+}
+
+function readImageFromForm(index) {
+  const urlEl = document.getElementById('imgUrl-' + index);
+  const url = urlEl ? urlEl.value.trim() : (formImages[index]?.url || '');
+  const fitRadio = document.querySelector(`input[name="imgFit-${index}"]:checked`);
+  const fit = fitRadio ? fitRadio.value : 'cover';
+  const zoomEl = document.getElementById('imgZoom-' + index);
+  const posXEl = document.getElementById('imgPosX-' + index);
+  const posYEl = document.getElementById('imgPosY-' + index);
+  return {
+    url,
+    fit,
+    posX: posXEl ? parseInt(posXEl.value) || 50 : 50,
+    posY: posYEl ? parseInt(posYEl.value) || 50 : 50,
+    zoom: zoomEl ? parseInt(zoomEl.value) / 100 || 1 : 1
+  };
+}
+
+function refreshPreview(index) {
+  const img = readImageFromForm(index);
+  formImages[index] = img;
+  const preview = document.getElementById('imgPreview-' + index);
+  if (!preview) return;
+  const customized = img.fit === 'cover' && (img.zoom !== 1 || img.posX !== 50 || img.posY !== 50);
+  const fitClass = customized ? 'object-contain' : (img.fit === 'contain' ? 'object-contain' : img.fit === 'fill' ? 'object-fill' : 'object-cover');
+  const sty = customized
+    ? `object-position:${img.posX}% ${img.posY}%;transform:scale(${img.zoom});transform-origin:${img.posX}% ${img.posY}%`
+    : (img.fit === 'cover' ? `object-position:${img.posX}% ${img.posY}%` : '');
+  preview.className = `w-full h-full ${fitClass}`;
+  preview.style = sty;
+  if (img.url) preview.src = img.url;
+}
+
+// 事件委托：图片条目内的所有交互
+imagesContainer.addEventListener('click', async (e) => {
+  // 移除按钮
+  const removeBtn = e.target.closest('.btn-remove-img');
+  if (removeBtn) {
+    const idx = parseInt(removeBtn.dataset.imgIndex);
+    formImages.splice(idx, 1);
+    renderImages();
+    return;
+  }
+  // 上传按钮
+  const uploadBtn = e.target.closest('.btn-img-upload');
+  if (uploadBtn) {
+    formImageFile.dataset.targetIndex = uploadBtn.dataset.imgIndex;
+    formImageFile.click();
+    return;
+  }
+});
+
+// 上传文件处理
+formImageFile.addEventListener('change', async () => {
+  const idx = parseInt(formImageFile.dataset.targetIndex || '0');
+  const file = formImageFile.files[0];
+  if (!file) return;
+
+  const c = getConfig();
+  if (!c.owner || !c.repo || !c.token) {
+    showToast('请先配置 GitHub 连接信息', 'error');
+    return;
+  }
+
+  if (file.size > 50 * 1024 * 1024) {
+    showToast('文件超过 50MB，建议先压缩再上传', 'error');
+    return;
+  }
+
+  const uploadBtn = document.querySelector(`.btn-img-upload[data-img-index="${idx}"]`);
+  if (uploadBtn) { uploadBtn.disabled = true; uploadBtn.textContent = '⏳'; }
+
+  try {
+    const base64 = await new Promise((resolve, reject) => {
+      const reader = new FileReader();
+      reader.onload = () => resolve(reader.result.split(',')[1]);
+      reader.onerror = () => reject(new Error('文件读取失败'));
+      reader.readAsDataURL(file);
+    });
+
+    const ext = file.name.split('.').pop().toLowerCase() || 'jpg';
+    const imagePath = `images/${Date.now()}-${Math.random().toString(36).slice(2, 8)}.${ext}`;
+    const apiUrl = `https://api.github.com/repos/${c.owner}/${c.repo}/contents/${imagePath}`;
+
+    const resp = await fetchWithTimeout(apiUrl, {
+      method: 'PUT',
+      headers: {
+        'Authorization': `token ${c.token}`,
+        'Accept': 'application/vnd.github.v3+json',
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify({
+        message: `📷 上传图片：${file.name}`,
+        content: base64,
+        branch: c.branch,
+      }),
+    }, 30000);
+
+    if (!resp.ok) {
+      const err = await resp.json().catch(() => ({}));
+      throw new Error(err.message || `HTTP ${resp.status}`);
+    }
+
+    const rawUrl = `https://raw.githubusercontent.com/${c.owner}/${c.repo}/${c.branch}/${imagePath}`;
+    const urlEl = document.getElementById('imgUrl-' + idx);
+    if (urlEl) { urlEl.value = rawUrl; }
+    formImages[idx].url = rawUrl;
+    refreshPreview(idx);
+    showToast('上传成功！', 'success');
+  } catch (err) {
+    showToast('上传失败：' + err.message, 'error');
+  } finally {
+    if (uploadBtn) { uploadBtn.disabled = false; uploadBtn.textContent = '📁 上传'; }
+    formImageFile.value = '';
+  }
+});
+
+// 事件委托：fit radio / slider / url 输入变化 → 更新预览
+imagesContainer.addEventListener('change', (e) => {
+  if (e.target.classList.contains('img-fit-radio')) {
+    const idx = parseInt(e.target.dataset.imgIndex);
+    formImages[idx].fit = e.target.value;
+    // 重新渲染以显示/隐藏滑块
+    formImages = formImages.map((img, i) => i === idx ? readImageFromForm(i) : img);
+    renderImages();
+  }
+});
+
+imagesContainer.addEventListener('input', (e) => {
+  if (e.target.classList.contains('img-slider')) {
+    const idx = parseInt(e.target.dataset.imgIndex);
+    const key = e.target.dataset.key;
+    const scale = parseInt(e.target.dataset.scale || '1');
+    const val = parseInt(e.target.value) / scale;
+    formImages[idx][key] = val;
+    // 更新标签
+    const labelClass = key === 'zoom' ? 'img-zoom-label' : key === 'posX' ? 'img-posx-label' : 'img-posy-label';
+    const entry = e.target.closest('.image-entry');
+    if (entry) {
+      const label = entry.querySelector('.' + labelClass);
+      if (label) label.textContent = e.target.value + '%';
+    }
+    refreshPreview(idx);
+  }
+  if (e.target.classList.contains('img-url-input')) {
+    const idx = parseInt(e.target.closest('.image-entry')?.dataset.imgIndex);
+    if (idx >= 0) {
+      formImages[idx].url = e.target.value;
+      // 完全重渲染（URL 从空变为有值时预览 img 元素需要从头创建）
+      renderImages();
+    }
+  }
+});
+
+// 添加图片按钮
+btnAddImage.addEventListener('click', () => {
+  if (formImages.length >= 5) { showToast('最多5张图片', 'error'); return; }
+  formImages.push(defaultImage());
+  renderImages();
+});
 function getConfig() {
   return {
     owner: localStorage.getItem('gzfood_owner') || '',
@@ -395,15 +616,27 @@ function openForm(shop) {
     formAddress.value = shop.address || '';
     formLat.value = shop.coordinates?.lat || '';
     formLng.value = shop.coordinates?.lng || '';
-    formImageUrl.value = shop.imageUrl || '';
-    const fit = shop.imageFit || 'cover';
-    formImageFitRadios().forEach(r => { if (r.value === fit) r.checked = true; });
-    formImageZoom.value = (shop.imageZoom ?? 1) * 100;
-    formImagePosX.value = shop.imagePosX ?? 50;
-    formImagePosY.value = shop.imagePosY ?? 50;
-    zoomLabel.textContent = formImageZoom.value + '%';
-    posXLabel.textContent = formImagePosX.value + '%';
-    posYLabel.textContent = formImagePosY.value + '%';
+    // 多图兼容：优先 images 数组，兼容旧单图格式
+    if (shop.images && shop.images.length > 0) {
+      formImages = shop.images.map(img => ({
+        url: img.url || '',
+        fit: img.fit || 'cover',
+        posX: img.posX ?? 50,
+        posY: img.posY ?? 50,
+        zoom: img.zoom ?? 1
+      }));
+    } else if (shop.imageUrl) {
+      formImages = [{
+        url: shop.imageUrl,
+        fit: shop.imageFit || 'cover',
+        posX: shop.imagePosX ?? 50,
+        posY: shop.imagePosY ?? 50,
+        zoom: shop.imageZoom ?? 1
+      }];
+    } else {
+      formImages = [defaultImage()];
+    }
+    renderImages();
     formDianpingUrl.value = shop.dianpingUrl || '';
     formTags.value = (shop.tags || []).join(', ');
     formNotes.value = shop.notes || '';
@@ -413,12 +646,10 @@ function openForm(shop) {
     shopForm.reset();
     formId.value = '';
     formRating.value = '4.0';
-    formImageFitRadios().forEach(r => { r.checked = r.value === 'cover'; });
-    formImageZoom.value = 100; formImagePosX.value = 50; formImagePosY.value = 50;
-    zoomLabel.textContent = '100%'; posXLabel.textContent = '50%'; posYLabel.textContent = '50%';
+    formImages = [defaultImage()];
+    renderImages();
     formVisitedDate.value = new Date().toISOString().split('T')[0];
   }
-  updateImagePreview();
   formModal.classList.remove('hidden');
   document.body.classList.add('modal-open');
   formName.focus();
@@ -428,145 +659,6 @@ function closeForm() {
   formModal.classList.add('hidden');
   document.body.classList.remove('modal-open');
 }
-
-function getSelectedImageFit() {
-  let fit = 'cover';
-  formImageFitRadios().forEach(r => { if (r.checked) fit = r.value; });
-  return fit;
-}
-
-function updateImagePreview() {
-  const url = formImageUrl.value.trim();
-  const fit = getSelectedImageFit();
-  const fitClass = fit === 'contain' ? 'object-contain' : fit === 'fill' ? 'object-fill' : 'object-cover';
-
-  // 显示/隐藏裁剪位置滑块（仅 cover 模式需要）
-  imagePosSliders.style.display = fit === 'cover' ? '' : 'none';
-
-  // 应用裁剪位置 + 缩放
-  const px = formImagePosX.value;
-  const py = formImagePosY.value;
-  const zoom = parseInt(formImageZoom.value) / 100;
-  const customized = fit === 'cover' && (zoom !== 1 || px !== '50' || py !== '50');
-  const previewFitClass = customized ? 'object-contain' : (fit === 'contain' ? 'object-contain' : fit === 'fill' ? 'object-fill' : 'object-cover');
-
-  formImagePreview.style.objectPosition = `${px}% ${py}%`;
-  if (customized) {
-    formImagePreview.style.transform = `scale(${zoom})`;
-    formImagePreview.style.transformOrigin = `${px}% ${py}%`;
-  } else {
-    formImagePreview.style.transform = '';
-    formImagePreview.style.transformOrigin = '';
-  }
-
-  if (url) {
-    formImagePreview.src = url;
-    formImagePreview.className = `w-full h-full ${previewFitClass}`;
-    formImagePreview.classList.remove('hidden');
-    formImagePreviewPlaceholder.classList.add('hidden');
-    formImagePreview.onerror = () => {
-      formImagePreview.classList.add('hidden');
-      formImagePreviewPlaceholder.classList.remove('hidden');
-    };
-  } else {
-    formImagePreview.classList.add('hidden');
-    formImagePreviewPlaceholder.classList.remove('hidden');
-  }
-}
-
-// 切换展示模式 → 更新预览和提示
-document.addEventListener('change', (e) => {
-  if (e.target.name === 'imageFit') {
-    updateImagePreview();
-    const hints = { cover: '撑满裁剪 — 拖动滑块调整可见区域', contain: '完整显示 — 图片完整可见，可能留白', fill: '拉伸填充 — 强制填满，可能变形' };
-    formImageFitHint.textContent = hints[e.target.value] || '';
-  }
-});
-
-// 拖动滑块 → 实时更新预览
-[formImageZoom, formImagePosX, formImagePosY].forEach(slider => {
-  slider.addEventListener('input', () => {
-    zoomLabel.textContent = formImageZoom.value + '%';
-    posXLabel.textContent = formImagePosX.value + '%';
-    posYLabel.textContent = formImagePosY.value + '%';
-    updateImagePreview();
-  });
-});
-
-formImageUrl.addEventListener('input', updateImagePreview);
-
-// ---------- 本地上传图片 ----------
-btnUploadImage.addEventListener('click', () => formImageFile.click());
-
-formImageFile.addEventListener('change', async () => {
-  const file = formImageFile.files[0];
-  if (!file) return;
-
-  const c = getConfig();
-  if (!c.owner || !c.repo || !c.token) {
-    showToast('请先配置 GitHub 连接信息', 'error');
-    return;
-  }
-
-  // 校验文件大小（限 5MB）
-  if (file.size > 5 * 1024 * 1024) {
-    showToast('图片不能超过 5MB', 'error');
-    return;
-  }
-
-  btnUploadImage.disabled = true;
-  btnUploadImage.textContent = '⏳ 压缩中...';
-
-  try {
-    // 几乎无损压缩：仅防止超大原图，视觉上与原图无差异
-    let maxWidth, quality;
-    if (file.size > 5 * 1024 * 1024) {       // > 5MB，适度缩小
-      maxWidth = 2000; quality = 0.85;
-    } else {                                  // <= 5MB，保留原图品质
-      maxWidth = 2000; quality = 0.92;
-    }
-    const base64Content = await compressImage(file, maxWidth, quality, 'image/webp');
-    const finalExt = 'webp';
-
-    btnUploadImage.textContent = '⏳ 上传中...';
-
-    // 上传到 GitHub
-    const imagePath = `images/${Date.now()}-${Math.random().toString(36).slice(2, 8)}.${finalExt}`;
-    const apiUrl = `https://api.github.com/repos/${c.owner}/${c.repo}/contents/${imagePath}`;
-
-    const resp = await fetchWithTimeout(apiUrl, {
-      method: 'PUT',
-      headers: {
-        'Authorization': `token ${c.token}`,
-        'Accept': 'application/vnd.github.v3+json',
-        'Content-Type': 'application/json',
-      },
-      body: JSON.stringify({
-        message: `📷 上传图片：${file.name}`,
-        content: base64Content,
-        branch: c.branch,
-      }),
-    }, 15000);
-
-    if (!resp.ok) {
-      const err = await resp.json().catch(() => ({}));
-      throw new Error(err.message || `HTTP ${resp.status}`);
-    }
-
-    const result = await resp.json();
-    // 使用 raw URL 作为图片链接
-    const rawUrl = `https://raw.githubusercontent.com/${c.owner}/${c.repo}/${c.branch}/${imagePath}`;
-    formImageUrl.value = rawUrl;
-    updateImagePreview();
-    showToast('图片上传成功！', 'success');
-  } catch (err) {
-    showToast('上传失败：' + err.message, 'error');
-  } finally {
-    btnUploadImage.disabled = false;
-    btnUploadImage.textContent = '📁 本地上传';
-    formImageFile.value = '';
-  }
-});
 
 btnNewShop.addEventListener('click', () => openForm(null));
 btnCloseForm.addEventListener('click', closeForm);
@@ -598,11 +690,7 @@ shopForm.addEventListener('submit', async (e) => {
       lat: parseFloat(formLat.value) || null,
       lng: parseFloat(formLng.value) || null,
     },
-    imageUrl: formImageUrl.value.trim(),
-    imageFit: getSelectedImageFit(),
-    imageZoom: parseInt(formImageZoom.value) / 100 || 1,
-    imagePosX: parseInt(formImagePosX.value) || 50,
-    imagePosY: parseInt(formImagePosY.value) || 50,
+    images: formImages.map((_, i) => readImageFromForm(i)).filter(img => img.url),
     dianpingUrl: formDianpingUrl.value.trim(),
     tags: formTags.value.split(',').map(t => t.trim()).filter(Boolean),
     notes: formNotes.value.trim(),

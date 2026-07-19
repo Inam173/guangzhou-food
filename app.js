@@ -13,6 +13,7 @@ const searchInput = document.getElementById('searchInput');
 const shopCount = document.getElementById('shopCount');
 const categoryTabs = document.getElementById('categoryTabs');
 const detailModal = document.getElementById('detailModal');
+const modalImageContainer = document.getElementById('modalImageContainer');
 const closeModal = document.getElementById('closeModal');
 
 // ---------- 数据加载 ----------
@@ -91,39 +92,81 @@ function render() {
   } catch (e) { /* quota exceeded, ignore */ }
 }
 
+// 向后兼容：将旧单图格式转为 images 数组
+function getShopImages(shop) {
+  if (shop.images && shop.images.length > 0) return shop.images;
+  if (shop.imageUrl) {
+    return [{
+      url: shop.imageUrl,
+      fit: shop.imageFit || 'cover',
+      posX: shop.imagePosX ?? 50,
+      posY: shop.imagePosY ?? 50,
+      zoom: shop.imageZoom ?? 1
+    }];
+  }
+  return [];
+}
+
+// 为单张图片生成 className + style
+function imageStyle(img) {
+  const fit = img.fit || 'cover';
+  const posX = img.posX ?? 50;
+  const posY = img.posY ?? 50;
+  const zoom = img.zoom ?? 1;
+  const customized = fit === 'cover' && (zoom !== 1 || posX !== 50 || posY !== 50);
+  const cls = customized ? 'object-contain'
+    : (fit === 'contain' ? 'object-contain' : fit === 'fill' ? 'object-fill' : 'object-cover');
+  const sty = customized
+    ? `object-position:${posX}% ${posY}%;transform:scale(${zoom});transform-origin:${posX}% ${posY}%`
+    : (fit === 'cover' ? `object-position:${posX}% ${posY}%` : '');
+  return { cls, sty };
+}
+
 function createCardHTML(shop) {
   const stars = createStarsHTML(shop.rating);
   const tags = (shop.tags || []).slice(0, 3).map(t =>
     `<span class="px-2 py-0.5 bg-orange-100 text-orange-700 rounded-md text-xs font-medium">${escapeHTML(t)}</span>`
   ).join('');
 
-  const imageUrl = shop.imageUrl || '';
-  const fit = shop.imageFit || 'cover';
-  const posX = shop.imagePosX ?? 50;
-  const posY = shop.imagePosY ?? 50;
-  const zoom = shop.imageZoom ?? 1;
+  const images = getShopImages(shop);
 
-  // 自定义了缩放/位置时，改用 contain + scale（100%=完整原图，>100%放大，<100%缩小）
-  const customized = fit === 'cover' && (zoom !== 1 || posX !== 50 || posY !== 50);
-  const fitClass = customized
-    ? 'object-contain'
-    : (fit === 'contain' ? 'object-contain' : fit === 'fill' ? 'object-fill' : 'object-cover');
-  const extraStyle = customized
-    ? `object-position:${posX}% ${posY}%;transform:scale(${zoom});transform-origin:${posX}% ${posY}%`
-    : (fit === 'cover' ? `object-position:${posX}% ${posY}%` : '');
+  let imageHTML;
+  if (images.length === 0) {
+    imageHTML = `<div class="w-full card-image flex items-center justify-center text-5xl">🍜</div>`;
+  } else if (images.length === 1) {
+    const s = imageStyle(images[0]);
+    imageHTML = `<div class="relative w-full card-image overflow-hidden">
+      <img src="${escapeHTML(images[0].url)}" alt="${escapeHTML(shop.name)}" class="w-full h-full ${s.cls} absolute inset-0" loading="lazy" style="${s.sty}" onerror="this.style.display='none';this.nextElementSibling.classList.remove('hidden')">
+      <div class="hidden w-full h-full card-image flex items-center justify-center text-5xl absolute inset-0">🍜</div>
+    </div>`;
+  } else {
+    // 多图轮播
+    const slides = images.map((img, i) => {
+      const s = imageStyle(img);
+      return `<div class="carousel-slide w-full h-full flex-shrink-0 relative">
+        <img src="${escapeHTML(img.url)}" alt="${escapeHTML(shop.name)} ${i+1}" class="w-full h-full ${s.cls}" loading="lazy" style="${s.sty}" onerror="this.parentElement.classList.add('hidden')">
+      </div>`;
+    }).join('');
 
-  const imageHTML = imageUrl
-    ? `<div class="relative w-full card-image overflow-hidden">
-         <img src="${escapeHTML(imageUrl)}" alt="${escapeHTML(shop.name)}" class="w-full h-full ${fitClass} absolute inset-0" loading="lazy" style="${extraStyle}" onerror="this.style.display='none';this.nextElementSibling.classList.remove('hidden')">
-         <div class="hidden w-full h-full card-image flex items-center justify-center text-5xl absolute inset-0">🍜</div>
-       </div>`
-    : `<div class="w-full card-image flex items-center justify-center text-5xl">🍜</div>`;
+    const dots = images.map((_, i) =>
+      `<span class="carousel-dot inline-block w-2 h-2 rounded-full bg-white/70 mx-0.5 cursor-pointer transition ${i === 0 ? '!bg-white w-3' : ''}" data-index="${i}"></span>`
+    ).join('');
+
+    imageHTML = `<div class="card-carousel relative w-full card-image overflow-hidden" data-current="0" data-shop-id="${shop.id}">
+      <div class="carousel-track flex w-full h-full transition-transform duration-300 ease-out">
+        ${slides}
+      </div>
+      <div class="carousel-dots absolute bottom-2 left-1/2 -translate-x-1/2 flex items-center z-10">${dots}</div>
+      <button class="carousel-btn carousel-prev absolute left-1 top-1/2 -translate-y-1/2 w-7 h-7 rounded-full bg-white/80 hover:bg-white text-gray-700 flex items-center justify-center text-sm shadow transition z-10" data-dir="-1">‹</button>
+      <button class="carousel-btn carousel-next absolute right-1 top-1/2 -translate-y-1/2 w-7 h-7 rounded-full bg-white/80 hover:bg-white text-gray-700 flex items-center justify-center text-sm shadow transition z-10" data-dir="1">›</button>
+      <div class="absolute inset-0 cursor-pointer" data-action="detail"></div>
+    </div>`;
+  }
 
   return `
-    <div class="shop-card bg-white rounded-2xl shadow-md overflow-hidden cursor-pointer hover:shadow-xl transition"
-         onclick="openDetail('${shop.id}')">
+    <div class="shop-card bg-white rounded-2xl shadow-md overflow-hidden hover:shadow-xl transition">
       ${imageHTML}
-      <div class="p-4">
+      <div class="p-4 cursor-pointer" onclick="openDetail('${shop.id}')">
         <div class="flex items-start justify-between mb-1">
           <h3 class="font-bold text-gray-900 text-base truncate pr-2">${escapeHTML(shop.name)}</h3>
         </div>
@@ -140,6 +183,113 @@ function createCardHTML(shop) {
       </div>
     </div>`;
 }
+
+// ---------- 轮播交互（事件委托） ----------
+function moveCarousel(carousel, newIndex, count) {
+  if (newIndex < 0) newIndex = count - 1;
+  if (newIndex >= count) newIndex = 0;
+  carousel.dataset.current = newIndex;
+  const track = carousel.querySelector('.carousel-track');
+  track.style.transform = `translateX(-${newIndex * 100}%)`;
+  // 更新圆点
+  const dots = carousel.querySelectorAll('.carousel-dot');
+  dots.forEach((d, i) => {
+    d.classList.toggle('!bg-white', i === newIndex);
+    d.classList.toggle('w-3', i === newIndex);
+    d.classList.toggle('bg-white/70', i !== newIndex);
+  });
+}
+
+cardGrid.addEventListener('click', (e) => {
+  // Detail 点击（图片区域非按钮位置）
+  const detailArea = e.target.closest('[data-action="detail"]');
+  if (detailArea) {
+    const carousel = detailArea.closest('.card-carousel');
+    if (carousel) {
+      openDetail(carousel.dataset.shopId);
+    }
+    return;
+  }
+  // 轮播按钮
+  const btn = e.target.closest('.carousel-btn');
+  if (btn) {
+    e.stopPropagation();
+    const carousel = btn.closest('.card-carousel');
+    const dir = parseInt(btn.dataset.dir);
+    const current = parseInt(carousel.dataset.current) || 0;
+    const count = carousel.querySelectorAll('.carousel-slide').length;
+    moveCarousel(carousel, current + dir, count);
+    return;
+  }
+  // 圆点
+  const dot = e.target.closest('.carousel-dot');
+  if (dot) {
+    e.stopPropagation();
+    const carousel = dot.closest('.card-carousel');
+    const index = parseInt(dot.dataset.index);
+    const count = carousel.querySelectorAll('.carousel-slide').length;
+    moveCarousel(carousel, index, count);
+    return;
+  }
+});
+
+// 触摸滑动
+let touchStartX = 0;
+cardGrid.addEventListener('touchstart', (e) => {
+  const carousel = e.target.closest('.card-carousel');
+  if (carousel) touchStartX = e.touches[0].clientX;
+}, { passive: true });
+
+cardGrid.addEventListener('touchend', (e) => {
+  const carousel = e.target.closest('.card-carousel');
+  if (!carousel) return;
+  const diff = touchStartX - e.changedTouches[0].clientX;
+  if (Math.abs(diff) < 30) return;
+  const current = parseInt(carousel.dataset.current) || 0;
+  const count = carousel.querySelectorAll('.carousel-slide').length;
+  moveCarousel(carousel, current + (diff > 0 ? 1 : -1), count);
+});
+
+// 弹窗轮播
+detailModal.addEventListener('click', (e) => {
+  const btn = e.target.closest('.carousel-btn');
+  if (btn) {
+    e.stopPropagation();
+    const carousel = btn.closest('.modal-carousel');
+    if (!carousel) return;
+    const dir = parseInt(btn.dataset.dir);
+    const current = parseInt(carousel.dataset.current) || 0;
+    const count = carousel.querySelectorAll('.carousel-slide').length;
+    moveCarousel(carousel, current + dir, count);
+    return;
+  }
+  const dot = e.target.closest('.carousel-dot');
+  if (dot) {
+    e.stopPropagation();
+    const carousel = dot.closest('.modal-carousel');
+    if (!carousel) return;
+    const index = parseInt(dot.dataset.index);
+    const count = carousel.querySelectorAll('.carousel-slide').length;
+    moveCarousel(carousel, index, count);
+    return;
+  }
+});
+
+let modalTouchStartX = 0;
+detailModal.addEventListener('touchstart', (e) => {
+  const carousel = e.target.closest('.modal-carousel');
+  if (carousel) modalTouchStartX = e.touches[0].clientX;
+}, { passive: true });
+
+detailModal.addEventListener('touchend', (e) => {
+  const carousel = e.target.closest('.modal-carousel');
+  if (!carousel) return;
+  const diff = modalTouchStartX - e.changedTouches[0].clientX;
+  if (Math.abs(diff) < 30) return;
+  const current = parseInt(carousel.dataset.current) || 0;
+  const count = carousel.querySelectorAll('.carousel-slide').length;
+  moveCarousel(carousel, current + (diff > 0 ? 1 : -1), count);
+});
 
 // 生成星级 HTML（支持半星）
 function createStarsHTML(rating) {
@@ -174,14 +324,43 @@ function openDetail(id) {
   const shop = allShops.find(s => s.id === id);
   if (!shop) return;
 
-  document.getElementById('modalImage').src = shop.imageUrl || '';
-  document.getElementById('modalImage').onerror = function() {
-    this.style.display = 'none';
-    this.nextElementSibling.style.display = 'none';
-  };
-  document.getElementById('modalImage').style.display = '';
-  if (document.getElementById('modalImage').nextElementSibling) {
-    document.getElementById('modalImage').nextElementSibling.style.display = '';
+  const images = getShopImages(shop);
+  const modalImgContainer = document.getElementById('modalImageContainer');
+  const modalImage = document.getElementById('modalImage');
+  const modalImgOverlay = modalImage.nextElementSibling;
+
+  if (images.length <= 1) {
+    // 单图或无图
+    modalImgContainer.innerHTML = `
+      <img id="modalImage" src="${images[0]?.url || ''}" alt="" class="w-full h-56 object-cover rounded-t-2xl">
+      <div class="absolute inset-0 bg-gradient-to-t from-black/40 to-transparent rounded-t-2xl"></div>
+      <span id="modalCategory" class="absolute bottom-3 left-4 px-3 py-1 bg-white/90 backdrop-blur-sm rounded-full text-xs font-bold text-gray-700"></span>`;
+    // Re-bind modalImage reference after replacing HTML
+    const newModalImage = document.getElementById('modalImage');
+    newModalImage.onerror = function() {
+      this.style.display = 'none';
+      if (this.nextElementSibling) this.nextElementSibling.style.display = 'none';
+    };
+  } else {
+    // 多图轮播
+    const slides = images.map((img, i) => {
+      const s = imageStyle(img);
+      return `<div class="carousel-slide w-full flex-shrink-0 relative">
+        <img src="${escapeHTML(img.url)}" alt="" class="w-full h-56 ${s.cls}" style="${s.sty}" onerror="this.parentElement.classList.add('hidden')">
+      </div>`;
+    }).join('');
+    const dots = images.map((_, i) =>
+      `<span class="carousel-dot inline-block w-2 h-2 rounded-full bg-white/70 mx-0.5 cursor-pointer transition ${i === 0 ? '!bg-white w-3' : ''}" data-index="${i}"></span>`
+    ).join('');
+    modalImgContainer.innerHTML = `
+      <div class="modal-carousel relative w-full h-56 overflow-hidden rounded-t-2xl" data-current="0">
+        <div class="carousel-track flex w-full h-full transition-transform duration-300 ease-out">${slides}</div>
+        <div class="carousel-dots absolute bottom-3 left-1/2 -translate-x-1/2 flex items-center z-10">${dots}</div>
+        <button class="carousel-btn carousel-prev absolute left-1 top-1/2 -translate-y-1/2 w-7 h-7 rounded-full bg-white/80 hover:bg-white text-gray-700 flex items-center justify-center text-sm shadow transition z-10" data-dir="-1">‹</button>
+        <button class="carousel-btn carousel-next absolute right-1 top-1/2 -translate-y-1/2 w-7 h-7 rounded-full bg-white/80 hover:bg-white text-gray-700 flex items-center justify-center text-sm shadow transition z-10" data-dir="1">›</button>
+        <div class="absolute inset-0 bg-gradient-to-t from-black/40 to-transparent pointer-events-none"></div>
+        <span id="modalCategory" class="absolute bottom-12 left-4 px-3 py-1 bg-white/90 backdrop-blur-sm rounded-full text-xs font-bold text-gray-700 z-10"></span>
+      </div>`;
   }
   document.getElementById('modalCategory').textContent = shop.category;
   document.getElementById('modalName').textContent = shop.name;

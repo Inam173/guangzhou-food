@@ -111,6 +111,7 @@ body.modal-open {
 .carousel-slide {
   width: 100%;
   flex-shrink: 0;
+  background: #fff; /* 防止窄图透明区域露出相邻图片 */
 }
 
 .carousel-track {

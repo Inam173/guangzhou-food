@@ -111,8 +111,8 @@ body.modal-open {
 .carousel-slide {
   width: 100%;
   flex-shrink: 0;
-  background: #fff;
-  overflow: hidden; /* 裁剪溢出内容，防止scale放大后串到相邻slide */
+  background: linear-gradient(135deg, #fef9f0 0%, #fef3c7 50%, #fde68a 100%);
+  overflow: hidden;
 }
 
 .carousel-track {

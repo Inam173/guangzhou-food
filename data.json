@@ -233,16 +233,52 @@
         "lat": null,
         "lng": null
       },
-      "imageUrl": "https://raw.githubusercontent.com/Inam173/guangzhou-food/main/images/1784118142163-gqserg.jpg",
+      "images": [
+        {
+          "url": "https://raw.githubusercontent.com/Inam173/guangzhou-food/main/images/1784585551500-5rasec.jpg",
+          "fit": "cover",
+          "posX": 50,
+          "posY": 50,
+          "zoom": 1
+        },
+        {
+          "url": "https://raw.githubusercontent.com/Inam173/guangzhou-food/main/images/1784585588865-ial34i.jpg",
+          "fit": "cover",
+          "posX": 50,
+          "posY": 50,
+          "zoom": 1
+        },
+        {
+          "url": "https://raw.githubusercontent.com/Inam173/guangzhou-food/main/images/1784585667116-l3f7xg.jpg",
+          "fit": "cover",
+          "posX": 50,
+          "posY": 50,
+          "zoom": 1
+        },
+        {
+          "url": "https://raw.githubusercontent.com/Inam173/guangzhou-food/main/images/1784585619077-dwvvlm.jpg",
+          "fit": "cover",
+          "posX": 50,
+          "posY": 50,
+          "zoom": 1
+        },
+        {
+          "url": "https://raw.githubusercontent.com/Inam173/guangzhou-food/main/images/1784585639943-4tc3qs.jpg",
+          "fit": "cover",
+          "posX": 50,
+          "posY": 50,
+          "zoom": 1
+        }
+      ],
       "dianpingUrl": "https://m.dianping.com/shopinfo/l7jWuERM3XMIGk4Q?msource=Appshare2021&utm_source=shop_share&shoptype=10&shopcategoryid=210&cityid=4&isoversea=0",
       "tags": [
         "肠粉",
         "石磨"
       ],
-      "notes": "※绝对地道，绝非预制，皮薄价低，童叟无欺\n※人在广州，起床了不得先急头白脸来一碟肠粉？\n※肠粉店倒也没必要专门打卡，但来西华路的话这家不容错过\n※街坊店的卫生不会太讲究，反正出餐前在锅里都高温消毒过啦",
+      "notes": "※绝对地道，绝非预制，皮薄价低，童叟无欺\n※人在广州，谁不想早起空腹时急头白脸来一碟肠粉呢~\n※不过广州优秀的肠粉粥店还有很多，倒也没必要专程打卡他家。但来广州的话西华路美食不容错过，而来了西华路的话这家就不容错过了\n※卫生就是街坊店的水准，不会太讲究，反正出餐前在锅里都高温消毒过啦。特别看重卫生的朋友还请谨慎消费",
       "visitedDate": null,
       "createdAt": "2026-07-14T14:25:16.683Z",
-      "updatedAt": "2026-07-15T12:22:25.306Z"
+      "updatedAt": "2026-07-20T22:21:57.260Z"
     },
     {
       "id": "eb44fcc5-fc79-4b0f-bc65-de8cc84f9807",

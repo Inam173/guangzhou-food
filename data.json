@@ -291,16 +291,52 @@
         "lat": null,
         "lng": null
       },
-      "imageUrl": "https://raw.githubusercontent.com/Inam173/guangzhou-food/main/images/1784199760738-u4kgff.webp",
+      "images": [
+        {
+          "url": "https://raw.githubusercontent.com/Inam173/guangzhou-food/main/images/1784644560603-kgfs52.jpg",
+          "fit": "cover",
+          "posX": 53,
+          "posY": 50,
+          "zoom": 1.69
+        },
+        {
+          "url": "https://raw.githubusercontent.com/Inam173/guangzhou-food/main/images/1784644584010-rznx29.jpg",
+          "fit": "cover",
+          "posX": 38,
+          "posY": 63,
+          "zoom": 1.43
+        },
+        {
+          "url": "https://raw.githubusercontent.com/Inam173/guangzhou-food/main/images/1784644599286-jrz06v.jpg",
+          "fit": "cover",
+          "posX": 50,
+          "posY": 50,
+          "zoom": 1
+        },
+        {
+          "url": "https://raw.githubusercontent.com/Inam173/guangzhou-food/main/images/1784644671585-489l24.jpg",
+          "fit": "cover",
+          "posX": 50,
+          "posY": 56,
+          "zoom": 1.49
+        },
+        {
+          "url": "https://raw.githubusercontent.com/Inam173/guangzhou-food/main/images/1784644686284-wd84j4.jpg",
+          "fit": "cover",
+          "posX": 50,
+          "posY": 50,
+          "zoom": 1
+        }
+      ],
       "dianpingUrl": "https://m.dianping.com/shopinfo/EwHdLZfxzcTDVUdY?msource=Appshare2021&utm_source=shop_share&shoptype=10&shopcategoryid=34282&cityid=4&isoversea=0",
       "tags": [
         "早茶",
         "连锁"
       ],
-      "notes": "※在连锁的早茶店里肯定算好的，至少非冻品，比点都德强\n※价格尚可，且各家门店品控基本都稳定，且经常来点花里胡哨的创新菜\n※但作为一个大型连锁，居然不支持线上拿号...饭点去吃/去大商圈吃的话必须提前规划！直到拿号时看到“当前等位76桌”的提示，我才明白附近的蔡澜为什么开得下去",
+      "notes": "※在连锁的早茶店里肯定算好的，至少非冻品，比点都德强\n※价格尚可，且各家门店品控基本都稳定，还经常会来点花里胡哨的创新菜\n※但作为一个大型连锁，居然不支持线上拿号==饭点去吃/去大商圈吃的话必须提前规划！直到拿号时看到“当前等位76桌”的提示，我才明白附近的蔡澜为什么开得下去",
       "visitedDate": null,
       "createdAt": "2026-07-14T22:51:24.456Z",
-      "updatedAt": "2026-07-16T11:02:58.627Z"
+      "updatedAt": "2026-07-21T14:40:51.394Z"
     },
     {
       "id": "e4202fbf-3088-4f07-9907-8d8a4bf612d8",

@@ -39,10 +39,20 @@
 
 /* 图片加载渐变 + 统一比例 */
 .card-image {
-  background: linear-gradient(135deg, #fef3c7 0%, #fde68a 50%, #fbbf24 100%);
+  background: linear-gradient(135deg, #fef3c7 0%, #fde68a 40%, #fef3c7 60%, #fde68a 100%);
+  background-size: 300% 300%;
+  animation: cardShimmer 2s ease-in-out infinite;
   aspect-ratio: 4 / 3;
   object-fit: cover;
 }
+
+@keyframes cardShimmer {
+  0%   { background-position: 100% 0%; }
+  50%  { background-position: 0% 100%; }
+  100% { background-position: 100% 0%; }
+}
+
+/* 图片加载后自然覆盖渐变，动画看不见也就无所谓了 */
 
 /* 分类标签按钮 */
 .category-btn {

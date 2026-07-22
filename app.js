@@ -82,6 +82,8 @@ function render() {
   } else {
     emptyState.classList.add('hidden');
     cardGrid.innerHTML = filteredShops.map(shop => createCardHTML(shop)).join('');
+    // 渲染后立即启动懒加载
+    initLazyLoading();
   }
 
   shopCount.textContent = `共 ${filteredShops.length} 家`;
@@ -90,6 +92,34 @@ function render() {
   try {
     sessionStorage.setItem('gzfood_shops', JSON.stringify(allShops));
   } catch (e) { /* quota exceeded, ignore */ }
+}
+
+// ---------- IntersectionObserver 懒加载 ----------
+let lazyObserver = null;
+function initLazyLoading() {
+  // 断开旧 observer
+  if (lazyObserver) lazyObserver.disconnect();
+
+  lazyObserver = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        const img = entry.target;
+        const src = img.dataset.src;
+        if (src && !img.src) {
+          img.src = src;
+          img.removeAttribute('data-src');
+        }
+        lazyObserver.unobserve(img);
+      }
+    });
+  }, {
+    rootMargin: '300px 0px', // 提前 300px 开始加载
+    threshold: 0.01
+  });
+
+  cardGrid.querySelectorAll('.lazy-img').forEach(img => {
+    lazyObserver.observe(img);
+  });
 }
 
 // 向后兼容：将旧单图格式转为 images 数组
@@ -136,7 +166,7 @@ function createCardHTML(shop) {
   } else if (images.length === 1) {
     const s = imageStyle(images[0]);
     imageHTML = `<div class="relative w-full card-image overflow-hidden">
-      <img src="${escapeHTML(images[0].url)}" alt="${escapeHTML(shop.name)}" class="w-full h-full ${s.cls} absolute inset-0" loading="lazy" style="${s.sty}" onerror="this.style.display='none';this.nextElementSibling.classList.remove('hidden')">
+      <img data-src="${escapeHTML(images[0].url)}" alt="${escapeHTML(shop.name)}" class="lazy-img w-full h-full ${s.cls} absolute inset-0 opacity-0 transition-opacity duration-500" style="${s.sty}" onerror="this.style.display='none';this.nextElementSibling.classList.remove('hidden')" onload="this.classList.remove('opacity-0')">
       <div class="hidden w-full h-full card-image flex items-center justify-center text-5xl absolute inset-0">🍜</div>
     </div>`;
   } else {
@@ -144,7 +174,7 @@ function createCardHTML(shop) {
     const slides = images.map((img, i) => {
       const s = imageStyle(img);
       return `<div class="carousel-slide w-full h-full flex-shrink-0 relative">
-        <img src="${escapeHTML(img.url)}" alt="${escapeHTML(shop.name)} ${i+1}" class="w-full h-full ${s.cls}" loading="lazy" style="${s.sty}" onerror="this.parentElement.classList.add('hidden')">
+        <img data-src="${escapeHTML(img.url)}" alt="${escapeHTML(shop.name)} ${i+1}" class="lazy-img w-full h-full ${s.cls} opacity-0 transition-opacity duration-500" style="${s.sty}" onerror="this.parentElement.classList.add('hidden')" onload="this.classList.remove('opacity-0')">
       </div>`;
     }).join('');
 

@@ -409,15 +409,51 @@
         "lat": null,
         "lng": null
       },
-      "imageUrl": "https://raw.githubusercontent.com/Inam173/guangzhou-food/main/images/1784113932695-54qi1p.webp",
+      "images": [
+        {
+          "url": "https://raw.githubusercontent.com/Inam173/guangzhou-food/main/images/1784733410245-ogsy0l.jpg",
+          "fit": "cover",
+          "posX": 50,
+          "posY": 50,
+          "zoom": 1
+        },
+        {
+          "url": "https://raw.githubusercontent.com/Inam173/guangzhou-food/main/images/1784733456201-rwr2ru.jpg",
+          "fit": "cover",
+          "posX": 50,
+          "posY": 50,
+          "zoom": 1
+        },
+        {
+          "url": "https://raw.githubusercontent.com/Inam173/guangzhou-food/main/images/1784733475374-g06ure.jpg",
+          "fit": "cover",
+          "posX": 50,
+          "posY": 50,
+          "zoom": 1
+        },
+        {
+          "url": "https://raw.githubusercontent.com/Inam173/guangzhou-food/main/images/1784733500446-5slb2l.jpg",
+          "fit": "cover",
+          "posX": 50,
+          "posY": 50,
+          "zoom": 1
+        },
+        {
+          "url": "https://raw.githubusercontent.com/Inam173/guangzhou-food/main/images/1784733515394-mrq3gb.jpg",
+          "fit": "cover",
+          "posX": 50,
+          "posY": 50,
+          "zoom": 1
+        }
+      ],
       "dianpingUrl": "https://m.dianping.com/shopinfo/k496mnb5DFSVeSor?msource=Appshare2021&utm_source=shop_share&shoptype=10&shopcategoryid=25474&cityid=4&isoversea=0",
       "tags": [
         "鸡"
       ],
-      "notes": "※正宗走地鸡，老板自己在从化养来开饭店的\n※鸡是真的好，去他家只吃鸡就行，别的菜没必要点\n※老鸡多，皮较厚，但肉也不少。因为是扇鸡，肉质会较韧\n※建议提前一天打电话订位+预定做法，顺便按需提要求",
+      "notes": "※正宗走地鸡，老板自己在从化养来开饭店的\n※鸡是真的好，去他家只吃鸡就行，别的菜没必要点。而且鸡的量挺多的，也吃不下别的hhh\n※皮脆肉滑。老鸡多，皮较厚，肉也不少。因为是扇鸡，肉质会较韧\n※建议提前一天打电话订位+预定做法（个人偏好白切+猪肚鸡，一干一湿），顺便按需提要求",
       "visitedDate": null,
       "createdAt": "2026-07-15T11:20:39.396Z",
-      "updatedAt": "2026-07-15T11:20:39.396Z"
+      "updatedAt": "2026-07-22T15:22:05.698Z"
     },
     {
       "id": "8a80ab85-ec85-4d47-80ee-a8d015dd083a",

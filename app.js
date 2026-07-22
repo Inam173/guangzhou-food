@@ -170,11 +170,14 @@ function createCardHTML(shop) {
       <div class="hidden w-full h-full card-image flex items-center justify-center text-5xl absolute inset-0">🍜</div>
     </div>`;
   } else {
-    // 多图轮播
+    // 多图轮播：第一张用 data-src 参与懒加载，其余用 data-lazy-src 切换时才加载
     const slides = images.map((img, i) => {
       const s = imageStyle(img);
+      const attr = i === 0
+        ? `data-src="${escapeHTML(img.url)}" class="lazy-img w-full h-full ${s.cls} opacity-0 transition-opacity duration-500"`
+        : `data-lazy-src="${escapeHTML(img.url)}" class="w-full h-full ${s.cls} opacity-0 transition-opacity duration-500"`;
       return `<div class="carousel-slide w-full h-full flex-shrink-0 relative">
-        <img data-src="${escapeHTML(img.url)}" alt="${escapeHTML(shop.name)} ${i+1}" class="lazy-img w-full h-full ${s.cls} opacity-0 transition-opacity duration-500" style="${s.sty}" onerror="this.parentElement.classList.add('hidden')" onload="this.classList.remove('opacity-0')">
+        <img ${attr} alt="${escapeHTML(shop.name)} ${i+1}" style="${s.sty}" onerror="this.parentElement.classList.add('hidden')" onload="this.classList.remove('opacity-0')">
       </div>`;
     }).join('');
 
@@ -221,6 +224,17 @@ function moveCarousel(carousel, newIndex, count) {
   carousel.dataset.current = newIndex;
   const track = carousel.querySelector('.carousel-track');
   track.style.transform = `translateX(-${newIndex * 100}%)`;
+  // 按需加载当前及相邻 slide 的图片（如果还没加载过）
+  const slides = carousel.querySelectorAll('.carousel-slide');
+  [newIndex, (newIndex + 1) % count, (newIndex - 1 + count) % count].forEach(idx => {
+    const slide = slides[idx];
+    if (!slide) return;
+    const img = slide.querySelector('img');
+    if (img && img.dataset.lazySrc && !img.src) {
+      img.src = img.dataset.lazySrc;
+      img.removeAttribute('data-lazy-src');
+    }
+  });
   // 更新圆点
   const dots = carousel.querySelectorAll('.carousel-dot');
   dots.forEach((d, i) => {

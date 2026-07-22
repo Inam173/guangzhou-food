@@ -113,7 +113,7 @@ function initLazyLoading() {
       }
     });
   }, {
-    rootMargin: '300px 0px', // 提前 300px 开始加载
+    rootMargin: '500px 0px', // 提前 500px 开始加载
     threshold: 0.01
   });
 
@@ -122,10 +122,17 @@ function initLazyLoading() {
   });
 }
 
-// 卡片缩略图 URL（400px，秒加载）
+// 将 raw.githubusercontent.com 的绝对 URL 转为相对路径
+// GitHub Pages 自带的 Fastly CDN 比 raw CDN 在国内快得多
+function localUrl(url) {
+  if (!url) return url;
+  return url.replace(/^https:\/\/raw\.githubusercontent\.com\/Inam173\/guangzhou-food\/main\//, '');
+}
+
+// 卡片缩略图 URL（800px，retina 清晰）
 function getThumbUrl(url) {
   if (!url) return url;
-  return url.replace(/\.webp$/, '.thumb.webp');
+  return localUrl(url).replace(/\.webp$/, '.thumb.webp');
 }
 
 // 向后兼容：将旧单图格式转为 images 数组
@@ -172,7 +179,7 @@ function createCardHTML(shop) {
   } else if (images.length === 1) {
     const s = imageStyle(images[0]);
     imageHTML = `<div class="relative w-full card-image overflow-hidden">
-      <img data-src="${escapeHTML(getThumbUrl(images[0].url))}" alt="${escapeHTML(shop.name)}" class="lazy-img w-full h-full ${s.cls} absolute inset-0 opacity-0 transition-opacity duration-500" style="${s.sty}" onerror="this.style.display='none';this.nextElementSibling.classList.remove('hidden')" onload="this.classList.remove('opacity-0')">
+      <img data-src="${escapeHTML(getThumbUrl(images[0].url))}" alt="${escapeHTML(shop.name)}" loading="lazy" decoding="async" class="lazy-img w-full h-full ${s.cls} absolute inset-0 opacity-0 transition-opacity duration-500" style="${s.sty}" onerror="this.style.display='none';this.nextElementSibling.classList.remove('hidden')" onload="this.classList.remove('opacity-0')">
       <div class="hidden w-full h-full card-image flex items-center justify-center text-5xl absolute inset-0">🍜</div>
     </div>`;
   } else {
@@ -180,8 +187,8 @@ function createCardHTML(shop) {
     const slides = images.map((img, i) => {
       const s = imageStyle(img);
       const attr = i === 0
-        ? `data-src="${escapeHTML(getThumbUrl(img.url))}" class="lazy-img w-full h-full ${s.cls} opacity-0 transition-opacity duration-500"`
-        : `data-lazy-src="${escapeHTML(getThumbUrl(img.url))}" class="w-full h-full ${s.cls} opacity-0 transition-opacity duration-500"`;
+        ? `data-src="${escapeHTML(getThumbUrl(img.url))}" loading="lazy" decoding="async" class="lazy-img w-full h-full ${s.cls} opacity-0 transition-opacity duration-500"`
+        : `data-lazy-src="${escapeHTML(getThumbUrl(img.url))}" loading="lazy" decoding="async" class="w-full h-full ${s.cls} opacity-0 transition-opacity duration-500"`;
       return `<div class="carousel-slide w-full h-full flex-shrink-0 relative">
         <img ${attr} alt="${escapeHTML(shop.name)} ${i+1}" style="${s.sty}" onerror="this.parentElement.classList.add('hidden')" onload="this.classList.remove('opacity-0')">
       </div>`;
@@ -382,7 +389,7 @@ function openDetail(id) {
   if (images.length <= 1) {
     // 单图或无图
     modalImgContainer.innerHTML = `
-      <img id="modalImage" src="${images[0]?.url || ''}" alt="" class="w-full h-56 object-cover rounded-t-2xl">
+      <img id="modalImage" src="${localUrl(images[0]?.url || '')}" alt="" class="w-full h-56 object-cover rounded-t-2xl">
       <div class="absolute inset-0 bg-gradient-to-t from-black/40 to-transparent rounded-t-2xl"></div>
       <span id="modalCategory" class="absolute bottom-3 left-4 px-3 py-1 bg-white/90 backdrop-blur-sm rounded-full text-xs font-bold text-gray-700"></span>`;
     // Re-bind modalImage reference after replacing HTML
@@ -396,7 +403,7 @@ function openDetail(id) {
     const slides = images.map((img, i) => {
       const s = imageStyle(img);
       return `<div class="carousel-slide w-full flex-shrink-0 relative">
-        <img src="${escapeHTML(img.url)}" alt="" class="w-full h-56 ${s.cls}" style="${s.sty}" onerror="this.parentElement.classList.add('hidden')">
+        <img src="${escapeHTML(localUrl(img.url))}" alt="" class="w-full h-56 ${s.cls}" style="${s.sty}" onerror="this.parentElement.classList.add('hidden')">
       </div>`;
     }).join('');
     const dots = images.map((_, i) =>

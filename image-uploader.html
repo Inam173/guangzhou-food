@@ -56,7 +56,7 @@
       <div id="dropZone" class="drop-zone rounded-2xl py-12 px-6 cursor-pointer transition">
         <div class="text-5xl mb-3">📁</div>
         <p class="text-gray-600 font-medium mb-1">点击选择图片 或 拖拽到此处</p>
-        <p class="text-gray-400 text-xs">支持 JPG / PNG / WebP / HEIC，自动压缩</p>
+        <p class="text-gray-400 text-xs">支持 JPG / PNG / WebP，自动转 1600px WebP 高清 + 800px 缩略图</p>
         <input type="file" id="fileInput" accept="image/*" class="hidden">
       </div>
 
@@ -89,7 +89,7 @@
 
     <!-- 使用说明 -->
     <section class="text-center text-xs text-gray-400 pb-8">
-      图片上传到 GitHub 仓库的 images/ 目录 · 获取 raw.githubusercontent.com 直链 · 可粘贴到管理后台的图片链接栏
+      图片自动转为 1600px WebP 高清 + 800px 缩略图，上传到 GitHub · 粘贴到管理后台即可
     </section>
 
   </main>
@@ -146,18 +146,68 @@
       if (fileInput.files.length) handleFile(fileInput.files[0]);
     });
 
-    // ===== 读取文件为 base64（不压缩，保留原图） =====
-    function readFileAsBase64(file) {
+    // ===== Canvas 转换图片为 WebP（指定最大宽度） =====
+    function convertToWebP(file, maxWidth, quality) {
+      return new Promise((resolve, reject) => {
+        const img = new Image();
+        const url = URL.createObjectURL(file);
+        img.onload = () => {
+          URL.revokeObjectURL(url);
+          let w = img.naturalWidth;
+          let h = img.naturalHeight;
+          if (w > maxWidth) {
+            h = Math.round(h * maxWidth / w);
+            w = maxWidth;
+          }
+          const canvas = document.createElement('canvas');
+          canvas.width = w;
+          canvas.height = h;
+          const ctx = canvas.getContext('2d');
+          ctx.drawImage(img, 0, 0, w, h);
+          canvas.toBlob(blob => {
+            if (!blob) return reject(new Error('WebP 转换失败（浏览器不支持？）'));
+            resolve({ blob, width: w, height: h });
+          }, 'image/webp', quality / 100);
+        };
+        img.onerror = () => {
+          URL.revokeObjectURL(url);
+          reject(new Error('图片加载失败，可能格式不支持（HEIC 请先在手机相册中转换）'));
+        };
+        img.src = url;
+      });
+    }
+
+    // ===== Blob 转 Base64 =====
+    function blobToBase64(blob) {
       return new Promise((resolve, reject) => {
         const reader = new FileReader();
-        reader.onload = () => {
-          // 去掉 data:xxx;base64, 前缀
-          const base64 = reader.result.split(',')[1];
-          resolve(base64);
-        };
-        reader.onerror = () => reject(new Error('文件读取失败'));
-        reader.readAsDataURL(file);
+        reader.onload = () => resolve(reader.result.split(',')[1]);
+        reader.onerror = () => reject(new Error('读取失败'));
+        reader.readAsDataURL(blob);
       });
+    }
+
+    // ===== 上传到 GitHub =====
+    async function uploadToGitHub(c, imagePath, base64, label) {
+      const apiUrl = `https://api.github.com/repos/${c.owner}/${c.repo}/contents/${imagePath}`;
+      const resp = await fetchWithTimeout(apiUrl, {
+        method: 'PUT',
+        headers: {
+          'Authorization': `token ${c.token}`,
+          'Accept': 'application/vnd.github.v3+json',
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({
+          message: `📷 ${label}`,
+          content: base64,
+          branch: 'main',
+        }),
+      }, 30000);
+      if (!resp.ok) {
+        const err = await resp.json().catch(() => ({}));
+        throw new Error(err.message || `HTTP ${resp.status}`);
+      }
+      return resp.json();
     }
 
     // ===== 主流程 =====
@@ -168,7 +218,6 @@
         return;
       }
 
-      // 文件大小提醒（GitHub API 限制 100MB）
       if (file.size > 50 * 1024 * 1024) {
         alert('文件超过 50MB，建议先压缩再上传');
         return;
@@ -180,69 +229,63 @@
         previewImage.src = previewReader.result;
         previewArea.classList.remove('hidden');
         const sizeMB = (file.size / 1024 / 1024).toFixed(2);
-        previewInfo.textContent = `${file.name} · ${sizeMB} MB（原图直传）`;
+        previewInfo.textContent = `${file.name} · ${sizeMB} MB → WebP 1600px + 800px`;
       };
       previewReader.readAsDataURL(file);
 
-      // 隐藏旧结果
       result.style.display = 'none';
       progressArea.classList.remove('hidden');
-      progressBar.style.width = '10%';
-      progressText.textContent = '正在读取原图...';
+      progressBar.style.width = '5%';
+      progressText.textContent = '正在转换为 WebP...';
 
       try {
-        // 原图直传，不压缩不转码
-        const base64 = await readFileAsBase64(file);
+        // 生成唯一文件名前缀
+        const prefix = `${Date.now()}-${Math.random().toString(36).slice(2, 8)}`;
+
+        // 1. 转 1600px 高清 WebP
+        progressBar.style.width = '15%';
+        progressText.textContent = '正在生成 1600px 高清版...';
+        const hd = await convertToWebP(file, 1600, 92);
+
+        // 2. 转 800px 缩略图 WebP
         progressBar.style.width = '30%';
-        progressText.textContent = `原图读取完成（${(file.size / 1024).toFixed(0)} KB），正在上传...`;
+        progressText.textContent = '正在生成 800px 缩略图...';
+        const thumb = await convertToWebP(file, 800, 85);
 
-        // 保留原始扩展名
-        const ext = file.name.split('.').pop().toLowerCase() || 'jpg';
-        const imagePath = `images/${Date.now()}-${Math.random().toString(36).slice(2, 8)}.${ext}`;
-        const apiUrl = `https://api.github.com/repos/${c.owner}/${c.repo}/contents/${imagePath}`;
+        // 3. 上传高清版
+        progressBar.style.width = '45%';
+        progressText.textContent = `正在上传高清版 (${(hd.blob.size/1024).toFixed(0)}KB)...`;
+        const hdBase64 = await blobToBase64(hd.blob);
+        await uploadToGitHub(c, `images/${prefix}.webp`, hdBase64, `上传 ${file.name} (1600px WebP)`);
 
-        const resp = await fetchWithTimeout(apiUrl, {
-          method: 'PUT',
-          headers: {
-            'Authorization': `token ${c.token}`,
-            'Accept': 'application/vnd.github.v3+json',
-            'Content-Type': 'application/json',
-          },
-          body: JSON.stringify({
-            message: `📷 上传原图：${file.name}`,
-            content: base64,
-            branch: 'main',
-          }),
-        }, 30000);
-
-        if (!resp.ok) {
-          const err = await resp.json().catch(() => ({}));
-          throw new Error(err.message || `HTTP ${resp.status}`);
-        }
+        // 4. 上传缩略图
+        progressBar.style.width = '70%';
+        progressText.textContent = `正在上传缩略图 (${(thumb.blob.size/1024).toFixed(0)}KB)...`;
+        const thumbBase64 = await blobToBase64(thumb.blob);
+        await uploadToGitHub(c, `images/${prefix}.thumb.webp`, thumbBase64, `上传 ${file.name} (800px 缩略图)`);
 
         progressBar.style.width = '100%';
         progressText.textContent = '上传完成！';
 
-        const rawUrl = `https://raw.githubusercontent.com/${c.owner}/${c.repo}/main/${imagePath}`;
+        const rawUrl = `https://raw.githubusercontent.com/${c.owner}/${c.repo}/main/images/${prefix}.webp`;
         resultUrl.value = rawUrl;
         result.style.display = 'block';
 
-        // 自动复制
         await navigator.clipboard.writeText(rawUrl);
-        showToast('原图直传完成，链接已复制！');
+        showToast(`转换完成！高清 ${(hd.blob.size/1024).toFixed(0)}KB + 缩略图 ${(thumb.blob.size/1024).toFixed(0)}KB，链接已复制`);
 
         setTimeout(() => {
           progressArea.classList.add('hidden');
           progressBar.style.width = '0%';
-        }, 2000);
+        }, 2500);
 
       } catch (err) {
-        progressText.textContent = '上传失败：' + err.message;
+        progressText.textContent = '转换失败：' + err.message;
         progressBar.style.background = '#ef4444';
         setTimeout(() => {
           progressArea.classList.add('hidden');
           progressBar.style.background = '';
-        }, 3000);
+        }, 4000);
       }
     }
 

@@ -30,8 +30,8 @@
           "url": "https://raw.githubusercontent.com/Inam173/guangzhou-food/main/images/1784428909611-3ybs7b.jpg",
           "fit": "cover",
           "posX": 50,
-          "posY": 50,
-          "zoom": 1.01
+          "posY": 83,
+          "zoom": 1.1
         },
         {
           "url": "https://raw.githubusercontent.com/Inam173/guangzhou-food/main/images/1784428924067-jyz29r.jpg",
@@ -58,7 +58,7 @@
       "notes": "※各类啫啫煲是招牌，旗舰级产品\n※价格不便宜，但出品确实好，水准也算物有所值\n※饭点排队容易排长龙，没订位的话直接外卖也很香\n※特别提醒：万一发现黄鳝相关菜品没做熟的话一定要换！！！！！生的鳝血呈鲜红色，是有毒的！！！！！",
       "visitedDate": null,
       "createdAt": "2026-05-20T14:30:00Z",
-      "updatedAt": "2026-07-19T05:42:37.951Z"
+      "updatedAt": "2026-07-19T06:05:21.982Z"
     },
     {
       "id": "0b20420a-b27a-4781-a4b3-41e8668c658f",
@@ -73,7 +73,35 @@
       },
       "images": [
         {
-          "url": "https://raw.githubusercontent.com/Inam173/guangzhou-food/main/images/1784198567355-gavsu2.webp",
+          "url": "https://raw.githubusercontent.com/Inam173/guangzhou-food/main/images/1784447621000-jpv6rs.jpg",
+          "fit": "cover",
+          "posX": 50,
+          "posY": 34,
+          "zoom": 1.5
+        },
+        {
+          "url": "https://raw.githubusercontent.com/Inam173/guangzhou-food/main/images/1784447648201-a8za47.jpg",
+          "fit": "cover",
+          "posX": 50,
+          "posY": 65,
+          "zoom": 1.74
+        },
+        {
+          "url": "https://raw.githubusercontent.com/Inam173/guangzhou-food/main/images/1784447664609-f2wyll.jpg",
+          "fit": "cover",
+          "posX": 51,
+          "posY": 37,
+          "zoom": 1.21
+        },
+        {
+          "url": "https://raw.githubusercontent.com/Inam173/guangzhou-food/main/images/1784447691271-px2xw6.jpg",
+          "fit": "cover",
+          "posX": 50,
+          "posY": 50,
+          "zoom": 1
+        },
+        {
+          "url": "https://raw.githubusercontent.com/Inam173/guangzhou-food/main/images/1784447678401-82k1g4.jpg",
           "fit": "cover",
           "posX": 50,
           "posY": 50,
@@ -86,10 +114,10 @@
         "老字号",
         "可线上排队"
       ],
-      "notes": "※菜品地道非冻品，环境较好\n※门店尽量选这家，另一家的出品有可能不如这家\n※考虑到价格，他家我不认为有90分，但吃完下楼右转即可珠江散步，所以我直接10000分\n※但是人太多了，建议早上开门就去吃，赶饭点的话最好提前1.5h开始留意拿号\n※包间有点菜限制，如果要吃早茶相关菜品，请务必坐大堂，包间主要提供的是正菜",
+      "notes": "※菜品地道非冻品，水准高，品类多，环境好\n※门店尽量选这家，另一家的出品有可能不如这家\n※价格稍微略贵，原价的话他家我认为勉强90分。但吃完下楼右转即可珠江散步，所以我直接10000分\n※但是人真的太多了，早茶直冲的话只建议赶8:00开门第一波去\n※所以还是线上拿号吧，尤其节假日要至少提前1.5h开始留意，多几个人轮流排号更好，他家的出品还是值得动动小手操作下的\n※包间有点菜限制，如果要吃早茶相关菜品，请务必坐大堂，包间主要提供的是正菜\n※早茶10:45前结账打7.8折",
       "visitedDate": null,
       "createdAt": "2026-07-14T12:44:30.648Z",
-      "updatedAt": "2026-07-19T02:23:03.883Z"
+      "updatedAt": "2026-07-19T08:47:29.491Z"
     },
     {
       "id": "7fe637da-1c8b-4616-9853-a2a1deea2633",
@@ -102,20 +130,52 @@
         "lat": null,
         "lng": null
       },
-      "imageUrl": "https://raw.githubusercontent.com/Inam173/guangzhou-food/main/images/1784325092799-v6r7xh.jpg",
-      "imageFit": "cover",
-      "imageZoom": 1.28,
-      "imagePosX": 50,
-      "imagePosY": 50,
+      "images": [
+        {
+          "url": "https://raw.githubusercontent.com/Inam173/guangzhou-food/main/images/1784451573407-rsnqsv.jpg",
+          "fit": "cover",
+          "posX": 94,
+          "posY": 53,
+          "zoom": 1.38
+        },
+        {
+          "url": "https://raw.githubusercontent.com/Inam173/guangzhou-food/main/images/1784453493015-2kjxzp.jpg",
+          "fit": "cover",
+          "posX": 50,
+          "posY": 53,
+          "zoom": 1.16
+        },
+        {
+          "url": "https://raw.githubusercontent.com/Inam173/guangzhou-food/main/images/1784451639397-37ij0h.jpg",
+          "fit": "cover",
+          "posX": 50,
+          "posY": 83,
+          "zoom": 1.69
+        },
+        {
+          "url": "https://raw.githubusercontent.com/Inam173/guangzhou-food/main/images/1784453388946-jzuov5.jpg",
+          "fit": "cover",
+          "posX": 50,
+          "posY": 50,
+          "zoom": 1
+        },
+        {
+          "url": "https://raw.githubusercontent.com/Inam173/guangzhou-food/main/images/1784451663218-mb6uey.jpg",
+          "fit": "cover",
+          "posX": 50,
+          "posY": 44,
+          "zoom": 1.25
+        }
+      ],
       "dianpingUrl": "https://m.dianping.com/shopinfo/G3raFpDcP2glSHD0?msource=Appshare2021&utm_source=shop_share&shoptype=10&shopcategoryid=132&cityid=4&isoversea=0",
       "tags": [
         "瑞士卷",
         "甜点"
       ],
-      "notes": "※只推荐招牌的抹茶瑞士卷，因为其他品类我没吃过\n※原材料够顶（宇治青岚），用料扎实，回口甘甜，口感方面偏厚重\n※价格不低，买单片挺划不来，整条买性价比还可以（不过买整条好像不能坐座位拍照）\n※吃不完得冷藏，个人习惯外带坐地铁回家开炫",
+      "notes": "※目前只推荐招牌的抹茶瑞士卷，因为其他品类我没吃过\n※原材料很有诚意（宇治青岚），用料扎实，回口甘甜，口感上偏厚重（他家就是纯靠原料好来打市场，烘焙技术都无所谓了，熟了就行）\n※价格不低，买单片及其划不来，但整条买性价比真还行，毕竟原料（不过仅买整条不能落座拍照，但外带正好也不用排队）\n※个人习惯单买一整条直接坐地铁回家开炫，所以也不知道他家平时排队多不多\n※吃不完肯定得冷藏",
       "visitedDate": null,
       "createdAt": "2026-07-14T13:14:39.512Z",
-      "updatedAt": "2026-07-18T23:59:59.257Z"
+      "updatedAt": "2026-07-19T09:37:49.902Z"
     },
     {
       "id": "976d37c8-f33e-404a-9d62-44dee2378bbf",
@@ -128,17 +188,39 @@
         "lat": null,
         "lng": null
       },
-      "imageUrl": "https://qcloud.dpfile.com/pc/AoT5VqDBtorPWjnM63edb5Z9Hc42GBw0Zm1TlcuuV7eNsqTZjllUeOvSOzh2Ou8Btinsm4wZBU2JBzCyrLLxBw.webp",
+      "images": [
+        {
+          "url": "https://raw.githubusercontent.com/Inam173/guangzhou-food/main/images/1784458090451-ggpe0s.jpg",
+          "fit": "cover",
+          "posX": 50,
+          "posY": 46,
+          "zoom": 1.45
+        },
+        {
+          "url": "https://raw.githubusercontent.com/Inam173/guangzhou-food/main/images/1784458127349-wgf1j8.jpg",
+          "fit": "cover",
+          "posX": 50,
+          "posY": 100,
+          "zoom": 1.14
+        },
+        {
+          "url": "https://raw.githubusercontent.com/Inam173/guangzhou-food/main/images/1784458138113-6qd7rp.jpg",
+          "fit": "cover",
+          "posX": 50,
+          "posY": 44,
+          "zoom": 1.76
+        }
+      ],
       "dianpingUrl": "https://m.dianping.com/shopinfo/l8wmBHRWnkEEPB6s?msource=Appshare2021&utm_source=shop_share&shoptype=10&shopcategoryid=34236&cityid=4&isoversea=0",
       "tags": [
         "广式甜品",
         "双皮奶",
         "姜撞奶"
       ],
-      "notes": "※街坊小店，店家现点现做，主打双皮奶姜撞奶鲜奶等等\n※逛吃西华路必吃\n※奶制品比较顶饱，但毕竟来都来了，还是预留多一点胃容量吧",
+      "notes": "※街坊小店，店家现点现做，主打双皮奶姜撞奶鲜奶等等\n※西华路必吃，有可能排队\n※奶制品比较顶饱，但毕竟来都来了，不妨多预留一点胃容量啦",
       "visitedDate": null,
       "createdAt": "2026-07-14T13:25:27.981Z",
-      "updatedAt": "2026-07-16T00:31:40.616Z"
+      "updatedAt": "2026-07-19T12:41:51.905Z"
     },
     {
       "id": "c678252f-4595-4f94-9c2d-d4760c508408",
@@ -151,16 +233,52 @@
         "lat": null,
         "lng": null
       },
-      "imageUrl": "https://raw.githubusercontent.com/Inam173/guangzhou-food/main/images/1784118142163-gqserg.jpg",
+      "images": [
+        {
+          "url": "https://raw.githubusercontent.com/Inam173/guangzhou-food/main/images/1784585551500-5rasec.jpg",
+          "fit": "cover",
+          "posX": 50,
+          "posY": 44,
+          "zoom": 1.53
+        },
+        {
+          "url": "https://raw.githubusercontent.com/Inam173/guangzhou-food/main/images/1784585588865-ial34i.jpg",
+          "fit": "cover",
+          "posX": 50,
+          "posY": 50,
+          "zoom": 1
+        },
+        {
+          "url": "https://raw.githubusercontent.com/Inam173/guangzhou-food/main/images/1784585667116-l3f7xg.jpg",
+          "fit": "cover",
+          "posX": 50,
+          "posY": 50,
+          "zoom": 1.01
+        },
+        {
+          "url": "https://raw.githubusercontent.com/Inam173/guangzhou-food/main/images/1784585619077-dwvvlm.jpg",
+          "fit": "cover",
+          "posX": 50,
+          "posY": 76,
+          "zoom": 1.49
+        },
+        {
+          "url": "https://raw.githubusercontent.com/Inam173/guangzhou-food/main/images/1784585639943-4tc3qs.jpg",
+          "fit": "cover",
+          "posX": 50,
+          "posY": 40,
+          "zoom": 1.45
+        }
+      ],
       "dianpingUrl": "https://m.dianping.com/shopinfo/l7jWuERM3XMIGk4Q?msource=Appshare2021&utm_source=shop_share&shoptype=10&shopcategoryid=210&cityid=4&isoversea=0",
       "tags": [
         "肠粉",
         "石磨"
       ],
-      "notes": "※绝对地道，绝非预制，皮薄价低，童叟无欺\n※人在广州，起床了不得先急头白脸来一碟肠粉？\n※肠粉店倒也没必要专门打卡，但来西华路的话这家不容错过\n※街坊店的卫生不会太讲究，反正出餐前在锅里都高温消毒过啦",
+      "notes": "※绝对地道，绝非预制，皮薄价低，童叟无欺\n※人在广州，谁不想早起空腹时急头白脸来一碟肠粉呢~\n※不过广州优秀的肠粉粥店还有很多，倒也没必要专程打卡他家。但来广州的话西华路美食不容错过，而来了西华路的话这家就不容错过了\n※卫生就是街坊店的水准，不会太讲究，反正出餐前在锅里都高温消毒过啦。特别看重卫生的朋友还请谨慎消费",
       "visitedDate": null,
       "createdAt": "2026-07-14T14:25:16.683Z",
-      "updatedAt": "2026-07-15T12:22:25.306Z"
+      "updatedAt": "2026-07-20T22:28:05.175Z"
     },
     {
       "id": "eb44fcc5-fc79-4b0f-bc65-de8cc84f9807",
@@ -173,16 +291,52 @@
         "lat": null,
         "lng": null
       },
-      "imageUrl": "https://raw.githubusercontent.com/Inam173/guangzhou-food/main/images/1784199760738-u4kgff.webp",
+      "images": [
+        {
+          "url": "https://raw.githubusercontent.com/Inam173/guangzhou-food/main/images/1784644560603-kgfs52.jpg",
+          "fit": "cover",
+          "posX": 53,
+          "posY": 50,
+          "zoom": 1.69
+        },
+        {
+          "url": "https://raw.githubusercontent.com/Inam173/guangzhou-food/main/images/1784644584010-rznx29.jpg",
+          "fit": "cover",
+          "posX": 38,
+          "posY": 63,
+          "zoom": 1.43
+        },
+        {
+          "url": "https://raw.githubusercontent.com/Inam173/guangzhou-food/main/images/1784644599286-jrz06v.jpg",
+          "fit": "cover",
+          "posX": 50,
+          "posY": 50,
+          "zoom": 1
+        },
+        {
+          "url": "https://raw.githubusercontent.com/Inam173/guangzhou-food/main/images/1784644671585-489l24.jpg",
+          "fit": "cover",
+          "posX": 50,
+          "posY": 56,
+          "zoom": 1.49
+        },
+        {
+          "url": "https://raw.githubusercontent.com/Inam173/guangzhou-food/main/images/1784644686284-wd84j4.jpg",
+          "fit": "cover",
+          "posX": 50,
+          "posY": 50,
+          "zoom": 1
+        }
+      ],
       "dianpingUrl": "https://m.dianping.com/shopinfo/EwHdLZfxzcTDVUdY?msource=Appshare2021&utm_source=shop_share&shoptype=10&shopcategoryid=34282&cityid=4&isoversea=0",
       "tags": [
         "早茶",
         "连锁"
       ],
-      "notes": "※在连锁的早茶店里肯定算好的，至少非冻品，比点都德强\n※价格尚可，且各家门店品控基本都稳定，且经常来点花里胡哨的创新菜\n※但作为一个大型连锁，居然不支持线上拿号...饭点去吃/去大商圈吃的话必须提前规划！直到拿号时看到“当前等位76桌”的提示，我才明白附近的蔡澜为什么开得下去",
+      "notes": "※在连锁的早茶店里肯定算好的，至少非冻品，比点都德强\n※价格尚可，且各家门店品控基本都稳定，还经常会来点花里胡哨的创新菜\n※但作为一个大型连锁，居然不支持线上拿号==饭点去吃/去大商圈吃的话必须提前规划！直到拿号时看到“当前等位76桌”的提示，我才明白附近的蔡澜为什么开得下去",
       "visitedDate": null,
       "createdAt": "2026-07-14T22:51:24.456Z",
-      "updatedAt": "2026-07-16T11:02:58.627Z"
+      "updatedAt": "2026-07-21T14:40:51.394Z"
     },
     {
       "id": "e4202fbf-3088-4f07-9907-8d8a4bf612d8",

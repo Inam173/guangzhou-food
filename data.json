@@ -466,15 +466,51 @@
         "lat": null,
         "lng": null
       },
-      "imageUrl": "https://raw.githubusercontent.com/Inam173/guangzhou-food/main/images/1784118719289-xbw2jc.webp",
+      "images": [
+        {
+          "url": "https://raw.githubusercontent.com/Inam173/guangzhou-food/main/images/1784736018657-ckceeq.jpg",
+          "fit": "cover",
+          "posX": 50,
+          "posY": 50,
+          "zoom": 1
+        },
+        {
+          "url": "https://raw.githubusercontent.com/Inam173/guangzhou-food/main/images/1784736128339-lz596a.jpg",
+          "fit": "cover",
+          "posX": 50,
+          "posY": 50,
+          "zoom": 1
+        },
+        {
+          "url": "https://raw.githubusercontent.com/Inam173/guangzhou-food/main/images/1784736155955-9p8v23.jpg",
+          "fit": "cover",
+          "posX": 50,
+          "posY": 50,
+          "zoom": 1
+        },
+        {
+          "url": "https://raw.githubusercontent.com/Inam173/guangzhou-food/main/images/1784736169877-0m6lpc.jpg",
+          "fit": "cover",
+          "posX": 50,
+          "posY": 50,
+          "zoom": 1
+        },
+        {
+          "url": "https://raw.githubusercontent.com/Inam173/guangzhou-food/main/images/1784736183531-z2zx51.jpg",
+          "fit": "cover",
+          "posX": 50,
+          "posY": 50,
+          "zoom": 1
+        }
+      ],
       "dianpingUrl": "https://m.dianping.com/shopinfo/G39MHG8c68TgfWKj?msource=Appshare2021&utm_source=shop_share&shoptype=10&shopcategoryid=2919&cityid=4&isoversea=0",
       "tags": [
         "烧腊（有烧鹅）"
       ],
-      "notes": "※街坊店，出品很好，价格公道，没有分店\n※高中时想改善伙食了就来这，当时都还是30m²的简陋装潢小门店，没想到后来扩张+精装升级这么多\n※烧腊倒也不用专程去吃哪家，但住附近的话这家完全可以闭眼消费",
+      "notes": "※街坊店，出品很好，价格公道，没有分店。40+年老店有感觉吗~\n※高中时想改善伙食了就来这，当时都还是30m²的简陋装潢小门店，没想到后来扩张+精装，能升级这么多\n※烧腊倒也不用专程去吃哪家，但住附近的话这家完全可以闭眼消费",
       "visitedDate": null,
       "createdAt": "2026-07-15T11:34:39.895Z",
-      "updatedAt": "2026-07-15T12:32:02.403Z"
+      "updatedAt": "2026-07-22T16:03:17.532Z"
     },
     {
       "id": "c32d9a81-af1e-4631-9af7-a37d60867e7d",

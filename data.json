@@ -355,7 +355,7 @@
           "fit": "cover",
           "posX": 50,
           "posY": 49,
-          "zoom": 1.17
+          "zoom": 1
         },
         {
           "url": "https://raw.githubusercontent.com/Inam173/guangzhou-food/main/images/1784731658445-wvemz7.jpg",
@@ -375,8 +375,8 @@
           "url": "https://raw.githubusercontent.com/Inam173/guangzhou-food/main/images/1784731695109-3hpg1q.jpg",
           "fit": "cover",
           "posX": 50,
-          "posY": 50,
-          "zoom": 1
+          "posY": 29,
+          "zoom": 1.4
         },
         {
           "url": "https://raw.githubusercontent.com/Inam173/guangzhou-food/main/images/1784731717397-dwkurh.jpg",
@@ -396,7 +396,7 @@
       "notes": "※无需多言，经典酒楼出品ok价格尚可环境不错交通便利，客流量还比网红店少，闭眼点菜不踩雷\n※虽然没有一项特别顶级，但他家各方面都高于平均水准\n※美中不足是出餐慢，真的有点慢，太饿的时候去他家可能真的会饿过劲儿",
       "visitedDate": null,
       "createdAt": "2026-07-14T23:28:27.000Z",
-      "updatedAt": "2026-07-22T14:50:37.355Z"
+      "updatedAt": "2026-07-22T14:54:41.868Z"
     },
     {
       "id": "e2011742-7417-42c6-b09e-936d0707009a",

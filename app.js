@@ -122,6 +122,12 @@ function initLazyLoading() {
   });
 }
 
+// 卡片缩略图 URL（400px，秒加载）
+function getThumbUrl(url) {
+  if (!url) return url;
+  return url.replace(/\.webp$/, '.thumb.webp');
+}
+
 // 向后兼容：将旧单图格式转为 images 数组
 function getShopImages(shop) {
   if (shop.images && shop.images.length > 0) return shop.images;
@@ -166,7 +172,7 @@ function createCardHTML(shop) {
   } else if (images.length === 1) {
     const s = imageStyle(images[0]);
     imageHTML = `<div class="relative w-full card-image overflow-hidden">
-      <img data-src="${escapeHTML(images[0].url)}" alt="${escapeHTML(shop.name)}" class="lazy-img w-full h-full ${s.cls} absolute inset-0 opacity-0 transition-opacity duration-500" style="${s.sty}" onerror="this.style.display='none';this.nextElementSibling.classList.remove('hidden')" onload="this.classList.remove('opacity-0')">
+      <img data-src="${escapeHTML(getThumbUrl(images[0].url))}" alt="${escapeHTML(shop.name)}" class="lazy-img w-full h-full ${s.cls} absolute inset-0 opacity-0 transition-opacity duration-500" style="${s.sty}" onerror="this.style.display='none';this.nextElementSibling.classList.remove('hidden')" onload="this.classList.remove('opacity-0')">
       <div class="hidden w-full h-full card-image flex items-center justify-center text-5xl absolute inset-0">🍜</div>
     </div>`;
   } else {
@@ -174,8 +180,8 @@ function createCardHTML(shop) {
     const slides = images.map((img, i) => {
       const s = imageStyle(img);
       const attr = i === 0
-        ? `data-src="${escapeHTML(img.url)}" class="lazy-img w-full h-full ${s.cls} opacity-0 transition-opacity duration-500"`
-        : `data-lazy-src="${escapeHTML(img.url)}" class="w-full h-full ${s.cls} opacity-0 transition-opacity duration-500"`;
+        ? `data-src="${escapeHTML(getThumbUrl(img.url))}" class="lazy-img w-full h-full ${s.cls} opacity-0 transition-opacity duration-500"`
+        : `data-lazy-src="${escapeHTML(getThumbUrl(img.url))}" class="w-full h-full ${s.cls} opacity-0 transition-opacity duration-500"`;
       return `<div class="carousel-slide w-full h-full flex-shrink-0 relative">
         <img ${attr} alt="${escapeHTML(shop.name)} ${i+1}" style="${s.sty}" onerror="this.parentElement.classList.add('hidden')" onload="this.classList.remove('opacity-0')">
       </div>`;

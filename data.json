@@ -581,11 +581,43 @@
         "lat": null,
         "lng": null
       },
-      "imageUrl": "https://raw.githubusercontent.com/Inam173/guangzhou-food/main/images/1784200021620-kvkkh3.webp",
-      "imageFit": "cover",
-      "imageZoom": 1.15,
-      "imagePosX": 50,
-      "imagePosY": 5,
+      "images": [
+        {
+          "url": "https://raw.githubusercontent.com/Inam173/guangzhou-food/main/images/1784767657789-ludk7e.jpg",
+          "fit": "cover",
+          "posX": 50,
+          "posY": 5,
+          "zoom": 1.15
+        },
+        {
+          "url": "https://raw.githubusercontent.com/Inam173/guangzhou-food/main/images/1784767679477-tsay17.jpg",
+          "fit": "cover",
+          "posX": 50,
+          "posY": 61,
+          "zoom": 1.24
+        },
+        {
+          "url": "https://raw.githubusercontent.com/Inam173/guangzhou-food/main/images/1784767709469-kpw4n7.jpg",
+          "fit": "cover",
+          "posX": 50,
+          "posY": 50,
+          "zoom": 1.01
+        },
+        {
+          "url": "https://raw.githubusercontent.com/Inam173/guangzhou-food/main/images/1784767742741-tphpnd.jpg",
+          "fit": "cover",
+          "posX": 50,
+          "posY": 50,
+          "zoom": 1
+        },
+        {
+          "url": "https://raw.githubusercontent.com/Inam173/guangzhou-food/main/images/1784767945216-0e9qab.jpg",
+          "fit": "cover",
+          "posX": 50,
+          "posY": 50,
+          "zoom": 1
+        }
+      ],
       "dianpingUrl": "https://m.dianping.com/shopinfo/G4rK4Z2G5ayRl44b?msource=Appshare2021&utm_source=shop_share&shoptype=10&shopcategoryid=232&cityid=4&isoversea=0",
       "tags": [
         "意大利菜",
@@ -595,7 +627,7 @@
       "notes": "※披萨经典中的经典，老那不勒斯正宗玛格丽特，只是价格也有点正宗\n※绝非预制，现揉面饼+窑炉现烤还是太权威了\n※唯一雷点是吃多了纯烤制饼皮，需要小心嗓子干上火\n※个人习惯点外卖，专程去吃下也没毛病吧，他家环境好也适合拍照，反正比去意大利方便",
       "visitedDate": null,
       "createdAt": "2026-07-15T22:47:13.192Z",
-      "updatedAt": "2026-07-19T00:11:28.816Z"
+      "updatedAt": "2026-07-23T00:53:52.354Z"
     },
     {
       "id": "2df70750-4109-4b9f-9042-79649360ccd4",

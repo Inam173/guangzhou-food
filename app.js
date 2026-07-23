@@ -383,8 +383,6 @@ function openDetail(id) {
 
   const images = getShopImages(shop);
   const modalImgContainer = document.getElementById('modalImageContainer');
-  const modalImage = document.getElementById('modalImage');
-  const modalImgOverlay = modalImage.nextElementSibling;
 
   if (images.length <= 1) {
     // 单图或无图

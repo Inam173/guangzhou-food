@@ -608,14 +608,14 @@
           "fit": "cover",
           "posX": 50,
           "posY": 50,
-          "zoom": 1
+          "zoom": 1.01
         },
         {
           "url": "https://raw.githubusercontent.com/Inam173/guangzhou-food/main/images/1784767945216-0e9qab.jpg",
           "fit": "cover",
           "posX": 50,
-          "posY": 50,
-          "zoom": 1
+          "posY": 33,
+          "zoom": 1.1
         }
       ],
       "dianpingUrl": "https://m.dianping.com/shopinfo/G4rK4Z2G5ayRl44b?msource=Appshare2021&utm_source=shop_share&shoptype=10&shopcategoryid=232&cityid=4&isoversea=0",
@@ -627,7 +627,7 @@
       "notes": "※披萨经典中的经典，老那不勒斯正宗玛格丽特，只是价格也有点正宗\n※绝非预制，现揉面饼+窑炉现烤还是太权威了\n※唯一雷点是吃多了纯烤制饼皮，需要小心嗓子干上火\n※个人习惯点外卖，专程去吃下也没毛病吧，他家环境好也适合拍照，反正比去意大利方便",
       "visitedDate": null,
       "createdAt": "2026-07-15T22:47:13.192Z",
-      "updatedAt": "2026-07-23T00:53:52.354Z"
+      "updatedAt": "2026-07-23T23:19:01.626Z"
     },
     {
       "id": "2df70750-4109-4b9f-9042-79649360ccd4",
@@ -683,10 +683,10 @@
         "西餐",
         "有外卖"
       ],
-      "notes": "※汉堡是招牌，有老式有新式，肉饼多汁，堡胚饱满\n※每周三汉堡打7折\n※意面也推荐，我吃过肉最厚实的一家，而且价格也不坑\n※虽然我没去过门店，但他家外卖我点过不下10次了\n※出餐偏慢，汉堡产品平均30min+，毕竟牛肉饼厚些就不好煎熟",
+      "notes": "※汉堡是招牌，有老式有新式，肉饼多汁，堡胚饱满\n※每周三汉堡打7折\n※意面也推荐，我吃过肉最厚实的一家，而且价格也不坑\n※虽然我没去过门店，但他家外卖我点过不下10次了",
       "visitedDate": null,
       "createdAt": "2026-07-15T23:05:07.912Z",
-      "updatedAt": "2026-07-23T23:17:48.621Z"
+      "updatedAt": "2026-07-23T23:13:41.713Z"
     }
   ]
 }

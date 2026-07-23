@@ -640,17 +640,53 @@
         "lat": null,
         "lng": null
       },
-      "imageUrl": "https://raw.githubusercontent.com/Inam173/guangzhou-food/main/images/1784156413880-c74q24.webp",
+      "images": [
+        {
+          "url": "https://raw.githubusercontent.com/Inam173/guangzhou-food/main/images/1784848133166-gr3zja.jpg",
+          "fit": "cover",
+          "posX": 50,
+          "posY": 52,
+          "zoom": 1.21
+        },
+        {
+          "url": "https://raw.githubusercontent.com/Inam173/guangzhou-food/main/images/1784848160787-dfnwnt.jpg",
+          "fit": "cover",
+          "posX": 50,
+          "posY": 100,
+          "zoom": 1.16
+        },
+        {
+          "url": "https://raw.githubusercontent.com/Inam173/guangzhou-food/main/images/1784848174338-mtficb.jpg",
+          "fit": "cover",
+          "posX": 50,
+          "posY": 100,
+          "zoom": 1.1
+        },
+        {
+          "url": "https://raw.githubusercontent.com/Inam173/guangzhou-food/main/images/1784848185481-2yxstk.jpg",
+          "fit": "cover",
+          "posX": 50,
+          "posY": 61,
+          "zoom": 1.34
+        },
+        {
+          "url": "https://raw.githubusercontent.com/Inam173/guangzhou-food/main/images/1784848196498-ito19i.jpg",
+          "fit": "cover",
+          "posX": 50,
+          "posY": 85,
+          "zoom": 1.17
+        }
+      ],
       "dianpingUrl": "https://m.dianping.com/shopinfo/l9PTip9oXEktlTOi?msource=Appshare2021&utm_source=shop_share&shoptype=10&shopcategoryid=116&cityid=4&isoversea=0",
       "tags": [
         "汉堡",
         "西餐",
         "有外卖"
       ],
-      "notes": "※汉堡是招牌，有老式有新式，肉饼多汁，堡胚饱满\n※意面也推荐，我吃过肉最厚实的一家，而且价格也不坑\n※个人点过他家不下10次外卖",
+      "notes": "※汉堡是招牌，有老式有新式，肉饼多汁，堡胚饱满\n※每周三汉堡打7折\n※意面也推荐，我吃过肉最厚实的一家，而且价格也不坑\n※虽然我没去过门店，但他家外卖我点过不下10次了",
       "visitedDate": null,
       "createdAt": "2026-07-15T23:05:07.912Z",
-      "updatedAt": "2026-07-15T23:05:07.912Z"
+      "updatedAt": "2026-07-23T23:13:41.713Z"
     }
   ]
 }

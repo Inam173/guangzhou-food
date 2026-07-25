@@ -471,8 +471,8 @@
           "url": "https://raw.githubusercontent.com/Inam173/guangzhou-food/main/images/1784736018657-ckceeq.jpg",
           "fit": "cover",
           "posX": 50,
-          "posY": 50,
-          "zoom": 1
+          "posY": 9,
+          "zoom": 1.34
         },
         {
           "url": "https://raw.githubusercontent.com/Inam173/guangzhou-food/main/images/1784736128339-lz596a.jpg",
@@ -510,7 +510,7 @@
       "notes": "※街坊店，出品很好，价格公道，没有分店。40+年老店有感觉吗~\n※高中时想改善伙食了就来这，当时都还是30m²的简陋装潢小门店，没想到后来扩张+精装，能升级这么多\n※烧腊倒也不用专程去吃哪家，但住附近的话这家完全可以闭眼消费",
       "visitedDate": null,
       "createdAt": "2026-07-15T11:34:39.895Z",
-      "updatedAt": "2026-07-24T00:01:16.858Z"
+      "updatedAt": "2026-07-25T02:03:06.233Z"
     },
     {
       "id": "c32d9a81-af1e-4631-9af7-a37d60867e7d",

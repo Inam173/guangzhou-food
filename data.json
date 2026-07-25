@@ -146,18 +146,11 @@
           "zoom": 1.16
         },
         {
-          "url": "https://raw.githubusercontent.com/Inam173/guangzhou-food/main/images/1784451639397-37ij0h.webp",
+          "url": "https://raw.githubusercontent.com/Inam173/guangzhou-food/main/images/1784948906420-xjuac4.jpg",
           "fit": "cover",
           "posX": 50,
-          "posY": 83,
-          "zoom": 1.69
-        },
-        {
-          "url": "https://raw.githubusercontent.com/Inam173/guangzhou-food/main/images/1784453388946-jzuov5.webp",
-          "fit": "cover",
-          "posX": 50,
-          "posY": 50,
-          "zoom": 1
+          "posY": 71,
+          "zoom": 1.41
         },
         {
           "url": "https://raw.githubusercontent.com/Inam173/guangzhou-food/main/images/1784451663218-mb6uey.webp",
@@ -165,6 +158,13 @@
           "posX": 50,
           "posY": 44,
           "zoom": 1.25
+        },
+        {
+          "url": "https://raw.githubusercontent.com/Inam173/guangzhou-food/main/images/1784453388946-jzuov5.webp",
+          "fit": "cover",
+          "posX": 50,
+          "posY": 50,
+          "zoom": 1
         }
       ],
       "dianpingUrl": "https://m.dianping.com/shopinfo/G3raFpDcP2glSHD0?msource=Appshare2021&utm_source=shop_share&shoptype=10&shopcategoryid=132&cityid=4&isoversea=0",
@@ -172,10 +172,10 @@
         "瑞士卷",
         "甜点"
       ],
-      "notes": "※目前只推荐招牌的抹茶瑞士卷，因为其他品类我没吃过\n※原材料很有诚意（宇治青岚），用料扎实，回口甘甜，口感上偏厚重（他家就是纯靠原料好来打市场，烘焙技术都无所谓了，熟了就行）\n※价格不低，买单片及其划不来，但整条买性价比真还行，毕竟原料（不过仅买整条不能落座拍照，但外带正好也不用排队）\n※个人习惯单买一整条直接坐地铁回家开炫，所以也不知道他家平时排队多不多\n※吃不完肯定得冷藏",
+      "notes": "※目前只推荐招牌的抹茶瑞士卷，因为其他品类我还没吃过\n※原材料很有诚意（宇治青岚），用料扎实，回口甘甜，口感上偏厚重（他家基本是纯靠原料好来打市场，烘焙技术可以不关注，反正肯定是熟了）\n※价格不低，买单片及其划不来，但整条买性价比真还可以，毕竟原料摆在这（不过仅买整条不能落座拍照，但外带正好也不用排队）\n※个人习惯单买一整条直接坐地铁回家开炫，所以也不知道他家平时排队多不多\n※吃不完肯定得冷藏",
       "visitedDate": null,
       "createdAt": "2026-07-14T13:14:39.512Z",
-      "updatedAt": "2026-07-23T23:39:18.322Z"
+      "updatedAt": "2026-07-25T03:15:09.763Z"
     },
     {
       "id": "976d37c8-f33e-404a-9d62-44dee2378bbf",

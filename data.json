@@ -58,7 +58,7 @@
       "notes": "※各类啫啫煲是招牌，旗舰级产品\n※价格不便宜，但出品确实好，水准也算物有所值\n※饭点排队容易排长龙，没订位的话直接外卖也很香\n※特别提醒：万一发现黄鳝相关菜品没做熟的话一定要换！！！！！生的鳝血呈鲜红色，是有毒的！！！！！",
       "visitedDate": null,
       "createdAt": "2026-05-20T14:30:00Z",
-      "updatedAt": "2026-07-23T23:35:36.787Z"
+      "updatedAt": "2026-07-26T21:40:42.158Z"
     },
     {
       "id": "0b20420a-b27a-4781-a4b3-41e8668c658f",
@@ -117,7 +117,7 @@
       "notes": "※菜品地道非冻品，水准高，品类多，环境好\n※门店尽量选这家，另一家的出品有可能不如这家\n※价格稍微略贵，原价的话他家我认为勉强90分。但吃完下楼右转即可珠江散步，所以我直接10000分\n※但是人真的太多了，早茶直冲的话只建议赶8:00开门第一波去\n※所以还是线上拿号吧，尤其节假日要至少提前1.5h开始留意，多几个人轮流排号更好，他家的出品还是值得动动小手操作下的\n※包间有点菜限制，如果要吃早茶相关菜品，请务必坐大堂，包间主要提供的是正菜\n※早茶10:45前结账打7.8折",
       "visitedDate": null,
       "createdAt": "2026-07-14T12:44:30.648Z",
-      "updatedAt": "2026-07-24T00:06:36.107Z"
+      "updatedAt": "2026-07-26T21:40:42.158Z"
     },
     {
       "id": "7fe637da-1c8b-4616-9853-a2a1deea2633",
@@ -175,169 +175,7 @@
       "notes": "※目前只推荐招牌的抹茶瑞士卷，因为其他品类我还没吃过\n※原材料很有诚意（宇治青岚），用料扎实，回口甘甜，口感上偏厚重（他家基本是纯靠原料好来打市场，烘焙技术可以不关注，反正肯定是熟了）\n※价格不低，买单片及其划不来，但整条买性价比真还可以，毕竟原料摆在这（不过仅买整条不能落座拍照，但外带正好也不用排队）\n※个人习惯单买一整条直接坐地铁回家开炫，所以也不知道他家平时排队多不多\n※吃不完肯定得冷藏",
       "visitedDate": null,
       "createdAt": "2026-07-14T13:14:39.512Z",
-      "updatedAt": "2026-07-25T03:15:09.763Z"
-    },
-    {
-      "id": "976d37c8-f33e-404a-9d62-44dee2378bbf",
-      "name": "英姐鲜奶",
-      "category": "甜品",
-      "rating": 4,
-      "pricePerPerson": 15,
-      "address": "越秀区西华路华业大厦1层（雍和酒家对面）",
-      "coordinates": {
-        "lat": null,
-        "lng": null
-      },
-      "images": [
-        {
-          "url": "https://raw.githubusercontent.com/Inam173/guangzhou-food/main/images/1784458090451-ggpe0s.webp",
-          "fit": "cover",
-          "posX": 50,
-          "posY": 46,
-          "zoom": 1.45
-        },
-        {
-          "url": "https://raw.githubusercontent.com/Inam173/guangzhou-food/main/images/1784458127349-wgf1j8.webp",
-          "fit": "cover",
-          "posX": 50,
-          "posY": 100,
-          "zoom": 1.14
-        },
-        {
-          "url": "https://raw.githubusercontent.com/Inam173/guangzhou-food/main/images/1784458138113-6qd7rp.webp",
-          "fit": "cover",
-          "posX": 50,
-          "posY": 44,
-          "zoom": 1.76
-        }
-      ],
-      "dianpingUrl": "https://m.dianping.com/shopinfo/l8wmBHRWnkEEPB6s?msource=Appshare2021&utm_source=shop_share&shoptype=10&shopcategoryid=34236&cityid=4&isoversea=0",
-      "tags": [
-        "广式甜品",
-        "双皮奶",
-        "姜撞奶",
-        "街坊店"
-      ],
-      "notes": "※街坊小店，店家现点现做，主打双皮奶姜撞奶鲜奶等等\n※西华路必吃，有可能排队\n※奶制品比较顶饱，但毕竟来都来了，不妨多预留一点胃容量啦",
-      "visitedDate": null,
-      "createdAt": "2026-07-14T13:25:27.981Z",
-      "updatedAt": "2026-07-25T03:05:38.605Z"
-    },
-    {
-      "id": "c678252f-4595-4f94-9c2d-d4760c508408",
-      "name": "华记石磨美食(西华路店)",
-      "category": "肠粉",
-      "rating": 4,
-      "pricePerPerson": 10,
-      "address": "越秀区西华路377号",
-      "coordinates": {
-        "lat": null,
-        "lng": null
-      },
-      "images": [
-        {
-          "url": "https://raw.githubusercontent.com/Inam173/guangzhou-food/main/images/1784585551500-5rasec.webp",
-          "fit": "cover",
-          "posX": 50,
-          "posY": 44,
-          "zoom": 1.53
-        },
-        {
-          "url": "https://raw.githubusercontent.com/Inam173/guangzhou-food/main/images/1784585588865-ial34i.webp",
-          "fit": "cover",
-          "posX": 50,
-          "posY": 50,
-          "zoom": 1
-        },
-        {
-          "url": "https://raw.githubusercontent.com/Inam173/guangzhou-food/main/images/1784585667116-l3f7xg.webp",
-          "fit": "cover",
-          "posX": 50,
-          "posY": 50,
-          "zoom": 1.01
-        },
-        {
-          "url": "https://raw.githubusercontent.com/Inam173/guangzhou-food/main/images/1784585619077-dwvvlm.webp",
-          "fit": "cover",
-          "posX": 50,
-          "posY": 76,
-          "zoom": 1.49
-        },
-        {
-          "url": "https://raw.githubusercontent.com/Inam173/guangzhou-food/main/images/1784585639943-4tc3qs.webp",
-          "fit": "cover",
-          "posX": 50,
-          "posY": 40,
-          "zoom": 1.45
-        }
-      ],
-      "dianpingUrl": "https://m.dianping.com/shopinfo/l7jWuERM3XMIGk4Q?msource=Appshare2021&utm_source=shop_share&shoptype=10&shopcategoryid=210&cityid=4&isoversea=0",
-      "tags": [
-        "肠粉",
-        "石磨"
-      ],
-      "notes": "※绝对地道，绝非预制，皮薄价低，童叟无欺\n※人在广州，谁不想早起空腹时急头白脸来一碟肠粉呢~\n※不过广州优秀的肠粉粥店还有很多，倒也没必要专程打卡他家。但来广州的话西华路美食不容错过，而来了西华路的话这家就不容错过了\n※卫生就是街坊店的水准，不会太讲究，反正出餐前在锅里都高温消毒过啦。特别看重卫生的朋友还请谨慎消费",
-      "visitedDate": null,
-      "createdAt": "2026-07-14T14:25:16.683Z",
-      "updatedAt": "2026-07-24T00:00:04.924Z"
-    },
-    {
-      "id": "eb44fcc5-fc79-4b0f-bc65-de8cc84f9807",
-      "name": "禄运茶居·手工点心(正佳广场店)",
-      "category": "茶楼",
-      "rating": 4.5,
-      "pricePerPerson": 70,
-      "address": "天河区天河路228号正佳广场5楼5A031",
-      "coordinates": {
-        "lat": null,
-        "lng": null
-      },
-      "images": [
-        {
-          "url": "https://raw.githubusercontent.com/Inam173/guangzhou-food/main/images/1784644560603-kgfs52.webp",
-          "fit": "cover",
-          "posX": 53,
-          "posY": 50,
-          "zoom": 1.69
-        },
-        {
-          "url": "https://raw.githubusercontent.com/Inam173/guangzhou-food/main/images/1784644584010-rznx29.webp",
-          "fit": "cover",
-          "posX": 38,
-          "posY": 63,
-          "zoom": 1.43
-        },
-        {
-          "url": "https://raw.githubusercontent.com/Inam173/guangzhou-food/main/images/1784644599286-jrz06v.webp",
-          "fit": "cover",
-          "posX": 50,
-          "posY": 50,
-          "zoom": 1
-        },
-        {
-          "url": "https://raw.githubusercontent.com/Inam173/guangzhou-food/main/images/1784644671585-489l24.webp",
-          "fit": "cover",
-          "posX": 50,
-          "posY": 56,
-          "zoom": 1.49
-        },
-        {
-          "url": "https://raw.githubusercontent.com/Inam173/guangzhou-food/main/images/1784644686284-wd84j4.webp",
-          "fit": "cover",
-          "posX": 50,
-          "posY": 50,
-          "zoom": 1
-        }
-      ],
-      "dianpingUrl": "https://m.dianping.com/shopinfo/EwHdLZfxzcTDVUdY?msource=Appshare2021&utm_source=shop_share&shoptype=10&shopcategoryid=34282&cityid=4&isoversea=0",
-      "tags": [
-        "早茶",
-        "连锁"
-      ],
-      "notes": "※在连锁的早茶店里肯定算好的，至少非冻品，比点都德强\n※价格尚可，且各家门店品控基本都稳定，还经常会来点花里胡哨的创新菜\n※但作为一个大型连锁，居然不支持线上拿号==饭点去吃/去大商圈吃的话必须提前规划！直到拿号时看到“当前等位76桌”的提示，我才明白附近的蔡澜为什么开得下去",
-      "visitedDate": null,
-      "createdAt": "2026-07-14T22:51:24.456Z",
-      "updatedAt": "2026-07-21T14:40:51.394Z"
+      "updatedAt": "2026-07-26T21:40:42.158Z"
     },
     {
       "id": "e4202fbf-3088-4f07-9907-8d8a4bf612d8",
@@ -397,7 +235,169 @@
       "notes": "※无需多言，经典酒楼出品ok价格尚可环境不错交通便利，客流量还比网红店少，闭眼点菜不踩雷\n※虽然没有一项特别顶级，但他家各方面都高于平均水准\n※美中不足是出餐慢，真的有点慢，太饿的时候去他家可能真的会饿过劲儿",
       "visitedDate": null,
       "createdAt": "2026-07-14T23:28:27.000Z",
-      "updatedAt": "2026-07-24T00:00:31.995Z"
+      "updatedAt": "2026-07-26T21:40:42.158Z"
+    },
+    {
+      "id": "976d37c8-f33e-404a-9d62-44dee2378bbf",
+      "name": "英姐鲜奶",
+      "category": "甜品",
+      "rating": 4,
+      "pricePerPerson": 15,
+      "address": "越秀区西华路华业大厦1层（雍和酒家对面）",
+      "coordinates": {
+        "lat": null,
+        "lng": null
+      },
+      "images": [
+        {
+          "url": "https://raw.githubusercontent.com/Inam173/guangzhou-food/main/images/1784458090451-ggpe0s.webp",
+          "fit": "cover",
+          "posX": 50,
+          "posY": 46,
+          "zoom": 1.45
+        },
+        {
+          "url": "https://raw.githubusercontent.com/Inam173/guangzhou-food/main/images/1784458127349-wgf1j8.webp",
+          "fit": "cover",
+          "posX": 50,
+          "posY": 100,
+          "zoom": 1.14
+        },
+        {
+          "url": "https://raw.githubusercontent.com/Inam173/guangzhou-food/main/images/1784458138113-6qd7rp.webp",
+          "fit": "cover",
+          "posX": 50,
+          "posY": 44,
+          "zoom": 1.76
+        }
+      ],
+      "dianpingUrl": "https://m.dianping.com/shopinfo/l8wmBHRWnkEEPB6s?msource=Appshare2021&utm_source=shop_share&shoptype=10&shopcategoryid=34236&cityid=4&isoversea=0",
+      "tags": [
+        "广式甜品",
+        "双皮奶",
+        "姜撞奶",
+        "街坊店"
+      ],
+      "notes": "※街坊小店，店家现点现做，主打双皮奶姜撞奶鲜奶等等\n※西华路必吃，有可能排队\n※奶制品比较顶饱，但毕竟来都来了，不妨多预留一点胃容量啦",
+      "visitedDate": null,
+      "createdAt": "2026-07-14T13:25:27.981Z",
+      "updatedAt": "2026-07-26T21:40:42.158Z"
+    },
+    {
+      "id": "c678252f-4595-4f94-9c2d-d4760c508408",
+      "name": "华记石磨美食(西华路店)",
+      "category": "肠粉",
+      "rating": 4,
+      "pricePerPerson": 10,
+      "address": "越秀区西华路377号",
+      "coordinates": {
+        "lat": null,
+        "lng": null
+      },
+      "images": [
+        {
+          "url": "https://raw.githubusercontent.com/Inam173/guangzhou-food/main/images/1784585551500-5rasec.webp",
+          "fit": "cover",
+          "posX": 50,
+          "posY": 44,
+          "zoom": 1.53
+        },
+        {
+          "url": "https://raw.githubusercontent.com/Inam173/guangzhou-food/main/images/1784585588865-ial34i.webp",
+          "fit": "cover",
+          "posX": 50,
+          "posY": 50,
+          "zoom": 1
+        },
+        {
+          "url": "https://raw.githubusercontent.com/Inam173/guangzhou-food/main/images/1784585667116-l3f7xg.webp",
+          "fit": "cover",
+          "posX": 50,
+          "posY": 50,
+          "zoom": 1.01
+        },
+        {
+          "url": "https://raw.githubusercontent.com/Inam173/guangzhou-food/main/images/1784585619077-dwvvlm.webp",
+          "fit": "cover",
+          "posX": 50,
+          "posY": 76,
+          "zoom": 1.49
+        },
+        {
+          "url": "https://raw.githubusercontent.com/Inam173/guangzhou-food/main/images/1784585639943-4tc3qs.webp",
+          "fit": "cover",
+          "posX": 50,
+          "posY": 40,
+          "zoom": 1.45
+        }
+      ],
+      "dianpingUrl": "https://m.dianping.com/shopinfo/l7jWuERM3XMIGk4Q?msource=Appshare2021&utm_source=shop_share&shoptype=10&shopcategoryid=210&cityid=4&isoversea=0",
+      "tags": [
+        "肠粉",
+        "石磨"
+      ],
+      "notes": "※绝对地道，绝非预制，皮薄价低，童叟无欺\n※人在广州，谁不想早起空腹时急头白脸来一碟肠粉呢~\n※不过广州优秀的肠粉粥店还有很多，倒也没必要专程打卡他家。但来广州的话西华路美食不容错过，而来了西华路的话这家就不容错过了\n※卫生就是街坊店的水准，不会太讲究，反正出餐前在锅里都高温消毒过啦。特别看重卫生的朋友还请谨慎消费",
+      "visitedDate": null,
+      "createdAt": "2026-07-14T14:25:16.683Z",
+      "updatedAt": "2026-07-26T21:40:42.158Z"
+    },
+    {
+      "id": "eb44fcc5-fc79-4b0f-bc65-de8cc84f9807",
+      "name": "禄运茶居·手工点心(正佳广场店)",
+      "category": "茶楼",
+      "rating": 4.5,
+      "pricePerPerson": 70,
+      "address": "天河区天河路228号正佳广场5楼5A031",
+      "coordinates": {
+        "lat": null,
+        "lng": null
+      },
+      "images": [
+        {
+          "url": "https://raw.githubusercontent.com/Inam173/guangzhou-food/main/images/1784644560603-kgfs52.webp",
+          "fit": "cover",
+          "posX": 53,
+          "posY": 50,
+          "zoom": 1.69
+        },
+        {
+          "url": "https://raw.githubusercontent.com/Inam173/guangzhou-food/main/images/1784644584010-rznx29.webp",
+          "fit": "cover",
+          "posX": 38,
+          "posY": 63,
+          "zoom": 1.43
+        },
+        {
+          "url": "https://raw.githubusercontent.com/Inam173/guangzhou-food/main/images/1784644599286-jrz06v.webp",
+          "fit": "cover",
+          "posX": 50,
+          "posY": 50,
+          "zoom": 1
+        },
+        {
+          "url": "https://raw.githubusercontent.com/Inam173/guangzhou-food/main/images/1784644671585-489l24.webp",
+          "fit": "cover",
+          "posX": 50,
+          "posY": 56,
+          "zoom": 1.49
+        },
+        {
+          "url": "https://raw.githubusercontent.com/Inam173/guangzhou-food/main/images/1784644686284-wd84j4.webp",
+          "fit": "cover",
+          "posX": 50,
+          "posY": 50,
+          "zoom": 1
+        }
+      ],
+      "dianpingUrl": "https://m.dianping.com/shopinfo/EwHdLZfxzcTDVUdY?msource=Appshare2021&utm_source=shop_share&shoptype=10&shopcategoryid=34282&cityid=4&isoversea=0",
+      "tags": [
+        "早茶",
+        "连锁"
+      ],
+      "notes": "※在连锁的早茶店里肯定算好的，至少非冻品，比点都德强\n※价格尚可，且各家门店品控基本都稳定，还经常会来点花里胡哨的创新菜\n※但作为一个大型连锁，居然不支持线上拿号==饭点去吃/去大商圈吃的话必须提前规划！直到拿号时看到“当前等位76桌”的提示，我才明白附近的蔡澜为什么开得下去",
+      "visitedDate": null,
+      "createdAt": "2026-07-14T22:51:24.456Z",
+      "updatedAt": "2026-07-26T21:40:42.158Z"
     },
     {
       "id": "e2011742-7417-42c6-b09e-936d0707009a",
@@ -454,7 +454,7 @@
       "notes": "※正宗走地鸡，老板自己在从化养来开饭店的\n※鸡是真的好，去他家只吃鸡就行，别的菜没必要点。而且鸡的量挺多的，也吃不下别的hhh\n※皮脆肉滑。老鸡多，皮较厚，肉也不少。因为是扇鸡，肉质会较韧\n※建议提前一天打电话订位+预定做法（个人偏好白切+猪肚鸡，一干一湿），顺便按需提要求",
       "visitedDate": null,
       "createdAt": "2026-07-15T11:20:39.396Z",
-      "updatedAt": "2026-07-24T00:01:02.582Z"
+      "updatedAt": "2026-07-26T21:40:42.158Z"
     },
     {
       "id": "8a80ab85-ec85-4d47-80ee-a8d015dd083a",
@@ -511,7 +511,7 @@
       "notes": "※街坊店，出品很好，价格公道，没有分店。40+年老店有感觉吗~\n※高中时想改善伙食了就来这，当时都还是30m²的简陋装潢小门店，没想到后来扩张+精装，能升级这么多\n※烧腊倒也不用专程去吃哪家，但住附近的话这家完全可以闭眼消费",
       "visitedDate": null,
       "createdAt": "2026-07-15T11:34:39.895Z",
-      "updatedAt": "2026-07-25T02:03:06.233Z"
+      "updatedAt": "2026-07-26T21:40:42.158Z"
     },
     {
       "id": "c32d9a81-af1e-4631-9af7-a37d60867e7d",
@@ -569,7 +569,7 @@
       "notes": "※街坊店，经典粤菜馆，水准在线，特色菜也不少，近地铁站\n※美中不足是价格高，在意性价比的话不用考虑这家，或者花些钱只尝特色的\n※点菜直接请阿姨推荐就行，店内较特色的有怪味大肠/脆皮炸大肠、虾酱骨、鱼肠焗蛋...\n※环境中规中矩，层高偏低，店内老人聊天的多，所以一般会比较热闹（\n※近年在北京路开了家分店，目前还没吃过不了解品控，就不评价了",
       "visitedDate": null,
       "createdAt": "2026-07-15T22:32:49.490Z",
-      "updatedAt": "2026-07-24T00:01:27.917Z"
+      "updatedAt": "2026-07-26T21:40:42.158Z"
     },
     {
       "id": "a2ee0138-de1b-4a4c-9a46-51cb592be34e",
@@ -628,7 +628,7 @@
       "notes": "※披萨经典中的经典，老那不勒斯正宗玛格丽特，只是价格也有点正宗\n※绝非预制，现揉面饼+窑炉现烤还是太权威了\n※唯一雷点是吃多了纯烤制饼皮，需要小心嗓子干上火\n※个人习惯点外卖，专程去吃下也没毛病吧，他家环境好也适合拍照，反正比去意大利方便",
       "visitedDate": null,
       "createdAt": "2026-07-15T22:47:13.192Z",
-      "updatedAt": "2026-07-24T00:01:37.334Z"
+      "updatedAt": "2026-07-26T21:40:42.158Z"
     },
     {
       "id": "2df70750-4109-4b9f-9042-79649360ccd4",
@@ -687,7 +687,7 @@
       "notes": "※汉堡是招牌，有老式有新式，肉饼多汁，堡胚饱满\n※每周三汉堡打7折（仅堂食）\n※意面也推荐，我吃过肉最厚实的一家，而且价格也不坑\n※虽然我没去过门店，但他家外卖我点过不下10次了",
       "visitedDate": null,
       "createdAt": "2026-07-15T23:05:07.912Z",
-      "updatedAt": "2026-07-26T21:35:56.359Z"
+      "updatedAt": "2026-07-26T21:40:42.158Z"
     }
   ]
 }

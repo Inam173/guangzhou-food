@@ -5,6 +5,7 @@ let allShops = [];
 let filteredShops = [];
 let currentCategory = 'all';
 let currentSearch = '';
+let lqipMap = {};  // LQIP 占位图映射
 
 // ---------- DOM 引用 ----------
 const cardGrid = document.getElementById('cardGrid');
@@ -21,14 +22,18 @@ const closeModal = document.getElementById('closeModal');
 
 async function loadData() {
   try {
-    // 部分云服务商可能会对 raw.githubusercontent.com 有访问问题
-    // 如果你使用 GitHub Pages 部署，data.json 在同目录下直接 fetch 即可
-    // 添加时间戳防止浏览器缓存旧数据
-    const response = await fetch('data.json?v=' + Date.now());
-    if (!response.ok) throw new Error(`HTTP ${response.status}`);
-    const data = await response.json();
+    // 并行加载数据和 LQIP 占位图
+    const [dataResp, lqipResp] = await Promise.all([
+      fetch('data.json?v=' + Date.now()),
+      fetch('lqip.json?v=' + Date.now())
+    ]);
+    if (!dataResp.ok) throw new Error(`HTTP ${dataResp.status}`);
+    const data = await dataResp.json();
     allShops = data.shops || [];
-    applyAllFilters();
+    // LQIP 加载失败不影响主流程
+    if (lqipResp.ok) {
+      lqipMap = await lqipResp.json().catch(() => ({}));
+    }
   } catch (err) {
     console.error('加载数据失败:', err);
     // 尝试从 sessionStorage 加载缓存
@@ -84,6 +89,8 @@ function render() {
     cardGrid.innerHTML = filteredShops.map(shop => createCardHTML(shop)).join('');
     // 渲染后立即启动懒加载
     initLazyLoading();
+    // 首屏前几张卡片直接开始下载，不等 observer
+    requestAnimationFrame(() => preloadFirstCards());
   }
 
   shopCount.textContent = `共 ${filteredShops.length} 家`;
@@ -122,6 +129,20 @@ function initLazyLoading() {
   });
 }
 
+// 首屏前 3 张卡片直接触发下载，不等 IntersectionObserver
+function preloadFirstCards() {
+  const imgs = cardGrid.querySelectorAll('.lazy-img');
+  const count = Math.min(3, imgs.length);
+  for (let i = 0; i < count; i++) {
+    const img = imgs[i];
+    if (img.dataset.src && !img.src) {
+      img.src = img.dataset.src;
+      img.removeAttribute('data-src');
+      lazyObserver.unobserve(img);
+    }
+  }
+}
+
 // 将 raw.githubusercontent.com 的绝对 URL 转为相对路径
 // GitHub Pages 自带的 Fastly CDN 比 raw CDN 在国内快得多
 function localUrl(url) {
@@ -133,6 +154,13 @@ function localUrl(url) {
 function getThumbUrl(url) {
   if (!url) return url;
   return localUrl(url).replace(/\.webp$/, '.thumb.webp');
+}
+
+// LQIP 占位图 base64（~1.5KB，零网络请求的模糊预览）
+function getLqip(url) {
+  const thumbUrl = getThumbUrl(url);
+  const filename = thumbUrl.replace(/^images\//, '');
+  return lqipMap[filename] || '';
 }
 
 // 向后兼容：将旧单图格式转为 images 数组
@@ -178,7 +206,8 @@ function createCardHTML(shop) {
     imageHTML = `<div class="w-full card-image flex items-center justify-center text-5xl">🍜</div>`;
   } else if (images.length === 1) {
     const s = imageStyle(images[0]);
-    imageHTML = `<div class="relative w-full card-image overflow-hidden">
+    const lqip = getLqip(images[0].url);
+    imageHTML = `<div class="relative w-full card-image overflow-hidden" style="background-image:url(${lqip});background-size:cover">
       <img data-src="${escapeHTML(getThumbUrl(images[0].url))}" alt="${escapeHTML(shop.name)}" loading="lazy" decoding="async" class="lazy-img w-full h-full ${s.cls} absolute inset-0 opacity-0 transition-opacity duration-500" style="${s.sty}" onerror="this.style.display='none';this.nextElementSibling.classList.remove('hidden')" onload="this.classList.remove('opacity-0');this.closest('.card-image, .carousel-slide').classList.add('img-loaded')">
       <div class="hidden w-full h-full card-image flex items-center justify-center text-5xl absolute inset-0">🍜</div>
     </div>`;
@@ -189,7 +218,8 @@ function createCardHTML(shop) {
       const attr = i === 0
         ? `data-src="${escapeHTML(getThumbUrl(img.url))}" loading="lazy" decoding="async" class="lazy-img w-full h-full ${s.cls} opacity-0 transition-opacity duration-500"`
         : `data-lazy-src="${escapeHTML(getThumbUrl(img.url))}" loading="lazy" decoding="async" class="w-full h-full ${s.cls} opacity-0 transition-opacity duration-500"`;
-      return `<div class="carousel-slide w-full h-full flex-shrink-0 relative">
+      const slideLqip = getLqip(img.url);
+      return `<div class="carousel-slide w-full h-full flex-shrink-0 relative" style="background-image:url(${slideLqip});background-size:cover">
         <img ${attr} alt="${escapeHTML(shop.name)} ${i+1}" style="${s.sty}" onerror="this.parentElement.classList.add('hidden')" onload="this.classList.remove('opacity-0');this.closest('.card-image, .carousel-slide').classList.add('img-loaded')">
       </div>`;
     }).join('');

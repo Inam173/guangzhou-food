@@ -187,9 +187,35 @@
       });
     }
 
-    // ===== 上传到 GitHub =====
-    async function uploadToGitHub(c, imagePath, base64, label) {
-      const apiUrl = `https://api.github.com/repos/${c.owner}/${c.repo}/contents/${imagePath}`;
+    // ===== 生成 LQIP (80px 模糊预览 base64) =====
+    function generateLQIP(thumbBlob) {
+      return new Promise((resolve, reject) => {
+        const img = new Image();
+        const url = URL.createObjectURL(thumbBlob);
+        img.onload = () => {
+          URL.revokeObjectURL(url);
+          const w = 80;
+          const h = Math.round(img.naturalHeight * w / img.naturalWidth);
+          const canvas = document.createElement('canvas');
+          canvas.width = w;
+          canvas.height = h;
+          const ctx = canvas.getContext('2d');
+          // 轻微模糊
+          ctx.filter = 'blur(1px)';
+          ctx.drawImage(img, 0, 0, w, h);
+          const b64 = canvas.toDataURL('image/jpeg', 0.2);
+          resolve(b64);
+        };
+        img.onerror = () => { URL.revokeObjectURL(url); reject(new Error('LQIP生成失败')); };
+        img.src = url;
+      });
+    }
+
+    // ===== 上传到 GitHub（支持更新已有文件） =====
+    async function uploadToGitHub(c, filePath, base64, label, sha) {
+      const apiUrl = `https://api.github.com/repos/${c.owner}/${c.repo}/contents/${filePath}`;
+      const body = { message: `📷 ${label}`, content: base64, branch: 'main' };
+      if (sha) body.sha = sha;
       const resp = await fetchWithTimeout(apiUrl, {
         method: 'PUT',
         headers: {
@@ -197,11 +223,7 @@
           'Accept': 'application/vnd.github.v3+json',
           'Content-Type': 'application/json',
         },
-        body: JSON.stringify({
-          message: `📷 ${label}`,
-          content: base64,
-          branch: 'main',
-        }),
+        body: JSON.stringify(body),
       }, 30000);
       if (!resp.ok) {
         const err = await resp.json().catch(() => ({}));
@@ -259,10 +281,43 @@
         await uploadToGitHub(c, `images/${prefix}.webp`, hdBase64, `上传 ${file.name} (1600px WebP)`);
 
         // 4. 上传缩略图
-        progressBar.style.width = '70%';
+        progressBar.style.width = '50%';
         progressText.textContent = `正在上传缩略图 (${(thumb.blob.size/1024).toFixed(0)}KB)...`;
         const thumbBase64 = await blobToBase64(thumb.blob);
         await uploadToGitHub(c, `images/${prefix}.thumb.webp`, thumbBase64, `上传 ${file.name} (800px 缩略图)`);
+
+        // 5. 生成 LQIP 并更新 lqip.json
+        progressBar.style.width = '70%';
+        progressText.textContent = '正在生成 LQIP 占位图...';
+        const lqipB64 = await generateLQIP(thumb.blob);
+
+        progressBar.style.width = '80%';
+        progressText.textContent = '正在更新 LQIP 索引...';
+        const thumbFilename = `${prefix}.thumb.webp`;
+        try {
+          // 读取现有 lqip.json
+          let lqipData = {};
+          let lqipSha = null;
+          try {
+            const getResp = await fetchWithTimeout(
+              `https://api.github.com/repos/${c.owner}/${c.repo}/contents/lqip.json?ref=main`,
+              { headers: { 'Authorization': `token ${c.token}`, 'Accept': 'application/vnd.github.v3+json' } },
+              10000
+            );
+            if (getResp.ok) {
+              const fileInfo = await getResp.json();
+              lqipSha = fileInfo.sha;
+              const content = atob(fileInfo.content.replace(/\s/g, ''));
+              lqipData = JSON.parse(content);
+            }
+          } catch (e) { /* 文件不存在则新建 */ }
+          // 添加新条目
+          lqipData[thumbFilename] = lqipB64;
+          const newContent = btoa(unescape(encodeURIComponent(JSON.stringify(lqipData, null, 2))));
+          await uploadToGitHub(c, 'lqip.json', newContent, `更新 LQIP: ${thumbFilename}`, lqipSha);
+        } catch (e) {
+          console.warn('LQIP 更新失败（不影响主流程）:', e);
+        }
 
         progressBar.style.width = '100%';
         progressText.textContent = '上传完成！';

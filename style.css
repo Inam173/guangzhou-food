@@ -37,28 +37,25 @@
   box-shadow: 0 12px 40px rgba(0, 0, 0, 0.12);
 }
 
-/* 骨架屏加载效果 — 卡片图片占位 */
+/* 卡片图片加载占位 — 暖调微光，图片加载后自动消失 */
 .card-image {
-  background: linear-gradient(110deg, #ececec 8%, #f5f5f5 18%, #ececec 33%);
-  background-size: 200% 100%;
-  animation: cardShimmer 1.6s ease-in-out infinite;
+  background: #fdf6ed;
   aspect-ratio: 4 / 3;
   object-fit: cover;
 }
 
-@keyframes cardShimmer {
-  0%   { background-position: 200% 0; }
-  100% { background-position: -200% 0; }
-}
-
-/* 轮播 slide 骨架屏 + 布局 */
+/* 轮播 slide */
 .carousel-slide {
   width: 100%;
   flex-shrink: 0;
   overflow: hidden;
-  background: linear-gradient(110deg, #ececec 8%, #f5f5f5 18%, #ececec 33%);
-  background-size: 200% 100%;
-  animation: cardShimmer 1.6s ease-in-out infinite;
+  background: #fdf6ed;
+}
+
+/* 图片已加载 → 清除占位 */
+.img-loaded {
+  background: transparent !important;
+  animation: none !important;
 }
 
 /* 分类标签按钮 */

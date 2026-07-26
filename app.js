@@ -179,7 +179,7 @@ function createCardHTML(shop) {
   } else if (images.length === 1) {
     const s = imageStyle(images[0]);
     imageHTML = `<div class="relative w-full card-image overflow-hidden">
-      <img data-src="${escapeHTML(getThumbUrl(images[0].url))}" alt="${escapeHTML(shop.name)}" loading="lazy" decoding="async" class="lazy-img w-full h-full ${s.cls} absolute inset-0 opacity-0 transition-opacity duration-500" style="${s.sty}" onerror="this.style.display='none';this.nextElementSibling.classList.remove('hidden')" onload="this.classList.remove('opacity-0')">
+      <img data-src="${escapeHTML(getThumbUrl(images[0].url))}" alt="${escapeHTML(shop.name)}" loading="lazy" decoding="async" class="lazy-img w-full h-full ${s.cls} absolute inset-0 opacity-0 transition-opacity duration-500" style="${s.sty}" onerror="this.style.display='none';this.nextElementSibling.classList.remove('hidden')" onload="this.classList.remove('opacity-0');this.closest('.card-image, .carousel-slide').classList.add('img-loaded')">
       <div class="hidden w-full h-full card-image flex items-center justify-center text-5xl absolute inset-0">🍜</div>
     </div>`;
   } else {
@@ -190,7 +190,7 @@ function createCardHTML(shop) {
         ? `data-src="${escapeHTML(getThumbUrl(img.url))}" loading="lazy" decoding="async" class="lazy-img w-full h-full ${s.cls} opacity-0 transition-opacity duration-500"`
         : `data-lazy-src="${escapeHTML(getThumbUrl(img.url))}" loading="lazy" decoding="async" class="w-full h-full ${s.cls} opacity-0 transition-opacity duration-500"`;
       return `<div class="carousel-slide w-full h-full flex-shrink-0 relative">
-        <img ${attr} alt="${escapeHTML(shop.name)} ${i+1}" style="${s.sty}" onerror="this.parentElement.classList.add('hidden')" onload="this.classList.remove('opacity-0')">
+        <img ${attr} alt="${escapeHTML(shop.name)} ${i+1}" style="${s.sty}" onerror="this.parentElement.classList.add('hidden')" onload="this.classList.remove('opacity-0');this.closest('.card-image, .carousel-slide').classList.add('img-loaded')">
       </div>`;
     }).join('');
 

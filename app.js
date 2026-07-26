@@ -34,6 +34,7 @@ async function loadData() {
     if (lqipResp.ok) {
       lqipMap = await lqipResp.json().catch(() => ({}));
     }
+    applyAllFilters();
   } catch (err) {
     console.error('加载数据失败:', err);
     // 尝试从 sessionStorage 加载缓存

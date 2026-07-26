@@ -91,6 +91,9 @@
           <button id="btnImport" class="bg-gray-100 hover:bg-gray-200 text-gray-700 px-3 py-1.5 rounded-lg text-sm transition">
             📤 导入
           </button>
+          <button id="btnSortMode" class="bg-amber-100 hover:bg-amber-200 text-amber-700 px-3 py-1.5 rounded-lg text-sm font-medium transition">
+            📋 排序
+          </button>
           <input type="file" id="importFileInput" accept=".json" class="hidden">
         </div>
       </div>
@@ -116,6 +119,27 @@
           <tbody id="shopTableBody">
           </tbody>
         </table>
+      </div>
+    </section>
+
+    <!-- ===== 排序模式 ===== -->
+    <section id="sortSection" class="bg-white rounded-2xl shadow-sm border border-amber-200 hidden">
+      <div class="p-4 flex items-center justify-between border-b border-amber-100 bg-amber-50/50 rounded-t-2xl">
+        <div>
+          <h2 class="text-lg font-bold text-amber-800">📋 拖拽排序</h2>
+          <p class="text-xs text-amber-600 mt-0.5">拖动店铺左侧手柄调整顺序，完成后点「保存排序」</p>
+        </div>
+        <div class="flex gap-2">
+          <button id="btnSaveSort" class="bg-amber-600 hover:bg-amber-700 text-white px-4 py-2 rounded-lg text-sm font-medium transition">
+            💾 保存排序
+          </button>
+          <button id="btnExitSort" class="bg-gray-100 hover:bg-gray-200 text-gray-700 px-4 py-2 rounded-lg text-sm transition">
+            退出
+          </button>
+        </div>
+      </div>
+      <div id="sortList" class="divide-y divide-gray-100">
+        <!-- 动态填充 -->
       </div>
     </section>
 

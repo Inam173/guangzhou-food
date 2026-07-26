@@ -111,7 +111,7 @@ body.modal-open {
   overflow: hidden;
 }
 
-/* 管理后台表单样式 */
+/* 管理后台表单 */
 .form-input {
   transition: border-color 0.2s, box-shadow 0.2s;
 }
@@ -120,6 +120,16 @@ body.modal-open {
   border-color: #f97316;
   box-shadow: 0 0 0 3px rgba(249, 115, 22, 0.1);
 }
+
+/* 拖拽排序 */
+.sort-item {
+  transition: background 0.15s, opacity 0.15s, transform 0.15s;
+  user-select: none;
+}
+.sort-item.dragging { opacity: 0.4; transform: scale(0.97); }
+.sort-item.drag-over { background: #fffbeb; border-top: 2px solid #f59e0b; }
+.sort-item .cursor-grab { cursor: grab; }
+.sort-item .cursor-grab:active { cursor: grabbing; }
 
 /* 图片轮播（骨架屏样式见上方 .carousel-slide） */
 

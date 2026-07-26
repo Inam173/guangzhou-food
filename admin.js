@@ -854,6 +854,118 @@ importFileInput.addEventListener('change', async (e) => {
   }
 });
 
+// ---------- 拖拽排序 ----------
+const btnSortMode = $('#btnSortMode');
+const sortSection = $('#sortSection');
+const sortList    = $('#sortList');
+const btnSaveSort = $('#btnSaveSort');
+const btnExitSort = $('#btnExitSort');
+let dragSrcIndex = null;
+
+function enterSortMode() {
+  sortSection.classList.remove('hidden');
+  document.getElementById('configSection').classList.add('hidden');
+  // 隐藏普通列表区
+  document.querySelector('#shopTable').closest('.overflow-x-auto').classList.add('hidden');
+  shopListMobile.classList.add('hidden');
+  btnSortMode.classList.add('hidden');
+  adminSearchInput.parentElement.classList.add('hidden');
+  btnNewShop.parentElement.classList.add('hidden');
+  renderSortList();
+  window.scrollTo({ top: sortSection.offsetTop - 80, behavior: 'smooth' });
+  showToast('拖动左侧 ≡ 手柄调整店铺顺序', 'info');
+}
+
+function exitSortMode() {
+  sortSection.classList.add('hidden');
+  document.getElementById('configSection').classList.remove('hidden');
+  document.querySelector('#shopTable').closest('.overflow-x-auto').classList.remove('hidden');
+  shopListMobile.classList.remove('hidden');
+  btnSortMode.classList.remove('hidden');
+  adminSearchInput.parentElement.classList.remove('hidden');
+  btnNewShop.parentElement.classList.remove('hidden');
+}
+
+function renderSortList() {
+  sortList.innerHTML = adminShops.map((s, i) => `
+    <div class="sort-item flex items-center gap-3 px-4 py-3 hover:bg-gray-50 transition cursor-default"
+         draggable="true" data-sort-index="${i}"
+         ondragstart="handleDragStart(event)" ondragover="handleDragOver(event)"
+         ondragleave="handleDragLeave(event)" ondrop="handleDrop(event)" ondragend="handleDragEnd(event)">
+      <span class="text-gray-300 text-lg cursor-grab select-none shrink-0" style="touch-action:none">≡</span>
+      <span class="w-7 h-7 rounded-full bg-amber-100 text-amber-700 flex items-center justify-center text-xs font-bold shrink-0">${i + 1}</span>
+      <div class="flex-1 min-w-0">
+        <div class="font-medium text-gray-800 text-sm truncate">${escapeHTML(s.name)}</div>
+        <div class="text-xs text-gray-400">${escapeHTML(s.category)} · ⭐${s.rating || '-'} · ¥${s.pricePerPerson || '-'}</div>
+      </div>
+    </div>
+  `).join('');
+}
+
+function handleDragStart(e) {
+  dragSrcIndex = parseInt(e.target.closest('.sort-item').dataset.sortIndex);
+  e.target.closest('.sort-item').classList.add('opacity-40', 'scale-95');
+  e.dataTransfer.effectAllowed = 'move';
+  e.dataTransfer.setData('text/plain', dragSrcIndex);
+}
+
+function handleDragOver(e) {
+  e.preventDefault();
+  e.dataTransfer.dropEffect = 'move';
+  const item = e.target.closest('.sort-item');
+  if (item) item.classList.add('bg-amber-50', 'border-t-2', 'border-amber-400');
+}
+
+function handleDragLeave(e) {
+  const item = e.target.closest('.sort-item');
+  if (item) item.classList.remove('bg-amber-50', 'border-t-2', 'border-amber-400');
+}
+
+function handleDrop(e) {
+  e.preventDefault();
+  const item = e.target.closest('.sort-item');
+  if (item) item.classList.remove('bg-amber-50', 'border-t-2', 'border-amber-400');
+  const targetIndex = parseInt(e.target.closest('.sort-item').dataset.sortIndex);
+  if (dragSrcIndex !== null && dragSrcIndex !== targetIndex) {
+    // 移动数组元素
+    const [moved] = adminShops.splice(dragSrcIndex, 1);
+    adminShops.splice(targetIndex, 0, moved);
+    renderSortList();
+    showToast(`已移动到第 ${targetIndex + 1} 位`, 'info');
+  }
+}
+
+function handleDragEnd(e) {
+  document.querySelectorAll('.sort-item').forEach(el => {
+    el.classList.remove('opacity-40', 'scale-95', 'bg-amber-50', 'border-t-2', 'border-amber-400');
+  });
+  dragSrcIndex = null;
+}
+
+btnSortMode.addEventListener('click', enterSortMode);
+btnExitSort.addEventListener('click', exitSortMode);
+
+btnSaveSort.addEventListener('click', async () => {
+  btnSaveSort.disabled = true;
+  btnSaveSort.textContent = '⏳ 保存中...';
+  try {
+    const c = getConfig();
+    if (!c.owner || !c.repo || !c.token) throw new Error('请先配置 GitHub 连接');
+    // 更新所有店铺的 updatedAt
+    const now = new Date().toISOString();
+    adminShops.forEach(s => { s.updatedAt = now; });
+    await githubPutFile(adminShops, `📋 调整店铺排序`);
+    renderAdminList(); // 刷新普通列表
+    showToast('排序已保存！刷新主页即可看到新顺序', 'success');
+    exitSortMode();
+  } catch (err) {
+    showToast('保存失败：' + err.message, 'error');
+  } finally {
+    btnSaveSort.disabled = false;
+    btnSaveSort.textContent = '💾 保存排序';
+  }
+});
+
 // ---------- 搜索 ----------
 adminSearchInput.addEventListener('input', () => {
   renderAdminList();

@@ -1,45 +1,39 @@
-/* ===== 动画 ===== */
+/* ===== 卡片 ===== */
 
-/* 卡片入场动画 */
 @keyframes cardFadeIn {
-  from {
-    opacity: 0;
-    transform: translateY(20px);
-  }
-  to {
-    opacity: 1;
-    transform: translateY(0);
-  }
+  from { opacity: 0; transform: translateY(24px); }
+  to   { opacity: 1; transform: translateY(0); }
 }
 
 .shop-card {
-  animation: cardFadeIn 0.4s ease-out both;
+  animation: cardFadeIn 0.5s cubic-bezier(0.22, 0.61, 0.36, 1) both;
+  background: #fefcf8;
+  border: 1px solid rgba(180,140,100,0.08);
+  box-shadow:
+    0 1px 2px rgba(0,0,0,0.03),
+    0 4px 20px rgba(0,0,0,0.04);
+  transition: transform 0.3s cubic-bezier(0.22, 0.61, 0.36, 1),
+              box-shadow 0.3s ease;
 }
 
-.shop-card:nth-child(1) { animation-delay: 0.05s; }
-.shop-card:nth-child(2) { animation-delay: 0.10s; }
-.shop-card:nth-child(3) { animation-delay: 0.15s; }
-.shop-card:nth-child(4) { animation-delay: 0.20s; }
-.shop-card:nth-child(5) { animation-delay: 0.25s; }
-.shop-card:nth-child(6) { animation-delay: 0.30s; }
-.shop-card:nth-child(7) { animation-delay: 0.35s; }
-.shop-card:nth-child(8) { animation-delay: 0.40s; }
-.shop-card:nth-child(9) { animation-delay: 0.45s; }
-.shop-card:nth-child(n+10) { animation-delay: 0.50s; }
-
-/* 卡片悬停效果 */
-.shop-card {
-  transition: transform 0.2s ease, box-shadow 0.2s ease;
-}
+.shop-card:nth-child(1) { animation-delay: 0.04s; }
+.shop-card:nth-child(2) { animation-delay: 0.08s; }
+.shop-card:nth-child(3) { animation-delay: 0.12s; }
+.shop-card:nth-child(4) { animation-delay: 0.16s; }
+.shop-card:nth-child(5) { animation-delay: 0.20s; }
+.shop-card:nth-child(6) { animation-delay: 0.24s; }
+.shop-card:nth-child(n+7) { animation-delay: 0.28s; }
 
 .shop-card:hover {
-  transform: translateY(-4px);
-  box-shadow: 0 12px 40px rgba(0, 0, 0, 0.12);
+  transform: translateY(-3px);
+  box-shadow:
+    0 2px 4px rgba(0,0,0,0.04),
+    0 8px 30px rgba(0,0,0,0.08);
 }
 
-/* 卡片图片加载占位 — 暖调微光，图片加载后自动消失 */
+/* 卡片图片加载占位 */
 .card-image {
-  background: #fdf6ed;
+  background: #faf5ed;
   aspect-ratio: 4 / 3;
   object-fit: cover;
 }
@@ -49,7 +43,7 @@
   width: 100%;
   flex-shrink: 0;
   overflow: hidden;
-  background: #fdf6ed;
+  background: #faf5ed;
 }
 
 /* 图片已加载 → 清除占位 */
@@ -60,41 +54,47 @@
 
 /* 分类标签按钮 */
 .category-btn {
-  transition: all 0.2s ease;
+  transition: all 0.25s ease;
   cursor: pointer;
   user-select: none;
   white-space: nowrap;
+  backdrop-filter: blur(4px);
+}
+
+.category-btn:hover {
+  transform: translateY(-1px);
+  box-shadow: 0 2px 12px rgba(0,0,0,0.06);
 }
 
 .category-btn.active {
-  background: #d97706 !important;
+  background: #b45309 !important;
   color: white !important;
-  border-color: #d97706 !important;
-  box-shadow: 0 2px 8px rgba(217, 119, 6, 0.3);
+  border-color: #b45309 !important;
+  box-shadow: 0 2px 12px rgba(180, 83, 9, 0.25);
 }
 
 /* 评分星星 */
 .star-rating {
-  color: #f59e0b;
-  letter-spacing: 2px;
+  color: #d97706;
+  letter-spacing: 1.5px;
+  font-size: 1.05em;
 }
 
-.star-full { color: #f59e0b; }
+.star-full { color: #d97706; }
 
 .star-half {
   position: relative;
   display: inline-block;
-  color: #d1d5db;
+  color: #e5d5c0;
 }
 
 .star-half::after {
   content: '★';
   position: absolute;
-  left: 0;
-  top: 0;
+  left: 0; top: 0;
   width: 50%;
   overflow: hidden;
-  color: #f59e0b;
+  color: #d97706;
 }
 
 /* 详情弹窗滚动条 */
@@ -143,72 +143,84 @@ body.modal-open {
   }
 }
 
-/* Toast 提示 */
+/* Toast */
 .toast {
   position: fixed;
-  top: 20px;
+  top: 24px;
   left: 50%;
   transform: translateX(-50%);
-  padding: 12px 24px;
-  border-radius: 12px;
+  padding: 10px 22px;
+  border-radius: 999px;
+  font-size: 14px;
   font-weight: 500;
   z-index: 100;
-  animation: toastSlide 0.3s ease-out;
-  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.15);
+  animation: toastSlide 0.35s cubic-bezier(0.22, 0.61, 0.36, 1);
+  box-shadow: 0 4px 24px rgba(0,0,0,0.12);
   max-width: 90vw;
   text-align: center;
+  backdrop-filter: blur(8px);
 }
 
 @keyframes toastSlide {
-  from {
-    opacity: 0;
-    transform: translateX(-50%) translateY(-20px);
-  }
-  to {
-    opacity: 1;
-    transform: translateX(-50%) translateY(0);
-  }
+  from { opacity: 0; transform: translateX(-50%) translateY(-16px); }
+  to   { opacity: 1; transform: translateX(-50%) translateY(0); }
 }
 
-.toast.success {
-  background: #10b981;
-  color: white;
-}
-
-.toast.error {
-  background: #ef4444;
-  color: white;
-}
-
-.toast.info {
-  background: #3b82f6;
-  color: white;
-}
+.toast.success { background: rgba(16,185,129,0.92); color: #fff; }
+.toast.error   { background: rgba(239,68,68,0.92); color: #fff; }
+.toast.info    { background: rgba(100,80,60,0.92); color: #fff; }
 
 /* ===== 响应式 ===== */
 
-/* 平板竖屏 */
+/* 平板 */
 @media (max-width: 768px) {
   .category-btn {
-    font-size: 12px;
-    padding: 6px 12px;
+    font-size: 13px;
+    padding: 7px 14px;
   }
 }
 
 /* 手机 */
 @media (max-width: 640px) {
+  body {
+    font-size: 15px;
+  }
+
+  /* 分类按钮横滑 */
+  #categoryTabs {
+    flex-wrap: nowrap;
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
+    scrollbar-width: none;
+    padding-bottom: 4px;
+  }
+  #categoryTabs::-webkit-scrollbar { display: none; }
+
   #cardGrid {
     grid-template-columns: 1fr;
-    gap: 12px;
+    gap: 16px;
+  }
+
+  .shop-card {
+    border-radius: 20px;
+  }
+
+  .card-image {
+    border-radius: 0; /* 卡片顶部圆角由 shop-card 控制 */
   }
 
   #detailModal > div {
-    max-height: 95vh;
-    margin: 8px;
-    border-radius: 16px;
+    max-height: 92vh;
+    margin: 12px;
+    border-radius: 20px;
   }
 
   header h1 {
-    font-size: 1.25rem;
+    font-size: 1.2rem;
+    letter-spacing: 0.02em;
+  }
+
+  header {
+    padding-top: env(safe-area-inset-top);
   }
 }

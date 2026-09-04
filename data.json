@@ -688,6 +688,28 @@
       "visitedDate": null,
       "createdAt": "2026-07-15T23:05:07.912Z",
       "updatedAt": "2026-07-28T11:30:54.232Z"
+    },
+    {
+      "id": "5bf77f1c-aa15-48a0-8e57-18ad479d0200",
+      "name": "味食家市师鸡(解放北路店)",
+      "category": "饭店",
+      "rating": 4.5,
+      "pricePerPerson": 0,
+      "address": "越秀区解放北路598号（迎宾馆斜对面）",
+      "coordinates": {
+        "lat": null,
+        "lng": null
+      },
+      "images": [],
+      "dianpingUrl": "https://m.dianping.com/shopinfo/FBBGb7cQaoD9o4H4?msource=Appshare2021&utm_source=shop_share&shoptype=10&shopcategoryid=1338&cityid=4&isoversea=0",
+      "tags": [
+        "粤菜",
+        "鸡"
+      ],
+      "notes": "",
+      "visitedDate": "2026-09-04",
+      "createdAt": "2026-09-04T01:53:16.674Z",
+      "updatedAt": "2026-09-04T01:53:16.674Z"
     }
   ]
 }

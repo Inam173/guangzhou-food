@@ -694,7 +694,7 @@
       "name": "味食家市师鸡(解放北路店)",
       "category": "饭店",
       "rating": 4.5,
-      "pricePerPerson": 0,
+      "pricePerPerson": 85,
       "address": "越秀区解放北路598号（迎宾馆斜对面）",
       "coordinates": {
         "lat": null,
@@ -709,7 +709,7 @@
       "notes": "",
       "visitedDate": "2026-09-04",
       "createdAt": "2026-09-04T01:53:16.674Z",
-      "updatedAt": "2026-09-04T01:53:16.674Z"
+      "updatedAt": "2026-09-04T01:55:00.581Z"
     }
   ]
 }

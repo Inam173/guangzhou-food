@@ -700,16 +700,38 @@
         "lat": null,
         "lng": null
       },
-      "images": [],
+      "images": [
+        {
+          "url": "https://raw.githubusercontent.com/Inam173/guangzhou-food/main/images/1790296145929-0tkqhz.webp",
+          "fit": "cover",
+          "posX": 50,
+          "posY": 50,
+          "zoom": 0.99
+        },
+        {
+          "url": "https://raw.githubusercontent.com/Inam173/guangzhou-food/main/images/1790296204913-ntvzjo.webp",
+          "fit": "cover",
+          "posX": 50,
+          "posY": 50,
+          "zoom": 1
+        },
+        {
+          "url": "https://raw.githubusercontent.com/Inam173/guangzhou-food/main/images/1790296306081-6fc3f1.webp",
+          "fit": "cover",
+          "posX": 50,
+          "posY": 50,
+          "zoom": 1
+        }
+      ],
       "dianpingUrl": "https://m.dianping.com/shopinfo/FBBGb7cQaoD9o4H4?msource=Appshare2021&utm_source=shop_share&shoptype=10&shopcategoryid=1338&cityid=4&isoversea=0",
       "tags": [
         "粤菜",
         "鸡"
       ],
-      "notes": "",
+      "notes": "他家招牌的白切鸡确实不错，鸡本身做的皮脆肉滑，在及格线之上，然后加上店里特色的酱汁，整体还是配得上称为招牌的~\n其他菜品也不错，这家主打家常菜系，又量大又不贵\n在这家还可以吃到超绝巨大的牛肉丸，牛肉放的量真的跟不要钱一样",
       "visitedDate": "2026-09-04",
       "createdAt": "2026-09-04T01:53:16.674Z",
-      "updatedAt": "2026-09-04T01:55:00.581Z"
+      "updatedAt": "2026-09-25T00:38:41.792Z"
     },
     {
       "id": "d34dc000-0e06-49c8-be18-cbe75e262e48",

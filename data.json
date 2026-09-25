@@ -744,15 +744,44 @@
         "lat": null,
         "lng": null
       },
-      "images": [],
+      "images": [
+        {
+          "url": "https://raw.githubusercontent.com/Inam173/guangzhou-food/main/images/1790297293487-613kfa.webp",
+          "fit": "cover",
+          "posX": 50,
+          "posY": 50,
+          "zoom": 0.99
+        },
+        {
+          "url": "https://raw.githubusercontent.com/Inam173/guangzhou-food/main/images/1790297322263-0hayya.webp",
+          "fit": "cover",
+          "posX": 50,
+          "posY": 50,
+          "zoom": 1.29
+        },
+        {
+          "url": "https://raw.githubusercontent.com/Inam173/guangzhou-food/main/images/1790297359756-9q7c0h.webp",
+          "fit": "cover",
+          "posX": 50,
+          "posY": 50,
+          "zoom": 1
+        },
+        {
+          "url": "https://raw.githubusercontent.com/Inam173/guangzhou-food/main/images/1790297462716-jgfzdn.webp",
+          "fit": "cover",
+          "posX": 50,
+          "posY": 50,
+          "zoom": 1
+        }
+      ],
       "dianpingUrl": "https://m.dianping.com/shopinfo/H3XCIwP5GBIzvJpC?msource=Appshare2021&utm_source=shop_share&shoptype=10&shopcategoryid=34282&cityid=4&isoversea=0",
       "tags": [
         "麻酱肠粉"
       ],
-      "notes": "",
+      "notes": "麻酱肠粉属于是潮州的其中一种特色肠粉，给肠粉浇的花生芝麻酱\n吃得惯麻酱就会觉得好吃\n不过环境不敢恭维，他家就一个小店（大众点评【口味】4.6分、【环境】4.1分），特别在意卫生的话还请慎重考虑hhh，我自己吃他家是不太在意卫生苍蝇啥的，毕竟麻酱确实香^_^",
       "visitedDate": "2026-09-04",
       "createdAt": "2026-09-04T01:56:35.314Z",
-      "updatedAt": "2026-09-04T01:56:35.314Z"
+      "updatedAt": "2026-09-25T01:02:25.804Z"
     }
   ]
 }
